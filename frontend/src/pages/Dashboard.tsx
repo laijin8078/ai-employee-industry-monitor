@@ -1,21 +1,25 @@
-import { Row, Col, Card, Statistic, Button, Tag } from 'antd'
-import { ReloadOutlined, ThunderboltOutlined } from '@ant-design/icons'
+import { Row, Col, Card, Statistic, Button, Tag, Spin } from 'antd'
+import {
+  ReloadOutlined, ThunderboltOutlined, RiseOutlined,
+  FileProtectOutlined, ExperimentOutlined, DashboardOutlined,
+} from '@ant-design/icons'
 import { useState, useEffect, useMemo } from 'react'
 
-const categoryColors: Record<string, string> = {
-  '竞品动态': '#1890ff', '行业政策': '#52c41a', '行业动态': '#faad14', '技术突破': '#722ed1'
+const categoryConfig: Record<string, { color: string; icon: React.ReactNode; bg: string }> = {
+  '竞品动态': { color: '#4b5de6', icon: <RiseOutlined />, bg: '#eef0ff' },
+  '行业政策': { color: '#2e8b57', icon: <FileProtectOutlined />, bg: '#ebf5ee' },
+  '行业动态': { color: '#d4a017', icon: <DashboardOutlined />, bg: '#fef9ed' },
+  '技术突破': { color: '#b05ce6', icon: <ExperimentOutlined />, bg: '#f8f0ff' },
 }
 
 function parseSummary(summary: string) {
-  // 「标题」（分类） 格式
   const items: { title: string; category: string }[] = []
-  const regex = /「([^」]+)」(?:（([^）]+)）)?/g
+  const pattern = /「([^」]+)」(?:（([^）]+)）)?/g
   let match
-  while ((match = regex.exec(summary)) !== null) {
+  while ((match = pattern.exec(summary)) !== null) {
     items.push({ title: match[1], category: match[2] || '未分类' })
   }
-  // 去掉匹配部分，剩下的就是头部文字
-  const header = summary.replace(/[；;]?「[^」]+」(?:（[^）]+)）?/g, '').replace(/[；;]\s*$/, '').trim()
+  const header = summary.replace(new RegExp('[；;]?「[^」]+」(?:（[^）]+）)?', 'g'), '').replace(/[；;]\s*$/, '').trim()
   return { header, items }
 }
 
@@ -39,8 +43,8 @@ export default function Dashboard() {
     try {
       const response = await fetch('/api/execute', { method: 'POST' })
       if (response.ok) {
-        alert('采集已启动，请稍后刷新查看结果')
-        setTimeout(fetchLatestReport, 5000)
+        alert('采集已启动，请前往「采集日志」查看实时进度')
+        setTimeout(fetchLatestReport, 8000)
       }
     } catch (error) { console.error(error) }
     finally { setLoading(false) }
@@ -53,114 +57,155 @@ export default function Dashboard() {
 
   const counts = latestReport?.category_counts || {}
 
+  const statCards = [
+    { title: '总情报数', value: latestReport?.totalCount || 0, icon: '📊', color: '#4b5de6', bg: '#eef0ff' },
+    { title: '竞品动态', value: counts['竞品动态'] || 0, icon: '🏢', color: '#4b5de6', bg: '#eef0ff' },
+    { title: '行业政策', value: counts['行业政策'] || 0, icon: '📜', color: '#2e8b57', bg: '#ebf5ee' },
+    { title: '技术突破', value: counts['技术突破'] || 0, icon: '🔬', color: '#b05ce6', bg: '#f8f0ff' },
+  ]
+
   return (
-    <div>
-      {/* ====== 统计卡片 ====== */}
-      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
-        <Col xs={24} sm={12} lg={6}>
-          <Card hoverable><Statistic title="📊 总情报数" value={latestReport?.totalCount || 0} /></Card>
-        </Col>
-        <Col xs={24} sm={12} lg={6}>
-          <Card hoverable><Statistic title="🏢 竞品动态" value={counts['竞品动态'] || 0} valueStyle={{ color: '#1890ff' }} /></Card>
-        </Col>
-        <Col xs={24} sm={12} lg={6}>
-          <Card hoverable><Statistic title="📜 行业政策" value={counts['行业政策'] || 0} valueStyle={{ color: '#52c41a' }} /></Card>
-        </Col>
-        <Col xs={24} sm={12} lg={6}>
-          <Card hoverable><Statistic title="🔬 技术突破" value={counts['技术突破'] || 0} valueStyle={{ color: '#722ed1' }} /></Card>
-        </Col>
+    <Spin spinning={loading}>
+      {/* ====== 统计卡片行 ====== */}
+      <Row gutter={[20, 20]} style={{ marginBottom: 28 }}>
+        {statCards.map(s => (
+          <Col xs={24} sm={12} lg={6} key={s.title}>
+            <div style={{
+              background: '#fff', borderRadius: 12, padding: '20px 24px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03)',
+              border: '1px solid oklch(0.93 0.01 260)',
+              display: 'flex', alignItems: 'center', gap: 16,
+              transition: 'box-shadow 0.2s',
+            }}
+              onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)'}
+              onMouseLeave={e => e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03)'}
+            >
+              <div style={{
+                width: 48, height: 48, borderRadius: 12, background: s.bg,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 22,
+              }}>
+                {s.icon}
+              </div>
+              <div>
+                <div style={{ fontSize: 12, color: 'oklch(0.45 0.01 260)', marginBottom: 2 }}>{s.title}</div>
+                <div style={{ fontSize: 28, fontWeight: 700, color: s.color, lineHeight: 1 }}>
+                  {s.value}
+                </div>
+              </div>
+            </div>
+          </Col>
+        ))}
       </Row>
 
-      <Row gutter={[16, 16]}>
-        {/* ====== 本期摘要 ====== */}
+      <Row gutter={[20, 20]}>
+        {/* ====== 报告摘要 ====== */}
         <Col xs={24} lg={16}>
           <Card
-            title="📋 最新报告摘要"
-            loading={loading}
-            extra={latestReport ? <Tag color="blue">{latestReport.date}</Tag> : undefined}
+            title={<span style={{ fontSize: 16, fontWeight: 600 }}>📋 最新报告摘要</span>}
+            extra={latestReport ? <Tag color="blue" style={{ borderRadius: 6 }}>{latestReport.date}</Tag> : undefined}
+            style={{ borderRadius: 12, height: '100%' }}
           >
             {parsed.header || parsed.items.length > 0 ? (
               <div>
-                {/* 头部 */}
                 {parsed.header && (
                   <div style={{
-                    backgroundColor: '#fff7e6', padding: '12px 16px', borderRadius: 6,
-                    borderLeft: '4px solid #faad14', marginBottom: 20, fontSize: 15, fontWeight: 500, color: '#ad6800'
+                    background: '#fffdf0', padding: '14px 18px', borderRadius: 8,
+                    borderLeft: '4px solid #d4a017', marginBottom: 20,
+                    fontSize: 14, fontWeight: 500, color: '#8b6914',
+                    lineHeight: 1.6,
                   }}>
-                    <ThunderboltOutlined style={{ marginRight: 6 }} />
+                    <ThunderboltOutlined style={{ marginRight: 8, color: '#d4a017' }} />
                     {parsed.header}
                   </div>
                 )}
-
-                {/* 情报列表 */}
-                {parsed.items.map((item, i) => (
-                  <div key={i} style={{
-                    display: 'flex', alignItems: 'flex-start', gap: 12,
-                    padding: '12px 0', borderBottom: i < parsed.items.length - 1 ? '1px solid #f0f0f0' : 'none'
-                  }}>
-                    <span style={{
-                      width: 24, height: 24, minWidth: 24, borderRadius: '50%',
-                      background: categoryColors[item.category] || '#999',
-                      color: 'white', textAlign: 'center', lineHeight: '24px',
-                      fontSize: 12, fontWeight: 'bold'
+                {parsed.items.map((item, i) => {
+                  const cfg = categoryConfig[item.category] || { color: '#999', icon: null, bg: '#f5f5f5' }
+                  return (
+                    <div key={i} style={{
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      padding: '10px 0', borderBottom: i < parsed.items.length - 1 ? '1px solid oklch(0.94 0.01 260)' : 'none'
                     }}>
-                      {i + 1}
-                    </span>
-                    <div style={{ flex: 1, lineHeight: 1.6 }}>
-                      <span style={{ fontSize: 14, color: '#262626' }}>{item.title}</span>
+                      <span style={{
+                        width: 28, height: 28, minWidth: 28, borderRadius: 8,
+                        background: cfg.bg, color: cfg.color,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 12, fontWeight: 700,
+                      }}>
+                        {i + 1}
+                      </span>
+                      <span style={{ flex: 1, fontSize: 14, color: 'oklch(0.2 0.01 260)', lineHeight: 1.5 }}>
+                        {item.title}
+                      </span>
+                      <Tag color={cfg.color} style={{ borderRadius: 4, fontWeight: 500 }}>
+                        {item.category}
+                      </Tag>
                     </div>
-                    <Tag color={categoryColors[item.category]} style={{ marginLeft: 8, flexShrink: 0 }}>
-                      {item.category}
-                    </Tag>
-                  </div>
-                ))}
-
-                {/* 底部统计 */}
+                  )
+                })}
                 {parsed.items.length === 0 && parsed.header && (
-                  <p style={{ color: '#999', textAlign: 'center', padding: 20 }}>暂无详细条目</p>
+                  <p style={{ color: '#999', textAlign: 'center', padding: 24 }}>暂无详细条目</p>
                 )}
               </div>
             ) : (
-              <p style={{ textAlign: 'center', color: '#999', padding: 40 }}>暂无报告数据，请点击右侧「立即执行采集」</p>
+              <div style={{ textAlign: 'center', padding: 48, color: '#999' }}>
+                <div style={{ fontSize: 48, marginBottom: 12 }}>📡</div>
+                <p style={{ fontSize: 15 }}>暂无报告数据</p>
+                <p style={{ fontSize: 13 }}>点击右侧「立即执行采集」开始获取情报</p>
+              </div>
             )}
           </Card>
         </Col>
 
-        {/* ====== 操作面板 ====== */}
+        {/* ====== 快捷面板 ====== */}
         <Col xs={24} lg={8}>
-          <Card title="⚙️ 快捷操作">
-            <Button type="primary" size="large" icon={<ReloadOutlined />}
-              onClick={handleExecute} loading={loading} block style={{ marginBottom: 16, height: 48 }}>
-              立即执行采集
-            </Button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <Card style={{ borderRadius: 12 }}>
+              <Button type="primary" size="large" icon={<ThunderboltOutlined />}
+                onClick={handleExecute} loading={loading} block
+                style={{
+                  height: 48, fontWeight: 600, fontSize: 15,
+                  borderRadius: 10, marginBottom: 16,
+                }}
+              >
+                立即执行采集
+              </Button>
+              <div style={{
+                background: '#f0fdf4', padding: '12px 16px', borderRadius: 8,
+                border: '1px solid #bbf7d0', marginBottom: 12,
+              }}>
+                <div style={{ fontSize: 13, color: '#166534', fontWeight: 500, marginBottom: 4 }}>
+                  📅 定时计划
+                </div>
+                <div style={{ fontSize: 13, color: '#333' }}>每两周周一 09:00 自动执行</div>
+              </div>
+            </Card>
 
-            <div style={{
-              background: '#f6ffed', padding: '12px 16px', borderRadius: 6,
-              border: '1px solid #b7eb8f', marginBottom: 12
-            }}>
-              <div style={{ fontSize: 13, color: '#52c41a', fontWeight: 500, marginBottom: 6 }}>📅 定时计划</div>
-              <div style={{ fontSize: 13, color: '#333' }}>每两周周一 09:00 自动执行</div>
-            </div>
-
-            <div style={{
-              background: '#e6f7ff', padding: '12px 16px', borderRadius: 6,
-              border: '1px solid #91d5ff'
-            }}>
-              <div style={{ fontSize: 13, color: '#1890ff', fontWeight: 500, marginBottom: 6 }}>📊 分类概览</div>
+            <Card title={<span style={{ fontWeight: 600 }}>📊 分类概览</span>} style={{ borderRadius: 12 }}>
               {Object.entries(counts).length > 0 ? (
-                Object.entries(counts).map(([cat, cnt]) => (
-                  <div key={cat} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, padding: '4px 0' }}>
-                    <Tag color={categoryColors[cat]}>{cat}</Tag>
-                    <strong>{cnt as number} 条</strong>
-                  </div>
-                ))
+                Object.entries(counts).map(([cat, cnt]) => {
+                  const cfg = categoryConfig[cat]
+                  return (
+                    <div key={cat} style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      padding: '8px 0', borderBottom: '1px solid oklch(0.94 0.01 260)',
+                    }}>
+                      <Tag color={cfg?.color || '#999'} style={{ borderRadius: 4 }}>
+                        {cat}
+                      </Tag>
+                      <strong style={{ fontSize: 16, color: cfg?.color || '#333' }}>
+                        {cnt as number} <span style={{ fontSize: 12, fontWeight: 400 }}>条</span>
+                      </strong>
+                    </div>
+                  )
+                })
               ) : (
                 <span style={{ fontSize: 13, color: '#999' }}>暂无数据</span>
               )}
-            </div>
-          </Card>
+            </Card>
+          </div>
         </Col>
       </Row>
-    </div>
+    </Spin>
   )
 }

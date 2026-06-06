@@ -66,75 +66,89 @@ class IntelligenceScreener:
     """情报初筛器：使用 LLM 判断相关性、分类、优先级"""
 
     def __init__(self, llm_client: LLMClient, company_context: dict):
-        """
-        Args:
-            llm_client: LLM 客户端
-            company_context: 朴道公司背景信息
-        """
         self.llm = llm_client
         self.company_context = company_context
+        self._progress_callback = None  # 可选进度回调 (msg: str) -> None
 
     def screen(self, items: list[CleanedItem]) -> list[ScreeningResult]:
         """
         对清洗后的数据进行初筛。
 
-        Args:
-            items: 清洗后的数据列表
-
-        Returns:
-            筛选结果列表（包含 is_relevant 判断和优先级）
+        优化：先用关键词规则快速过滤明显无关项，再用 LLM 精确判断。
         """
         if not items:
             logger.warning("初筛：无数据")
             return []
 
-        logger.info(f"初筛开始: {len(items)} 条数据")
+        total = len(items)
+        logger.info(f"初筛开始: {total} 条数据")
 
-        results = []
+        # 第1遍：关键词快速预筛，分出"明显无关"和"需要AI判断"
+        need_ai = []
+        pre_filtered = []
+        for item in items:
+            if self._is_obviously_irrelevant(item):
+                pre_filtered.append(ScreeningResult(
+                    item=item, is_relevant=False, category="其他",
+                    priority="低", reason="关键词预筛：与净水器无关", key_entities=[],
+                ))
+            else:
+                need_ai.append(item)
 
-        for i, item in enumerate(items, 1):
+        skipped = len(pre_filtered)
+        if skipped > 0:
+            logger.info(f"关键词预筛跳过 {skipped} 条明显无关，AI 需判断 {len(need_ai)} 条")
+            self._emit_progress(f"🔍 预筛跳过{skipped}条无关，剩余{len(need_ai)}条AI判断")
+
+        results = list(pre_filtered)
+
+        for i, item in enumerate(need_ai, 1):
             try:
-                result = self._screen_single(item, i, len(items))
+                idx_str = f"[{i}/{len(need_ai)}]"
+                logger.info(f"初筛 {idx_str}: {item.raw.title[:60]}...")
+                if i % 5 == 0 or i == 1:
+                    self._emit_progress(f"🔍 AI初筛 {idx_str}（共{total}条，已跳过{skipped}条）")
+
+                result = self._screen_single(item, i, len(need_ai))
                 if result:
                     results.append(result)
             except Exception as e:
                 logger.error(f"初筛失败 [{i}]: {e}")
-                # 兜底：标记为相关但低优先级
                 results.append(ScreeningResult(
-                    item=item,
-                    is_relevant=True,
-                    category="其他",
-                    priority="低",
-                    reason=f"AI分析异常: {str(e)[:50]}",
-                    key_entities=[],
+                    item=item, is_relevant=True, category="其他",
+                    priority="低", reason=f"AI分析异常: {str(e)[:50]}", key_entities=[],
                 ))
 
-        # 统计
         relevant = [r for r in results if r.is_relevant]
         important = [r for r in results if r.is_important]
-        logger.info(
-            f"初筛完成: {len(results)}条 → "
-            f"相关{len(relevant)}条 → "
-            f"重要{len(important)}条（高+中优先级）"
-        )
-
+        logger.info(f"初筛完成: {len(results)}条 → 相关{len(relevant)}条 → 重要{len(important)}条")
         return results
+
+    def _emit_progress(self, msg: str):
+        """通过回调发送进度到 SSE"""
+        if self._progress_callback:
+            try:
+                self._progress_callback(msg)
+            except Exception:
+                pass
+
+    def _is_obviously_irrelevant(self, item: CleanedItem) -> bool:
+        """快速关键词预筛：标题明显不相关直接跳过"""
+        title = item.raw.title
+        content = item.raw.content or ""
+        full = f"{title} {content}"[:300]
+        water_kw = ["净水", "直饮水", "饮水", "水质", "纳滤", "RO", "反渗透", "过滤", "纯水", "矿泉水"]
+        return not any(kw in full for kw in water_kw)
 
     def _screen_single(
         self, item: CleanedItem, index: int, total: int
     ) -> Optional[ScreeningResult]:
-        """对单条数据进行初筛"""
+        """对单条数据进行 LLM 初筛"""
         raw = item.raw
-        user_message = f"""请分析以下内容：
-
-**标题**：{raw.title}
-**来源**：{raw.source_name}（{raw.source_channel}）
-**发布时间**：{raw.publish_date}
-**内容摘要**：{raw.content[:1500]}
-
-请判断其相关性、分类和优先级，输出指定JSON格式。"""
-
-        logger.debug(f"初筛 [{index}/{total}]: {raw.title[:60]}...")
+        user_message = f"""分析标题：{raw.title}
+来源：{raw.source_name}（{raw.source_channel}）
+内容摘要：{raw.content[:1500]}
+判断相关性、分类和优先级，输出JSON。"""
 
         llm_result = self.llm.chat_json(
             user_message=user_message,
@@ -143,7 +157,6 @@ class IntelligenceScreener:
         )
 
         if llm_result is None:
-            # LLM 不可用时，使用规则兜底
             return self._fallback_screen(item)
 
         return ScreeningResult(

@@ -1446,3 +1446,539 @@ TypeError: IntelligenceDB.cleanup_old_data() got an unexpected keyword argument 
 2026-06-06 16:30:57 | INFO    | __main__:run:240 |    下次监控: 2026-06-22
 2026-06-06 16:30:57 | INFO    | __main__:run:241 | ============================================================
 2026-06-06 16:30:57 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭
+2026-06-06 22:06:32 | INFO    | __main__:main:717 | 配置验证通过
+2026-06-06 22:06:32 | INFO    | __main__:main:718 |    监控范围: 3公众号, 3网站, 8关键词
+2026-06-06 22:06:32 | INFO    | __main__:main:721 |    AI模型: claude-sonnet-4-6
+2026-06-06 22:06:32 | INFO    | __main__:main:722 |    数据目录: C:\Users\86158\ai-employee\data
+2026-06-06 22:06:32 | INFO    | __main__:main:723 |    通知收件人: 5人
+2026-06-06 22:06:32 | INFO    | __main__:main:724 |    LLM可用: 是
+2026-06-06 22:17:21 | INFO    | __main__:run_scheduled:682 | ⏰ 定时任务已配置: 每两周 mon 09:00
+2026-06-06 22:17:21 | INFO    | __main__:run_scheduled:683 |    下次执行: 2026-06-08 09:00:00+08:00
+2026-06-06 22:26:06 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 22:26:06 | DEBUG   | src.storage.database:_init_tables:104 | 数据库表初始化完成
+2026-06-06 22:26:06 | INFO    | __main__:cleanup_jobs:720 | 标记超时任务: 0 个
+2026-06-06 22:26:06 | INFO    | src.storage.database:cleanup_jobs:195 | 清理完成: jobs failed=0 timeout=0, raw_data=0
+2026-06-06 22:26:06 | INFO    | __main__:cleanup_jobs:724 | 清理结果: failed=0, timeout=0, raw_data=0
+2026-06-06 22:26:06 | DEBUG   | src.storage.database:close:378 | 数据库连接已关闭
+2026-06-06 22:26:06 | INFO    | __main__:cleanup_jobs:727 | ✅ 任务清理完成
+2026-06-07 00:18:52 | INFO    | __main__:main:860 | 🎭 启动模拟模式 — 使用内置Mock数据测试流水线
+2026-06-07 00:18:52 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-07 00:18:52 | DEBUG   | src.storage.database:_init_tables:104 | 数据库表初始化完成
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | ==================================================
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 🚀 AI情报系统启动 [Job: job_20260607_001852_bcab5b]
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 |    模式: Mock模拟
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | ==================================================
+2026-06-07 00:18:52 | INFO    | __main__:run:192 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 🎭 使用模拟数据...
+2026-06-07 00:18:52 | INFO    | __main__:run:202 | ✅ 采集完成: 10 条原始数据
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-07 00:18:52 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 10 条
+2026-06-07 00:18:52 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 10 条
+2026-06-07 00:18:52 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '美的智净3.0系列发布 3000G超大流量引领企业饮水新趋势' ≈ '美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代' (相似度: 83.8%)
+2026-06-07 00:18:52 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 9 条
+2026-06-07 00:18:52 | DEBUG   | src.processors.cleaner:_filter_irrelevant:217 | 过滤（招聘）: 美的净水诚聘研发工程师，薪资20-35K
+2026-06-07 00:18:52 | DEBUG   | src.processors.cleaner:_filter_irrelevant:212 | 过滤（黑名单）: 美的集团发布2026年智能冰箱新品，搭载AI食材管理
+2026-06-07 00:18:52 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 7 条
+2026-06-07 00:18:52 | SUCCESS | __main__:_emit_log:145 | ✅ 清洗完成: 7 条有效数据 (去重 0 条)
+2026-06-07 00:18:52 | INFO    | src.storage.database:save_raw_items:234 | 已保存 7 条原始数据到数据库
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:84 | 初筛开始: 7 条数据
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:100 | 关键词预筛跳过 1 条明显无关，AI 需判断 6 条
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [1/6]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [2/6]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [3/6]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [4/6]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [5/6]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [6/6]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.screener:screen:124 | 初筛完成: 7条 → 相关6条 → 重要6条
+2026-06-07 00:18:52 | SUCCESS | __main__:_emit_log:145 | ✅ 初筛完成: 7条判定, 6条需要深度分析
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 🧠 [步骤 5/10] AI 深度分析 — 6 条重要情报...
+2026-06-07 00:18:52 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 6 条重要情报
+2026-06-07 00:18:52 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/6]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/6]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/6]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/6]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/6]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/6]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-07 00:18:52 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-07 00:18:52 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 6条 → 高紧急度(≥7分): 0条
+2026-06-07 00:18:52 | SUCCESS | __main__:_emit_log:145 | ✅ 深度分析完成: 6条
+2026-06-07 00:18:52 | INFO    | __main__:run:234 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 📝 [步骤 7/10] 生成情报报告...
+2026-06-07 00:18:52 | INFO    | src.reporters.json_reporter:generate:110 | JSON 报告生成: 7条采集 → 6条重要 → 6条深度分析
+2026-06-07 00:18:52 | INFO    | src.reporters.json_reporter:save:135 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.json
+2026-06-07 00:18:52 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23918 字符)
+2026-06-07 00:18:52 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23918 字符)
+2026-06-07 00:18:52 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.html
+2026-06-07 00:18:52 | SUCCESS | __main__:_emit_log:145 | ✅ 报告生成完成: JSON=intelligence_report_2026-06-07.json, HTML=intelligence_report_2026-06-07.html
+2026-06-07 00:18:52 | INFO    | __main__:run:257 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-07 00:18:52 | INFO    | __main__:_emit_log:145 | 📬 [步骤 9/10] 发送通知...
+2026-06-07 00:18:52 | INFO    | __main__:_send_notifications:527 |    🚨 发现高优先级情报，立即通知！
+2026-06-07 00:18:59 | INFO    | src.notifiers.email_notifier:send_report:93 | 邮件已发送 → 5 个收件人: 2477395349@qq.com, 董素梅 <dongmei@example.com>, 销售总监 <sales@example.com>
+2026-06-07 00:18:59 | INFO    | __main__:_emit_log:145 | ✅ 通知已发送
+2026-06-07 00:18:59 | INFO    | __main__:run:268 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-07 00:18:59 | INFO    | src.storage.database:save_report:287 | 报告已保存，ID=13
+2026-06-07 00:18:59 | INFO    | __main__:run:271 | ✅ 数据已归档
+2026-06-07 00:18:59 | SUCCESS | __main__:_emit_log:145 | 🎉 情报采集分析完成！
+2026-06-07 00:18:59 | INFO    | __main__:_emit_log:145 |    耗时: 7.6 秒
+2026-06-07 00:18:59 | INFO    | __main__:_emit_log:145 |    采集: 10 条 → 清洗: 7 条 → 重要分析: 6 条
+2026-06-07 00:18:59 | INFO    | __main__:_emit_log:145 |    渠道: 成功3 / 失败0
+2026-06-07 00:18:59 | INFO    | __main__:_emit_log:145 |    下次监控: 2026-06-22
+2026-06-07 00:18:59 | DEBUG   | src.storage.database:close:378 | 数据库连接已关闭
+2026-06-07 00:18:59 | INFO    | __main__:main:868 | ============================================================
+2026-06-07 00:18:59 | INFO    | __main__:main:869 | [模拟运行报告摘要]
+2026-06-07 00:18:59 | INFO    | __main__:main:870 | ============================================================
+2026-06-07 00:18:59 | INFO    | __main__:main:871 |   采集总数: 10
+2026-06-07 00:18:59 | INFO    | __main__:main:872 |   深度分析: 6
+2026-06-07 00:18:59 | INFO    | __main__:main:873 |   报告路径: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.json
+2026-06-07 00:18:59 | INFO    | __main__:main:874 |   HTML路径: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.html
+2026-06-07 00:18:59 | INFO    | __main__:main:875 |   耗时: 7.6秒
+2026-06-07 00:18:59 | INFO    | __main__:main:876 | 报告文件:
+2026-06-07 00:18:59 | INFO    | __main__:main:877 |   JSON: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.json
+2026-06-07 00:18:59 | INFO    | __main__:main:878 |   HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.html
+2026-06-07 00:20:34 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-07 00:20:34 | DEBUG   | src.storage.database:_init_tables:104 | 数据库表初始化完成
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 | ==================================================
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 | 🚀 AI情报系统启动 [Job: job_20260607_002034_b1774d]
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 |    模式: 真实采集
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 | ==================================================
+2026-06-07 00:20:38 | INFO    | __main__:run:192 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 | 📡 启动并行采集: 3个公众号 + 3个网站 + 新闻搜索
+2026-06-07 00:20:38 | INFO    | src.crawlers.wechat:crawl:68 | [微信爬虫] 开始采集 3 个公众号 (Playwright: 无, Profile: 无)
+2026-06-07 00:20:38 | INFO    | src.crawlers.wechat:crawl:83 |    [美的净水] 微信直采失败/不可用，启用搜索引擎补偿...
+2026-06-07 00:20:38 | INFO    | src.crawlers.website:crawl:59 | [官网爬虫] 开始采集 3 个网站（requests优先→Playwright兜底）
+2026-06-07 00:20:38 | INFO    | src.crawlers.news:crawl:287 | [新闻聚合] 5个源 × 17个query (行业8 + 竞品9) [并行模式]
+2026-06-07 00:20:38 | INFO    | __main__:_emit_log:145 | ⏳ 微信公众号 采集中...
+2026-06-07 00:20:46 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第1/3次): [美的净水] HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='water.midea.com', port=443): Failed to resolve 'water.midea.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-07 00:20:46 | WARNING | src.crawlers.base:block_source:80 | 🛡️ [搜狗新闻] 触发反爬保护，冷却 600s: HTTP 403 反爬拦截
+2026-06-07 00:20:54 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第2/3次): [美的净水] HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='water.midea.com', port=443): Failed to resolve 'water.midea.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-07 00:20:54 | WARNING | src.crawlers.base:load_cached_data:236 | 无缓存数据: wechat_美的净水
+2026-06-07 00:20:54 | WARNING | src.crawlers.wechat:crawl:97 | [微信爬虫] 美的净水: 本期无数据
+2026-06-07 00:20:54 | INFO    | src.crawlers.wechat:crawl:83 |    [沁园净水器官方] 微信直采失败/不可用，启用搜索引擎补偿...
+2026-06-07 00:21:01 | ERROR   | src.crawlers.base:fetch:168 | 请求彻底失败(fail#1): [美的净水] HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='water.midea.com', port=443): Failed to resolve 'water.midea.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-07 00:21:01 | INFO    | src.crawlers.website:_crawl_with_fallback:111 |    [美的净水] Playwright 未安装，跳过浏览器兜底
+2026-06-07 00:21:01 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 341 条 (文件: cache_website_all.json, 时间: 2026-06-07T00:08:00.539925)
+2026-06-07 00:21:01 | INFO    | src.crawlers.website:_crawl_with_fallback:120 |    [美的净水] 使用缓存兜底（341条）
+2026-06-07 00:21:01 | INFO    | src.crawlers.website:crawl:67 | [官网爬虫] 美的净水: 341 条
+2026-06-07 00:21:08 | WARNING | src.crawlers.base:load_cached_data:236 | 无缓存数据: wechat_沁园净水器官方
+2026-06-07 00:21:08 | WARNING | src.crawlers.wechat:crawl:97 | [微信爬虫] 沁园净水器官方: 本期无数据
+2026-06-07 00:21:08 | INFO    | src.crawlers.wechat:crawl:83 |    [安吉尔官方] 微信直采失败/不可用，启用搜索引擎补偿...
+2026-06-07 00:21:11 | WARNING | src.crawlers.news:crawl:325 | [新闻聚合] 结果偏少(2条)，并行补偿...
+2026-06-07 00:21:11 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第1/3次): [沁园] HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='www.qinyuan.com.cn', port=443): Failed to resolve 'www.qinyuan.com.cn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:348 | [新闻聚合] 加载近7天缓存兜底
+2026-06-07 00:21:15 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 57 条 (文件: cache_news_all.json, 时间: 2026-06-07T00:07:44.081877)
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:374 | [新闻聚合] 反爬屏蔽源: 搜狗新闻（已跳过）
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:383 |    [百度新闻] 0 条
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:383 |    [Bing新闻] 0 条
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:383 |    [搜狗新闻] 0 条 🛡️
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:383 |    [今日头条] 2 条
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:383 |    [微信搜索] 0 条 ⚠降级
+2026-06-07 00:21:15 | INFO    | src.crawlers.base:cache_raw_data:225 | 已缓存 58 条数据到 C:\Users\86158\ai-employee\data\raw\cache_news_all.json
+2026-06-07 00:21:15 | INFO    | src.crawlers.news:crawl:388 | [新闻聚合] 总计: 59条原始 → 58条去重后
+2026-06-07 00:21:19 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第2/3次): [沁园] HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='www.qinyuan.com.cn', port=443): Failed to resolve 'www.qinyuan.com.cn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-07 00:21:21 | WARNING | src.crawlers.base:load_cached_data:236 | 无缓存数据: wechat_安吉尔官方
+2026-06-07 00:21:21 | WARNING | src.crawlers.wechat:crawl:97 | [微信爬虫] 安吉尔官方: 本期无数据
+2026-06-07 00:21:21 | WARNING | __main__:_emit_log:145 | ⚠ 微信公众号: 0 条结果
+2026-06-07 00:21:21 | WARNING | __main__:_emit_log:145 |   ⚠ 公众号「美的净水」: 未获取到数据
+2026-06-07 00:21:21 | WARNING | __main__:_emit_log:145 |   ⚠ 公众号「沁园净水器官方」: 未获取到数据
+2026-06-07 00:21:21 | WARNING | __main__:_emit_log:145 |   ⚠ 公众号「安吉尔官方」: 未获取到数据
+2026-06-07 00:21:21 | INFO    | __main__:_emit_log:145 | ⏳ 竞品官网 采集中...
+2026-06-07 00:21:26 | ERROR   | src.crawlers.base:fetch:168 | 请求彻底失败(fail#2): [沁园] HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='www.qinyuan.com.cn', port=443): Failed to resolve 'www.qinyuan.com.cn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-07 00:21:26 | INFO    | src.crawlers.website:_crawl_with_fallback:111 |    [沁园] Playwright 未安装，跳过浏览器兜底
+2026-06-07 00:21:26 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 341 条 (文件: cache_website_all.json, 时间: 2026-06-07T00:08:00.539925)
+2026-06-07 00:21:26 | INFO    | src.crawlers.website:_crawl_with_fallback:120 |    [沁园] 使用缓存兜底（341条）
+2026-06-07 00:21:26 | INFO    | src.crawlers.website:crawl:67 | [官网爬虫] 沁园: 341 条
+2026-06-07 00:21:36 | INFO    | src.crawlers.website:crawl:67 | [官网爬虫] 安吉尔: 11 条
+2026-06-07 00:21:36 | INFO    | src.crawlers.base:cache_raw_data:225 | 已缓存 693 条数据到 C:\Users\86158\ai-employee\data\raw\cache_website_all.json
+2026-06-07 00:21:36 | SUCCESS | __main__:_emit_log:145 | ✅ [竞品官网] 安吉尔: 获取 693 条
+2026-06-07 00:21:36 | SUCCESS | __main__:_emit_log:145 | ✅ 竞品官网: 共获取 693 条
+2026-06-07 00:21:36 | INFO    | __main__:_emit_log:145 | ⏳ 行业新闻 采集中...
+2026-06-07 00:21:36 | SUCCESS | __main__:_emit_log:145 | ✅ [行业新闻] 今日头条: 获取 5 条
+2026-06-07 00:21:36 | SUCCESS | __main__:_emit_log:145 | ✅ [行业新闻] 百度新闻: 获取 20 条
+2026-06-07 00:21:36 | SUCCESS | __main__:_emit_log:145 | ✅ [行业新闻] 微信搜索: 获取 33 条
+2026-06-07 00:21:36 | SUCCESS | __main__:_emit_log:145 | ✅ 行业新闻: 共获取 58 条
+2026-06-07 00:21:36 | INFO    | __main__:_emit_log:145 | 📊 采集汇总: 成功渠道 2/3, 共 751 条原始数据
+2026-06-07 00:21:36 | WARNING | __main__:_emit_log:145 | 🛡️ 反爬/降级源: 美的净水(degraded), 沁园(degraded), 搜狗新闻(blocked), 微信搜索(degraded)（已跳过，由正常源补偿）
+2026-06-07 00:21:36 | INFO    | __main__:run:202 | ✅ 采集完成: 751 条原始数据
+2026-06-07 00:21:36 | INFO    | __main__:_emit_log:145 | 🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-07 00:21:36 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 751 条
+2026-06-07 00:21:36 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 751 条
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:36 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）2025-09-22' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22' (相似度: 96.3%)
+2026-06-07 00:21:37 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔饮水机怎么换水使用?' ≈ '安吉尔饮水机怎么清洗使用?' (相似度: 82.2%)
+2026-06-07 00:21:37 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 66 条
+2026-06-07 00:21:37 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 66 条
+2026-06-07 00:21:37 | SUCCESS | __main__:_emit_log:145 | ✅ 清洗完成: 66 条有效数据 (去重 0 条)
+2026-06-07 00:21:37 | INFO    | src.storage.database:save_raw_items:234 | 已保存 66 条原始数据到数据库
+2026-06-07 00:21:37 | INFO    | __main__:_emit_log:145 | 🔍 [步骤 4/10] AI 初筛 — 66 条数据判断相关性和优先级...
+2026-06-07 00:21:37 | INFO    | src.analyzers.screener:screen:84 | 初筛开始: 66 条数据
+2026-06-07 00:21:37 | INFO    | src.analyzers.screener:screen:100 | 关键词预筛跳过 20 条明显无关，AI 需判断 46 条
+2026-06-07 00:21:37 | INFO    | __main__:_emit_log:145 | 🔍 预筛跳过20条无关，剩余46条AI判断
+2026-06-07 00:21:37 | INFO    | src.analyzers.screener:screen:108 | 初筛 [1/46]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态2025-07-28...
+2026-06-07 00:21:37 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [1/46]（共66条，已跳过20条）
+2026-06-07 00:21:38 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6dFE35gVjMtiDxFvt'}
+2026-06-07 00:21:38 | INFO    | src.analyzers.screener:screen:108 | 初筛 [2/46]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP102025-07-22...
+2026-06-07 00:21:38 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6emzz6xPFgQGJAPnR'}
+2026-06-07 00:21:38 | INFO    | src.analyzers.screener:screen:108 | 初筛 [3/46]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学2025-05-13...
+2026-06-07 00:21:38 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6gTTczE3DDWWVzmhw'}
+2026-06-07 00:21:38 | INFO    | src.analyzers.screener:screen:108 | 初筛 [4/46]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22...
+2026-06-07 00:21:39 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6hxFM3xfc6wxtg1gM'}
+2026-06-07 00:21:39 | INFO    | src.analyzers.screener:screen:108 | 初筛 [5/46]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国2025-06-16...
+2026-06-07 00:21:39 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [5/46]（共66条，已跳过20条）
+2026-06-07 00:21:39 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6jXkmw6GaqJcuk3WM'}
+2026-06-07 00:21:39 | INFO    | src.analyzers.screener:screen:108 | 初筛 [6/46]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-07 00:21:40 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6m52KGshFLWJMXMpy'}
+2026-06-07 00:21:40 | INFO    | src.analyzers.screener:screen:108 | 初筛 [7/46]: 孝义市看守所询价采购孝义市看守所直饮水设备采购及安装的采......
+2026-06-07 00:21:40 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6nfWrm1ETUGzApP2G'}
+2026-06-07 00:21:40 | INFO    | src.analyzers.screener:screen:108 | 初筛 [8/46]: 15个高水平净水器品牌率先通过新国标GB/T30307-2023检测|净......
+2026-06-07 00:21:40 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6pHkNy9j2yGxPeMNC'}
+2026-06-07 00:21:40 | INFO    | src.analyzers.screener:screen:108 | 初筛 [9/46]: 净水器滤芯越多越好吗?新国标给出解答...
+2026-06-07 00:21:41 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6qvUfLbAdfKwidSbU'}
+2026-06-07 00:21:41 | INFO    | src.analyzers.screener:screen:108 | 初筛 [10/46]: 净水机新国标实施,净水器额定总净水量不得低于2000升...
+2026-06-07 00:21:41 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [10/46]（共66条，已跳过20条）
+2026-06-07 00:21:41 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6sQmhd7ZehmrXes5p'}
+2026-06-07 00:21:41 | INFO    | src.analyzers.screener:screen:108 | 初筛 [11/46]: 净水机新规出台迎“首考” 家电院公布首批新国标测试产品...
+2026-06-07 00:21:41 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6tup4aBUgsCFEA6z6'}
+2026-06-07 00:21:41 | INFO    | src.analyzers.screener:screen:108 | 初筛 [12/46]: 净水器新国标实行月余乱象依旧 业内吁统一标准...
+2026-06-07 00:21:42 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6vczgSxGtgUGjx4ug'}
+2026-06-07 00:21:42 | INFO    | src.analyzers.screener:screen:108 | 初筛 [13/46]: 2026年口碑TOP10家用净水器:高性价比长效机型,净水器过滤器家用...
+2026-06-07 00:21:42 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6xcJaaJsSu1M4oWCe'}
+2026-06-07 00:21:42 | INFO    | src.analyzers.screener:screen:108 | 初筛 [14/46]: 全国十大品牌净水器排名2026|主流机型深度实测与行业解析...
+2026-06-07 00:21:43 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK6z8LS1d92zQPg7R5V'}
+2026-06-07 00:21:43 | INFO    | src.analyzers.screener:screen:108 | 初筛 [15/46]: Friend,您家的直饮水机符合新国标吗?...
+2026-06-07 00:21:43 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [15/46]（共66条，已跳过20条）
+2026-06-07 00:21:43 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK71oJCUXwr3fSFG15G'}
+2026-06-07 00:21:43 | INFO    | src.analyzers.screener:screen:108 | 初筛 [16/46]: 新国标实施,净水器功能参数怎么标?...
+2026-06-07 00:21:44 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK73ahW6CSc9xS6AAYU'}
+2026-06-07 00:21:44 | INFO    | src.analyzers.screener:screen:108 | 初筛 [17/46]: 国家淘汰了一批不合格净水器,你中招了吗?...
+2026-06-07 00:21:44 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK76FBnDarPj4mARYnj'}
+2026-06-07 00:21:44 | INFO    | src.analyzers.screener:screen:108 | 初筛 [18/46]: 今天(7月1日)起,此类净水器已被淘汰!别买错了……...
+2026-06-07 00:21:44 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK77kUiUr8Dh8QPdEK8'}
+2026-06-07 00:21:44 | INFO    | src.analyzers.screener:screen:108 | 初筛 [19/46]: 净水机水效等级标准来了!听听专家说了啥...
+2026-06-07 00:21:45 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK79SvUH2SVWoeHmFh3'}
+2026-06-07 00:21:45 | INFO    | src.analyzers.screener:screen:108 | 初筛 [20/46]: 国家明令:此类净水器已被禁止销售!千万不要再买了!...
+2026-06-07 00:21:45 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [20/46]（共66条，已跳过20条）
+2026-06-07 00:21:45 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7AyTK6ax9PLMvBG3E'}
+2026-06-07 00:21:45 | INFO    | src.analyzers.screener:screen:108 | 初筛 [21/46]: 东莞市水乡未来学校管道直饮水系统采购项目招标公告...
+2026-06-07 00:21:46 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7CwGio3xCe6T8AcQk'}
+2026-06-07 00:21:46 | INFO    | src.analyzers.screener:screen:108 | 初筛 [22/46]: 西乡县职业技术高中西乡职中——一中教学点直饮水机采购项目竞争......
+2026-06-07 00:21:46 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7ES4UXFXpcB2kc6Un'}
+2026-06-07 00:21:46 | INFO    | src.analyzers.screener:screen:108 | 初筛 [23/46]: 新设立一体化直饮水机维护服务(第二次)(JLP25C00116)公开招标公告...
+2026-06-07 00:21:46 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7FwbimsesWXgXiJPe'}
+2026-06-07 00:21:46 | INFO    | src.analyzers.screener:screen:108 | 初筛 [24/46]: 关于直饮水服务政策调整的通知...
+2026-06-07 00:21:47 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7HrwLZFDDYiyBazfK'}
+2026-06-07 00:21:47 | INFO    | src.analyzers.screener:screen:108 | 初筛 [25/46]: 浅议城市供水行业发展之“直饮水”现象...
+2026-06-07 00:21:47 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [25/46]（共66条，已跳过20条）
+2026-06-07 00:21:47 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7KZda95VhkrgocTA3'}
+2026-06-07 00:21:47 | INFO    | src.analyzers.screener:screen:108 | 初筛 [26/46]: 让更多内江市民喝上高品质的放心水!管道直饮水到底是什么——...
+2026-06-07 00:21:48 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7M5ArcnuyebMxnyka'}
+2026-06-07 00:21:48 | INFO    | src.analyzers.screener:screen:108 | 初筛 [27/46]: 南昌:加速迈向全城直饮水时代...
+2026-06-07 00:21:48 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7NgAKK9HHRoZgXs8a'}
+2026-06-07 00:21:48 | INFO    | src.analyzers.screener:screen:108 | 初筛 [28/46]: 中国管道直饮水面面观...
+2026-06-07 00:21:48 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7Q9iGmr2sEsYMif2V'}
+2026-06-07 00:21:48 | INFO    | src.analyzers.screener:screen:108 | 初筛 [29/46]: “第九届”获奖论文悦享|高伟:浅议城市供水行业发展之“直饮水......
+2026-06-07 00:21:49 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7RjxMcm95T3gcgJic'}
+2026-06-07 00:21:49 | INFO    | src.analyzers.screener:screen:108 | 初筛 [30/46]: 全国科技工作者日|对话安吉尔赵凯:做难而正确的事,让创新净水科技......
+2026-06-07 00:21:49 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [30/46]（共66条，已跳过20条）
+2026-06-07 00:21:49 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7THj38t58xWBSbFHm'}
+2026-06-07 00:21:49 | INFO    | src.analyzers.screener:screen:108 | 初筛 [31/46]: 安吉尔:如何再次定义净水新时代...
+2026-06-07 00:21:49 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7Uwgj3Sx9Tmn6x8zb'}
+2026-06-07 00:21:49 | INFO    | src.analyzers.screener:screen:108 | 初筛 [32/46]: 【协会动态】安吉尔“长效反渗透膜”正式获得欧洲发明专利...
+2026-06-07 00:21:50 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7WREk2jLs6KCUts1P'}
+2026-06-07 00:21:50 | INFO    | src.analyzers.screener:screen:108 | 初筛 [33/46]: 开启家用净水微生物控制新篇章安吉尔APCM航天除菌科技获年度技术......
+2026-06-07 00:21:50 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7Y3U53NPtoWP5XUez'}
+2026-06-07 00:21:50 | INFO    | src.analyzers.screener:screen:108 | 初筛 [34/46]: 企业风采∣“安吉尔”打造净饮水领域“中国芯”...
+2026-06-07 00:21:50 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7ZcUjzTBHyhSvZ9e6'}
+2026-06-07 00:21:50 | INFO    | src.analyzers.screener:screen:108 | 初筛 [35/46]: 实测:“黑科技”净水器为啥这么多“大佬”推荐?...
+2026-06-07 00:21:50 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [35/46]（共66条，已跳过20条）
+2026-06-07 00:21:51 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7b7Wq5AQYstrXfnQs'}
+2026-06-07 00:21:51 | INFO    | src.analyzers.screener:screen:108 | 初筛 [36/46]: 高端净水黑科技,安吉尔A7 lite为你打造五星级全屋净水新体验...
+2026-06-07 00:21:51 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7d17sRJQKHWgt4rGk'}
+2026-06-07 00:21:51 | INFO    | src.analyzers.screener:screen:108 | 初筛 [37/46]: 安吉尔饮水机四个滤芯多久换一次?...
+2026-06-07 00:21:52 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7eYtWGMjERQboVCZi'}
+2026-06-07 00:21:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [38/46]: 2026世界食品安全日|饮水健康,安吉尔在行动...
+2026-06-07 00:21:52 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7g5uvscLfYY2NiPMq'}
+2026-06-07 00:21:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [39/46]: 安吉尔饮水机的用法支持多温出水吗?...
+2026-06-07 00:21:52 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7hidyyiPGDpQ3QwJ9'}
+2026-06-07 00:21:52 | INFO    | src.analyzers.screener:screen:108 | 初筛 [40/46]: 安吉尔饮水机加热灯亮但自动停了咋办...
+2026-06-07 00:21:52 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [40/46]（共66条，已跳过20条）
+2026-06-07 00:21:53 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7jLsW9kwStjzVXVSj'}
+2026-06-07 00:21:53 | INFO    | src.analyzers.screener:screen:108 | 初筛 [41/46]: 安吉尔饮水机怎么清洗使用?...
+2026-06-07 00:21:53 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7m928T6hTyiGetCCX'}
+2026-06-07 00:21:53 | INFO    | src.analyzers.screener:screen:108 | 初筛 [42/46]: 安吉尔饮水机怎么设置童锁使用?...
+2026-06-07 00:21:54 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7niX7NswzkQykzV9g'}
+2026-06-07 00:21:54 | INFO    | src.analyzers.screener:screen:108 | 初筛 [43/46]: 净水器站上“刚需”风口:科技领跑的安吉尔如何定义行业未来?...
+2026-06-07 00:21:54 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7pEJSpgyt8tT2NG4A'}
+2026-06-07 00:21:54 | INFO    | src.analyzers.screener:screen:108 | 初筛 [44/46]: 深圳安吉尔饮水产业集团有限公司...
+2026-06-07 00:21:54 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7qzxnR6UwMFw11zUA'}
+2026-06-07 00:21:55 | INFO    | src.analyzers.screener:screen:108 | 初筛 [45/46]: 净饮水新时代,渠道持续提质升级的新命题...
+2026-06-07 00:21:55 | INFO    | __main__:_emit_log:145 | 🔍 AI初筛 [45/46]（共66条，已跳过20条）
+2026-06-07 00:21:55 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7v6meksFcrTYbYUDL'}
+2026-06-07 00:21:55 | INFO    | src.analyzers.screener:screen:108 | 初筛 [46/46]: 安吉尔赵凯:诠释“好部品”,引领净饮水技术创新...
+2026-06-07 00:21:56 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7xHExzmpK4ThusL7U'}
+2026-06-07 00:21:56 | INFO    | src.analyzers.screener:screen:124 | 初筛完成: 66条 → 相关46条 → 重要46条
+2026-06-07 00:21:56 | SUCCESS | __main__:_emit_log:145 | ✅ 初筛完成: 66条判定, 46条需要深度分析
+2026-06-07 00:21:56 | INFO    | __main__:_emit_log:145 | 🧠 [步骤 5/10] AI 深度分析 — 46 条重要情报...
+2026-06-07 00:21:56 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 46 条重要情报
+2026-06-07 00:21:56 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/46]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态2025-07-28...
+2026-06-07 00:21:56 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK7yrVftLXJvVuwzzYK'}
+2026-06-07 00:21:56 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/46]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP102025-07-22...
+2026-06-07 00:21:56 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK81NXMy2bRjFWyJZoD'}
+2026-06-07 00:21:56 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/46]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学2025-05-13...
+2026-06-07 00:21:57 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK82tZBEtWed593wcCo'}
+2026-06-07 00:21:57 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/46]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22...
+2026-06-07 00:21:57 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK84P6srx4TKbbat9J4'}
+2026-06-07 00:21:57 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/46]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国2025-06-16...
+2026-06-07 00:21:58 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK85y6dfzZba7XxWqDn'}
+2026-06-07 00:21:58 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/46]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-07 00:21:58 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK87XN9pSUUT9RVfw7z'}
+2026-06-07 00:21:58 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [7/46]: 孝义市看守所询价采购孝义市看守所直饮水设备采购及安装的采......
+2026-06-07 00:21:58 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK895sTZzgTEAUnQ2ak'}
+2026-06-07 00:21:58 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [8/46]: 15个高水平净水器品牌率先通过新国标GB/T30307-2023检测|净......
+2026-06-07 00:21:59 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8Aj6avVDAfYjsxA5W'}
+2026-06-07 00:21:59 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [9/46]: 净水器滤芯越多越好吗?新国标给出解答...
+2026-06-07 00:21:59 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8CEP13guC3Wjf9zaP'}
+2026-06-07 00:21:59 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [10/46]: 净水机新国标实施,净水器额定总净水量不得低于2000升...
+2026-06-07 00:21:59 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8DjRTmzcnoLpoSMmZ'}
+2026-06-07 00:21:59 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [11/46]: 净水机新规出台迎“首考” 家电院公布首批新国标测试产品...
+2026-06-07 00:22:00 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8FGCY4A9WzuaSSz4J'}
+2026-06-07 00:22:00 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [12/46]: 净水器新国标实行月余乱象依旧 业内吁统一标准...
+2026-06-07 00:22:00 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8GnyEgJ2yZZeFEpmA'}
+2026-06-07 00:22:00 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [13/46]: 2026年口碑TOP10家用净水器:高性价比长效机型,净水器过滤器家用...
+2026-06-07 00:22:01 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8JSwDVKrKnG4H6ZGh'}
+2026-06-07 00:22:01 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [14/46]: 全国十大品牌净水器排名2026|主流机型深度实测与行业解析...
+2026-06-07 00:22:01 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8L6fCSsaNAp9ZKfZd'}
+2026-06-07 00:22:01 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [15/46]: Friend,您家的直饮水机符合新国标吗?...
+2026-06-07 00:22:01 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8MjNxKS6R8bqgV3ci'}
+2026-06-07 00:22:01 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [16/46]: 新国标实施,净水器功能参数怎么标?...
+2026-06-07 00:22:02 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8PcVSj7kRyTFDKcuk'}
+2026-06-07 00:22:02 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [17/46]: 国家淘汰了一批不合格净水器,你中招了吗?...
+2026-06-07 00:22:02 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8RBkETzcaCfp3SCEk'}
+2026-06-07 00:22:02 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [18/46]: 今天(7月1日)起,此类净水器已被淘汰!别买错了……...
+2026-06-07 00:22:02 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8Si2UTbasU2DYzsnT'}
+2026-06-07 00:22:02 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [19/46]: 净水机水效等级标准来了!听听专家说了啥...
+2026-06-07 00:22:03 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8UGXyoe42indbu9KD'}
+2026-06-07 00:22:03 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [20/46]: 国家明令:此类净水器已被禁止销售!千万不要再买了!...
+2026-06-07 00:22:03 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8VqnyDTYf7VPJxT2P'}
+2026-06-07 00:22:03 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [21/46]: 东莞市水乡未来学校管道直饮水系统采购项目招标公告...
+2026-06-07 00:22:04 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8XS3AYnQrn2WPikJE'}
+2026-06-07 00:22:04 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [22/46]: 西乡县职业技术高中西乡职中——一中教学点直饮水机采购项目竞争......
+2026-06-07 00:22:04 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8YxKWHKvh1UrEAtKr'}
+2026-06-07 00:22:04 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [23/46]: 新设立一体化直饮水机维护服务(第二次)(JLP25C00116)公开招标公告...
+2026-06-07 00:22:04 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8abY6hvBTNTGraiR3'}
+2026-06-07 00:22:04 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [24/46]: 关于直饮水服务政策调整的通知...
+2026-06-07 00:22:05 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8cV9Cc1ENt3Hgy5Mi'}
+2026-06-07 00:22:05 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [25/46]: 浅议城市供水行业发展之“直饮水”现象...
+2026-06-07 00:22:05 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8e3A7DLXJyBnBW8bF'}
+2026-06-07 00:22:05 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [26/46]: 让更多内江市民喝上高品质的放心水!管道直饮水到底是什么——...
+2026-06-07 00:22:05 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8fpp6GyPKhqVCnYEs'}
+2026-06-07 00:22:05 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [27/46]: 南昌:加速迈向全城直饮水时代...
+2026-06-07 00:22:06 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8hL6vNG3jXUZcQeno'}
+2026-06-07 00:22:06 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [28/46]: 中国管道直饮水面面观...
+2026-06-07 00:22:06 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8jHvGPx3kYCGXXwAu'}
+2026-06-07 00:22:06 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [29/46]: “第九届”获奖论文悦享|高伟:浅议城市供水行业发展之“直饮水......
+2026-06-07 00:22:07 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8krBZg9SsqeoVpa3u'}
+2026-06-07 00:22:07 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [30/46]: 全国科技工作者日|对话安吉尔赵凯:做难而正确的事,让创新净水科技......
+2026-06-07 00:22:07 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8oxDJxPi2sLMjjWaL'}
+2026-06-07 00:22:07 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [31/46]: 安吉尔:如何再次定义净水新时代...
+2026-06-07 00:22:08 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8qmrMVYBJrWni45uF'}
+2026-06-07 00:22:08 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [32/46]: 【协会动态】安吉尔“长效反渗透膜”正式获得欧洲发明专利...
+2026-06-07 00:22:08 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8srs62F2K6PjZwobn'}
+2026-06-07 00:22:08 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [33/46]: 开启家用净水微生物控制新篇章安吉尔APCM航天除菌科技获年度技术......
+2026-06-07 00:22:09 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8uUM2GKZDmMfgofYc'}
+2026-06-07 00:22:09 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [34/46]: 企业风采∣“安吉尔”打造净饮水领域“中国芯”...
+2026-06-07 00:22:09 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8wDmYPhdR1mvaQ6d8'}
+2026-06-07 00:22:09 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [35/46]: 实测:“黑科技”净水器为啥这么多“大佬”推荐?...
+2026-06-07 00:22:09 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8xmnhtc1z8i1QAdka'}
+2026-06-07 00:22:09 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [36/46]: 高端净水黑科技,安吉尔A7 lite为你打造五星级全屋净水新体验...
+2026-06-07 00:22:10 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK8zGprssKFrHNkyzj9'}
+2026-06-07 00:22:10 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [37/46]: 安吉尔饮水机四个滤芯多久换一次?...
+2026-06-07 00:22:10 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK91kdF9fNAzBJzthCH'}
+2026-06-07 00:22:10 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [38/46]: 2026世界食品安全日|饮水健康,安吉尔在行动...
+2026-06-07 00:22:10 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK93ERU3Cv1hfH6jKHW'}
+2026-06-07 00:22:10 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [39/46]: 安吉尔饮水机的用法支持多温出水吗?...
+2026-06-07 00:22:11 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK94nSM3TeYgmjvzVnu'}
+2026-06-07 00:22:11 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [40/46]: 安吉尔饮水机加热灯亮但自动停了咋办...
+2026-06-07 00:22:11 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK96FzCfRbg1YJGuE6h'}
+2026-06-07 00:22:11 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [41/46]: 安吉尔饮水机怎么清洗使用?...
+2026-06-07 00:22:12 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK97qjvbouNUb9zSajX'}
+2026-06-07 00:22:12 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [42/46]: 安吉尔饮水机怎么设置童锁使用?...
+2026-06-07 00:22:12 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK99i75QDA5XhoxsLwd'}
+2026-06-07 00:22:12 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [43/46]: 净水器站上“刚需”风口:科技领跑的安吉尔如何定义行业未来?...
+2026-06-07 00:22:18 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK9DXYqAN9rdJCJpEq3'}
+2026-06-07 00:22:18 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [44/46]: 深圳安吉尔饮水产业集团有限公司...
+2026-06-07 00:22:19 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK9e2SVdhjUndmmksC5'}
+2026-06-07 00:22:19 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [45/46]: 净饮水新时代,渠道持续提质升级的新命题...
+2026-06-07 00:22:19 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK9fkdRXzHr74bd3rVf'}
+2026-06-07 00:22:19 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [46/46]: 安吉尔赵凯:诠释“好部品”,引领净饮水技术创新...
+2026-06-07 00:22:19 | ERROR   | src.analyzers.llm_client:chat:127 | LLM 调用失败: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CbnK9hLsTyDYRbQG3CgNd'}
+2026-06-07 00:22:19 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 46条 → 高紧急度(≥7分): 0条
+2026-06-07 00:22:19 | SUCCESS | __main__:_emit_log:145 | ✅ 深度分析完成: 46条
+2026-06-07 00:22:19 | INFO    | __main__:run:236 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-07 00:22:19 | INFO    | __main__:_emit_log:145 | 📝 [步骤 7/10] 生成情报报告...
+2026-06-07 00:22:19 | INFO    | src.reporters.json_reporter:generate:110 | JSON 报告生成: 66条采集 → 46条重要 → 46条深度分析
+2026-06-07 00:22:19 | INFO    | src.reporters.json_reporter:save:135 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.json
+2026-06-07 00:22:19 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (135328 字符)
+2026-06-07 00:22:19 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (135328 字符)
+2026-06-07 00:22:19 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-07.html
+2026-06-07 00:22:19 | SUCCESS | __main__:_emit_log:145 | ✅ 报告生成完成: JSON=intelligence_report_2026-06-07.json, HTML=intelligence_report_2026-06-07.html
+2026-06-07 00:22:19 | INFO    | __main__:run:259 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-07 00:22:19 | INFO    | __main__:_emit_log:145 | 📬 [步骤 9/10] 发送通知...
+2026-06-07 00:22:19 | INFO    | __main__:_send_notifications:529 |    🚨 发现高优先级情报，立即通知！
+2026-06-07 00:22:21 | INFO    | src.notifiers.email_notifier:send_report:93 | 邮件已发送 → 5 个收件人: 2477395349@qq.com, 董素梅 <dongmei@example.com>, 销售总监 <sales@example.com>
+2026-06-07 00:22:21 | INFO    | __main__:_emit_log:145 | ✅ 通知已发送
+2026-06-07 00:22:21 | INFO    | __main__:run:270 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-07 00:22:21 | INFO    | src.storage.database:save_report:287 | 报告已保存，ID=15
+2026-06-07 00:22:21 | INFO    | __main__:run:273 | ✅ 数据已归档
+2026-06-07 00:22:21 | WARNING | __main__:_emit_log:145 | ⚠️ 情报采集分析完成！
+2026-06-07 00:22:21 | INFO    | __main__:_emit_log:145 |    耗时: 103.2 秒
+2026-06-07 00:22:21 | INFO    | __main__:_emit_log:145 |    采集: 751 条 → 清洗: 66 条 → 重要分析: 46 条
+2026-06-07 00:22:21 | INFO    | __main__:_emit_log:145 |    渠道: 成功2 / 失败1
+2026-06-07 00:22:21 | WARNING | __main__:_emit_log:145 |    失败渠道: wechat
+2026-06-07 00:22:21 | INFO    | __main__:_emit_log:145 |    下次监控: 2026-06-22
+2026-06-07 00:22:21 | DEBUG   | src.storage.database:close:378 | 数据库连接已关闭
