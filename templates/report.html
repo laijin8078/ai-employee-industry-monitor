@@ -357,6 +357,37 @@
     {% endif %}
 
     <!-- 底部 -->
+    <!-- 来源健康度 -->
+    {% if report.source_health %}
+    <div class="section">
+        <div class="section-title">💚 数据源健康度</div>
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <tr style="background:#f5f5f5;">
+                <th style="padding:8px; text-align:left; border-bottom:1px solid #e0e0e0;">来源</th>
+                <th style="padding:8px; text-align:left; border-bottom:1px solid #e0e0e0;">状态</th>
+                <th style="padding:8px; text-align:left; border-bottom:1px solid #e0e0e0;">策略</th>
+                <th style="padding:8px; text-align:left; border-bottom:1px solid #e0e0e0;">采集数</th>
+                <th style="padding:8px; text-align:left; border-bottom:1px solid #e0e0e0;">备注</th>
+            </tr>
+            {% for name, health in report.source_health.items() %}
+            <tr>
+                <td style="padding:8px; border-bottom:1px solid #f0f0f0;">{{ name }}</td>
+                <td style="padding:8px; border-bottom:1px solid #f0f0f0;">
+                    {% if health.status == 'ok' %}✅ 正常
+                    {% elif health.status == 'empty' %}⚠️ 无数据
+                    {% elif health.status == 'failed' %}❌ 失败
+                    {% else %}⚠️ {{ health.status }}
+                    {% endif %}
+                </td>
+                <td style="padding:8px; border-bottom:1px solid #f0f0f0;">{{ health.strategy }}</td>
+                <td style="padding:8px; border-bottom:1px solid #f0f0f0;">{{ health.count }}条</td>
+                <td style="padding:8px; border-bottom:1px solid #f0f0f0; color:#888;">{{ health.error or '' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
     <div class="footer">
         <p>📬 本报告已发送至：{{ report.notification_sent_to | join(', ') }}</p>
         <p>⏰ 下次监控日期：{{ report.next_monitoring_date }} | 由 AI 情报系统自动生成</p>

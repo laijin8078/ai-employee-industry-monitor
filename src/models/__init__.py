@@ -7,6 +7,9 @@ from .schemas import (
     IntelligenceReport,
     CompetitorSummary,
     ResponseAction,
+    SourceHealth,
+    SourceHealthReport,
+    JobRecord,
 )
 
 __all__ = [
@@ -17,4 +20,7 @@ __all__ = [
     "IntelligenceReport",
     "CompetitorSummary",
     "ResponseAction",
+    "SourceHealth",
+    "SourceHealthReport",
+    "JobRecord",
 ]

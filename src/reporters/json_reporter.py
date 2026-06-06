@@ -32,6 +32,7 @@ class JSONReporter:
         self.reports_dir = reports_dir
         self.company_context = company_context
         self.reports_dir.mkdir(parents=True, exist_ok=True)
+        self._source_health = {}  # 最近一次的来源健康度数据
 
     def generate(
         self,
@@ -39,6 +40,7 @@ class JSONReporter:
         all_screening_results: list[ScreeningResult],
         report_date: Optional[date] = None,
         notification_recipients: list[str] = None,
+        source_health: dict = None,
     ) -> IntelligenceReport:
         """
         生成完整的情报报告。
@@ -48,6 +50,7 @@ class JSONReporter:
             all_screening_results: 所有初筛结果（含低优先级和无关）
             report_date: 报告日期，默认今天
             notification_recipients: 通知接收人
+            source_health: 各渠道来源健康度 {"channel": {"status", "strategy", "count", "error"}}
 
         Returns:
             IntelligenceReport 实例
@@ -87,6 +90,9 @@ class JSONReporter:
         # 通知列表
         if notification_recipients is None:
             notification_recipients = []
+
+        # 保存来源健康度
+        self._source_health = source_health or {}
 
         report = IntelligenceReport(
             report_date=report_date,
@@ -292,4 +298,5 @@ class JSONReporter:
             "recommendation": report.recommendation,
             "next_monitoring_date": str(report.next_monitoring_date),
             "notification_sent_to": report.notification_sent_to,
+            "source_health": self._source_health,
         }

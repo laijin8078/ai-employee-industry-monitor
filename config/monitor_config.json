@@ -33,6 +33,7 @@
   },
   "notification": {
     "email_recipients": [
+      "2477395349@qq.com",
       "董素梅 <dongmei@example.com>",
       "销售总监 <sales@example.com>",
       "产品经理 <product@example.com>",
@@ -83,6 +84,17 @@
       "招聘", "团建", "年会"
     ],
     "max_news_age_days": 14,
-    "title_similarity_threshold": 0.8
+    "title_similarity_threshold": 0.8,
+    "news_source_limits": {
+      "baidu": 10,
+      "bing": 10,
+      "sogou": 10,
+      "toutiao": 5,
+      "wechat_search": 10
+    },
+    "compensation_keywords": [
+      "净水器", "直饮水机", "商用净水", "饮水设备", "净水行业"
+    ]
   }
 }
+

@@ -146,7 +146,7 @@ class IntelligencePipeline:
         try:
             # === 步骤 2: 数据采集（3个渠道并行） ===
             logger.info("\n📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...")
-            raw_items, channels_succeeded, channels_failed = self._collect_data()
+            raw_items, channels_succeeded, channels_failed, source_health = self._collect_data()
 
             if not raw_items:
                 logger.warning("⚠ 所有渠道采集均为空！")
@@ -189,6 +189,7 @@ class IntelligencePipeline:
                 all_screening_results=screening_results,
                 report_date=date.today(),
                 notification_recipients=self.settings.email_recipients,
+                source_health=source_health,
             )
 
             # 保存 JSON 报告
@@ -265,21 +266,27 @@ class IntelligencePipeline:
 
     # ==================== 数据采集 ====================
 
-    def _collect_data(self) -> tuple[list[RawItem], list[str], list[str]]:
+    def _collect_data(self) -> tuple[list[RawItem], list[str], list[str], dict]:
         """
         并行采集3个渠道。
 
         Returns:
-            (all_items, succeeded_channels, failed_channels)
+            (all_items, succeeded_channels, failed_channels, source_health)
         """
         all_items = []
         succeeded = []
         failed = []
+        source_health = {}  # source_name → {"status": ..., "strategy": ..., "count": ..., "error": ...}
 
         if self.mock_mode:
             logger.info("   🎭 使用模拟数据...")
             all_items = generate_mock_data()
-            return all_items, ["wechat", "website", "news"], []
+            source_health = {
+                "wechat": {"status": "ok", "strategy": "mock", "count": 3, "error": None},
+                "website": {"status": "ok", "strategy": "mock", "count": 4, "error": None},
+                "news": {"status": "ok", "strategy": "mock", "count": 3, "error": None},
+            }
+            return all_items, ["wechat", "website", "news"], [], source_health
 
         # 并行执行3个爬虫
         with ThreadPoolExecutor(max_workers=3) as executor:
@@ -310,15 +317,18 @@ class IntelligencePipeline:
                     if items:
                         all_items.extend(items)
                         succeeded.append(channel)
+                        source_health[channel] = {"status": "ok", "strategy": "requests", "count": len(items), "error": None}
                         logger.info(f"   ✅ {channel}: {len(items)} 条")
                     else:
                         failed.append(channel)
+                        source_health[channel] = {"status": "empty", "strategy": "requests", "count": 0, "error": "0条结果"}
                         logger.warning(f"   ⚠ {channel}: 0 条")
                 except Exception as e:
                     failed.append(channel)
+                    source_health[channel] = {"status": "failed", "strategy": "timeout", "count": 0, "error": str(e)[:100]}
                     logger.error(f"   ❌ {channel}: {e}")
 
-        return all_items, succeeded, failed
+        return all_items, succeeded, failed, source_health
 
     def _load_all_cached(self) -> list[RawItem]:
         """从缓存加载所有渠道数据（失败回退）"""

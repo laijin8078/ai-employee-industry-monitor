@@ -193,3 +193,25 @@ class JobRecord(BaseModel):
     report_generated: bool = Field(default=False, description="是否生成了报告")
     error_message: str = Field(default="", description="错误信息（如有）")
     duration_seconds: float = Field(default=0.0, description="执行耗时（秒）")
+
+
+# ==================== 来源健康度 ====================
+
+class SourceHealth(BaseModel):
+    """单个采集源的健康状态"""
+
+    name: str = Field(..., description="来源标识，如 website_midea / wechat / toutiao")
+    status: str = Field(
+        default="ok",
+        description="ok / degraded / fallback_used / fallback_failed / needs_manual_refresh / empty",
+    )
+    strategy: str = Field(default="", description="实际使用的采集策略: requests / playwright / search_engine / cache")
+    raw_count: int = Field(default=0, description="原始采集数量")
+    error: Optional[str] = Field(default=None, description="错误信息（如有）")
+
+
+class SourceHealthReport(BaseModel):
+    """来源健康度汇总"""
+
+    sources: list[SourceHealth] = Field(default_factory=list)
+    summary: str = Field(default="", description="一句话健康度摘要")
