@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞品与行业动态情报报告 — {{ report.report_date }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .header .meta {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 13px;
+        }
+        .header .meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* 摘要区 */
+        .summary-box {
+            background: #e8f0fe;
+            border-left: 4px solid #1a73e8;
+            margin: 24px 32px;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: #1a237e;
+        }
+
+        /* 分区 */
+        .section {
+            padding: 0 32px 24px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a73e8;
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .badge {
+            font-size: 13px;
+            background: #1a73e8;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        /* 情报卡片 */
+        .intel-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .intel-card:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .intel-card.priority-high {
+            border-left: 4px solid #e53935;
+        }
+        .intel-card.priority-medium {
+            border-left: 4px solid #fb8c00;
+        }
+        .intel-card.priority-low {
+            border-left: 4px solid #9e9e9e;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            background: #fafafa;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .card-header .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            flex: 1;
+        }
+        .card-header .meta-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+            white-space: nowrap;
+        }
+        .priority-tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .priority-tag.high { background: #ffebee; color: #c62828; }
+        .priority-tag.medium { background: #fff3e0; color: #e65100; }
+        .priority-tag.low { background: #f5f5f5; color: #616161; }
+
+        .card-body {
+            padding: 16px 20px;
+        }
+        .field {
+            margin-bottom: 12px;
+        }
+        .field-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .field-value {
+            font-size: 14px;
+            color: #444;
+        }
+
+        /* 影响类型标签 */
+        .impact-threat { color: #c62828; font-weight: 600; }
+        .impact-opportunity { color: #2e7d32; font-weight: 600; }
+        .impact-neutral { color: #616161; font-weight: 600; }
+
+        /* 应对策略 */
+        .response-list {
+            list-style: none;
+            padding: 0;
+        }
+        .response-list li {
+            padding: 6px 0 6px 16px;
+            font-size: 13px;
+            color: #555;
+            border-left: 2px solid #e0e0e0;
+            margin-bottom: 4px;
+        }
+        .response-list li .dim-tag {
+            display: inline-block;
+            font-size: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-right: 6px;
+            font-weight: 600;
+        }
+
+        /* 竞品汇总 */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+        }
+        .competitor-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .competitor-card h4 {
+            font-size: 15px;
+            color: #1a73e8;
+            margin-bottom: 6px;
+        }
+        .competitor-card p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* 底部 */
+        .footer {
+            background: #fafafa;
+            padding: 24px 32px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .footer p { margin-bottom: 4px; }
+
+        .recommendation-box {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .recommendation-box .field-label { color: #f57f17; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="header">
+        <h1>🔍 竞品与行业动态情报报告</h1>
+        <div class="subtitle">朴道水汇 · AI 情报系统自动生成</div>
+        <div class="meta">
+            <span>📅 {{ report.report_date }}</span>
+            <span>📊 周期：{{ report.report_period }}</span>
+            <span>📈 共 {{ report.total_items }} 条，重要 {{ report.important_items }} 条</span>
+        </div>
+    </div>
+
+    <!-- 摘要 -->
+    {% if report.summary %}
+    <div class="summary-box">
+        <strong>📋 本期摘要：</strong>{{ report.summary }}
+    </div>
+    {% endif %}
+
+    <!-- 综合建议 -->
+    {% if report.recommendation %}
+    <div class="section">
+        <div class="recommendation-box">
+            <div class="field-label">💡 综合建议</div>
+            <div class="field-value">{{ report.recommendation }}</div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 分类情报 -->
+    {% for category, items in report.intelligence_by_category.items() %}
+        {% if items %}
+        <div class="section">
+            <div class="section-title">
+                {% if category == "竞品动态" %}🏢
+                {% elif category == "行业政策" %}📜
+                {% elif category == "行业动态" %}📊
+                {% elif category == "技术突破" %}🔬
+                {% else %}📌{% endif %}
+                {{ category }}
+                <span class="badge">{{ items|length }} 条</span>
+            </div>
+
+            {% for item in items %}
+            <div class="intel-card priority-{{ item.screening.priority }}">
+                <div class="card-header">
+                    <div class="title">
+                        {{ item.screening.item.raw.title }}
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag {{ 'high' if item.screening.priority == '高' else 'medium' if item.screening.priority == '中' else 'low' }}">
+                            {{ item.screening.priority }}优先级
+                        </span>
+                        <span>⏱ 紧急度 {{ item.urgency_score }}/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">{{ item.screening.item.raw.source_name }} · {{ item.screening.item.raw.publish_date }}</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">{{ item.ai_summary }}</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-{% if item.impact_type == '威胁' %}threat{% elif item.impact_type == '机会' %}opportunity{% else %}neutral{% endif %}">
+                                {{ item.impact_type }}
+                            </span>
+                        </div>
+                        <div class="field-value">{{ item.impact_analysis }}</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    {% if item.our_response %}
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            {% for resp in item.our_response %}
+                            <li>
+                                <span class="dim-tag">{{ resp.dimension }}</span>
+                                {{ resp.action }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <!-- 相关链接 -->
+                    {% if item.related_links %}
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        {% for link in item.related_links %}
+                        <div><a href="{{ link }}" target="_blank" style="color:#1a73e8;font-size:13px;">{{ link }}</a></div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endfor %}
+
+    <!-- 竞品汇总 -->
+    {% if report.competitor_summary %}
+    <div class="section">
+        <div class="section-title">📋 竞品动态汇总</div>
+        <div class="competitor-grid">
+            {% for comp in report.competitor_summary %}
+            <div class="competitor-card">
+                <h4>{{ comp.name }}</h4>
+                <p>{{ comp.period_summary }}</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    {{ comp.high_priority_count }}条高优 · 共{{ comp.total_items }}条
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 底部 -->
+    <div class="footer">
+        <p>📬 本报告已发送至：{{ report.notification_sent_to | join(', ') }}</p>
+        <p>⏰ 下次监控日期：{{ report.next_monitoring_date }} | 由 AI 情报系统自动生成</p>
+        <p style="margin-top:8px;">如有疑问或需要调整监控范围，请联系管理员</p>
+    </div>
+</div>
+</body>
+</html>

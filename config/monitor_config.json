@@ -1,0 +1,88 @@
+{
+  "monitor_scope": {
+    "competitor_wechat": [
+      "美的净水",
+      "沁园净水器官方",
+      "安吉尔官方"
+    ],
+    "competitor_websites": [
+      {"name": "美的净水", "url": "https://water.midea.com/news/"},
+      {"name": "沁园", "url": "https://www.qinyuan.com.cn/news/"},
+      {"name": "安吉尔", "url": "https://www.angelgroup.com.cn/news/"}
+    ],
+    "industry_keywords": [
+      "净水器新国标",
+      "直饮水政策",
+      "DPM技术",
+      "纳滤净水器",
+      "商用净水器",
+      "企业直饮水",
+      "净水器排行榜",
+      "净水器水质标准"
+    ],
+    "news_sources": [
+      "今日头条",
+      "腾讯新闻",
+      "新浪财经"
+    ]
+  },
+  "schedule": {
+    "frequency": "biweekly",
+    "day_of_week": "monday",
+    "time": "09:00"
+  },
+  "notification": {
+    "email_recipients": [
+      "董素梅 <dongmei@example.com>",
+      "销售总监 <sales@example.com>",
+      "产品经理 <product@example.com>",
+      "市场总监 <marketing@example.com>"
+    ],
+    "smtp_host": "smtp.example.com",
+    "smtp_port": 587,
+    "wechat_bot_webhook": ""
+  },
+  "company_context": {
+    "name": "朴道水汇",
+    "full_name": "朴道水汇净水科技有限公司",
+    "core_tech": "DPM纳滤技术",
+    "key_differentiator": "保留水中矿物质（钙镁离子30-50mg/L）",
+    "main_competitors": ["美的净水", "沁园", "安吉尔"],
+    "target_market": "商用净水器 / 企业直饮水",
+    "product_lines": [
+      {"name": "名士K2", "spec": "2000G大流量商用直饮机"},
+      {"name": "名士K1", "spec": "1000G商用直饮机"},
+      {"name": "名士S系列", "spec": "中小型企业直饮机"}
+    ],
+    "key_clients": ["华为", "阿里巴巴", "腾讯", "字节跳动"]
+  },
+  "crawler_settings": {
+    "request_interval_min": 5,
+    "request_interval_max": 10,
+    "timeout_seconds": 30,
+    "max_retries": 3,
+    "use_proxy": false,
+    "proxy_pool": [],
+    "headless": true
+  },
+  "ai_settings": {
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 4096,
+    "temperature": 0.3,
+    "batch_size": 10,
+    "max_concurrent": 5
+  },
+  "filter_rules": {
+    "keyword_whitelist": [
+      "降价", "融资", "新品", "发布", "政策", "标准", "技术",
+      "纳滤", "RO反渗透", "直饮水", "商用", "企业", "招标",
+      "采购", "合作", "战略", "市场", "份额"
+    ],
+    "competitor_blacklist": [
+      "冰箱", "洗衣机", "空调", "电视", "油烟机", "热水器",
+      "招聘", "团建", "年会"
+    ],
+    "max_news_age_days": 14,
+    "title_similarity_threshold": 0.8
+  }
+}
