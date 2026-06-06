@@ -1,0 +1,43 @@
+{
+  "cached_at": "2026-06-06T14:15:16.458505",
+  "channel": "news_all",
+  "count": 3,
+  "items": [
+    {
+      "source_channel": "news",
+      "source_name": "今日头条",
+      "title": "中方始终将老挝视作周边外交重要方向",
+      "url": "https://sou.toutiao.com/search/jump?url=https%3A%2F%2Fwww.toutiao.com%2Farticle%2F7647889614103790118%2F%3Fchannel%3D%26source%3Dnews&aid=4916&jtoken=",
+      "content": "",
+      "publish_date": "2026-06-06T14:12:26.449672",
+      "raw_metadata": {
+        "source": "今日头条",
+        "search_keyword": "净水器新国标"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "今日头条",
+      "title": "净水器行业新增两项新国标|163-手机网易网",
+      "url": "https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&aid=4916&jtoken=",
+      "content": "",
+      "publish_date": "2026-06-06T14:12:26.486693",
+      "raw_metadata": {
+        "source": "今日头条",
+        "search_keyword": "净水器新国标"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "今日头条",
+      "title": "净水器行业新增两项新国标|163-手机网易网",
+      "url": "https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&aid=4916&jtoken=",
+      "content": "",
+      "publish_date": "2026-06-06T14:12:26.493174",
+      "raw_metadata": {
+        "source": "今日头条",
+        "search_keyword": "净水器新国标"
+      }
+    }
+  ]
+}

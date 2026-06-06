@@ -1,0 +1,686 @@
+2026-06-06 13:49:26 | INFO    | __main__:main:666 | 🎭 启动模拟模式 — 使用内置Mock数据测试流水线
+2026-06-06 13:49:27 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 13:49:27 | DEBUG   | src.storage.database:_init_tables:101 | 数据库表初始化完成
+2026-06-06 13:49:27 | INFO    | __main__:run:133 | ============================================================
+2026-06-06 13:49:27 | INFO    | __main__:run:134 | 🚀 AI情报系统启动 [Job: job_20260606_134926_e910e1]
+2026-06-06 13:49:27 | INFO    | __main__:run:135 |    模式: Mock模拟
+2026-06-06 13:49:27 | INFO    | __main__:run:136 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-06 13:49:27 | INFO    | __main__:run:139 | ============================================================
+2026-06-06 13:49:27 | INFO    | __main__:run:148 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-06 13:49:27 | INFO    | __main__:_collect_data:280 |    🎭 使用模拟数据...
+2026-06-06 13:49:27 | INFO    | __main__:run:158 | ✅ 采集完成: 10 条原始数据
+2026-06-06 13:49:27 | INFO    | __main__:run:161 | 
+🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-06 13:49:27 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 10 条
+2026-06-06 13:49:27 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 10 条
+2026-06-06 13:49:27 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '美的智净3.0系列发布 3000G超大流量引领企业饮水新趋势' ≈ '美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代' (相似度: 83.8%)
+2026-06-06 13:49:27 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 9 条
+2026-06-06 13:49:27 | DEBUG   | src.processors.cleaner:_filter_irrelevant:217 | 过滤（招聘）: 美的净水诚聘研发工程师，薪资20-35K
+2026-06-06 13:49:27 | DEBUG   | src.processors.cleaner:_filter_irrelevant:212 | 过滤（黑名单）: 美的集团发布2026年智能冰箱新品，搭载AI食材管理
+2026-06-06 13:49:27 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 7 条
+2026-06-06 13:49:27 | INFO    | __main__:run:163 | ✅ 清洗完成: 7 条有效数据 (去重 0 条)
+2026-06-06 13:49:27 | INFO    | src.storage.database:save_raw_items:139 | 已保存 7 条原始数据到数据库
+2026-06-06 13:49:27 | INFO    | __main__:run:170 | 
+🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-06 13:49:27 | INFO    | src.analyzers.screener:screen:91 | 初筛开始: 7 条数据
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [1/7]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [2/7]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [3/7]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [4/7]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [5/7]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [6/7]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [7/7]: 某地自来水管道改造工程完成，惠及10万居民...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | INFO    | src.analyzers.screener:screen:115 | 初筛完成: 7条 → 相关6条 → 重要6条（高+中优先级）
+2026-06-06 13:49:27 | INFO    | __main__:run:172 | ✅ 初筛完成: 7条判定, 6条需要深度分析
+2026-06-06 13:49:27 | INFO    | __main__:run:177 | 
+🧠 [步骤 5/10] AI 深度分析 — 6 条重要情报...
+2026-06-06 13:49:27 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 6 条重要情报
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/6]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/6]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/6]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/6]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/6]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/6]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-06 13:49:27 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:27 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 6条 → 高紧急度(≥7分): 0条
+2026-06-06 13:49:27 | INFO    | __main__:run:179 | ✅ 深度分析完成: 6条
+2026-06-06 13:49:27 | INFO    | __main__:run:182 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-06 13:49:27 | INFO    | __main__:run:186 | 
+📝 [步骤 7/10] 生成情报报告...
+2026-06-06 13:49:27 | INFO    | src.reporters.json_reporter:generate:104 | JSON 报告生成: 7条采集 → 6条重要 → 6条深度分析
+2026-06-06 13:49:27 | INFO    | src.reporters.json_reporter:save:129 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:27 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23874 字符)
+2026-06-06 13:49:27 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23874 字符)
+2026-06-06 13:49:27 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:27 | INFO    | __main__:run:200 | ✅ 报告生成完成: JSON=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json, HTML=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:27 | INFO    | __main__:run:203 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-06 13:49:27 | INFO    | __main__:run:206 | 
+📬 [步骤 9/10] 发送通知...
+2026-06-06 13:49:27 | INFO    | __main__:_send_notifications:352 |    🚨 发现高优先级情报，立即通知！
+2026-06-06 13:49:27 | WARNING | src.notifiers.email_notifier:send_report:68 | SMTP 未配置，跳过邮件发送
+2026-06-06 13:49:27 | INFO    | __main__:run:208 | ✅ 通知跳过（SMTP未配置）
+2026-06-06 13:49:27 | INFO    | __main__:run:211 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-06 13:49:27 | INFO    | src.storage.database:save_report:192 | 报告已保存，ID=1
+2026-06-06 13:49:27 | ERROR   | __main__:run:254 | ❌ 流水线执行异常: IntelligenceDB.cleanup_old_data() got an unexpected keyword argument 'days'
+Traceback (most recent call last):
+
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+
+  File "C:\Users\86158\ai-employee\src\main.py", line 700, in <module>
+    main()
+    └ <function main at 0x0000025FC3DCB1C0>
+
+  File "C:\Users\86158\ai-employee\src\main.py", line 669, in main
+    result = pipeline.run()
+             │        └ <function IntelligencePipeline.run at 0x0000025FC3DCA980>
+             └ <__main__.IntelligencePipeline object at 0x0000025FC1E31A90>
+
+> File "C:\Users\86158\ai-employee\src\main.py", line 213, in run
+    self.db.cleanup_old_data(days=90)
+    │    │  └ <function IntelligenceDB.cleanup_old_data at 0x0000025FC3DCA6C0>
+    │    └ <src.storage.database.IntelligenceDB object at 0x0000025FC1E31BE0>
+    └ <__main__.IntelligencePipeline object at 0x0000025FC1E31A90>
+
+TypeError: IntelligenceDB.cleanup_old_data() got an unexpected keyword argument 'days'
+2026-06-06 13:49:27 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭
+2026-06-06 13:49:38 | INFO    | __main__:main:666 | 🎭 启动模拟模式 — 使用内置Mock数据测试流水线
+2026-06-06 13:49:38 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 13:49:38 | DEBUG   | src.storage.database:_init_tables:101 | 数据库表初始化完成
+2026-06-06 13:49:38 | INFO    | __main__:run:133 | ============================================================
+2026-06-06 13:49:38 | INFO    | __main__:run:134 | 🚀 AI情报系统启动 [Job: job_20260606_134938_4d1c7d]
+2026-06-06 13:49:38 | INFO    | __main__:run:135 |    模式: Mock模拟
+2026-06-06 13:49:38 | INFO    | __main__:run:136 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-06 13:49:38 | INFO    | __main__:run:139 | ============================================================
+2026-06-06 13:49:38 | INFO    | __main__:run:148 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-06 13:49:38 | INFO    | __main__:_collect_data:280 |    🎭 使用模拟数据...
+2026-06-06 13:49:38 | INFO    | __main__:run:158 | ✅ 采集完成: 10 条原始数据
+2026-06-06 13:49:38 | INFO    | __main__:run:161 | 
+🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-06 13:49:38 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 10 条
+2026-06-06 13:49:38 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 10 条
+2026-06-06 13:49:38 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '美的智净3.0系列发布 3000G超大流量引领企业饮水新趋势' ≈ '美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代' (相似度: 83.8%)
+2026-06-06 13:49:38 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 9 条
+2026-06-06 13:49:38 | DEBUG   | src.processors.cleaner:_filter_irrelevant:217 | 过滤（招聘）: 美的净水诚聘研发工程师，薪资20-35K
+2026-06-06 13:49:38 | DEBUG   | src.processors.cleaner:_filter_irrelevant:212 | 过滤（黑名单）: 美的集团发布2026年智能冰箱新品，搭载AI食材管理
+2026-06-06 13:49:38 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 7 条
+2026-06-06 13:49:38 | INFO    | __main__:run:163 | ✅ 清洗完成: 7 条有效数据 (去重 0 条)
+2026-06-06 13:49:38 | INFO    | src.storage.database:save_raw_items:139 | 已保存 7 条原始数据到数据库
+2026-06-06 13:49:38 | INFO    | __main__:run:170 | 
+🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-06 13:49:38 | INFO    | src.analyzers.screener:screen:91 | 初筛开始: 7 条数据
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [1/7]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [2/7]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [3/7]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [4/7]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [5/7]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [6/7]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [7/7]: 某地自来水管道改造工程完成，惠及10万居民...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | INFO    | src.analyzers.screener:screen:115 | 初筛完成: 7条 → 相关6条 → 重要6条（高+中优先级）
+2026-06-06 13:49:38 | INFO    | __main__:run:172 | ✅ 初筛完成: 7条判定, 6条需要深度分析
+2026-06-06 13:49:38 | INFO    | __main__:run:177 | 
+🧠 [步骤 5/10] AI 深度分析 — 6 条重要情报...
+2026-06-06 13:49:38 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 6 条重要情报
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/6]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/6]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/6]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/6]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/6]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/6]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-06 13:49:38 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:38 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 6条 → 高紧急度(≥7分): 0条
+2026-06-06 13:49:38 | INFO    | __main__:run:179 | ✅ 深度分析完成: 6条
+2026-06-06 13:49:38 | INFO    | __main__:run:182 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-06 13:49:38 | INFO    | __main__:run:186 | 
+📝 [步骤 7/10] 生成情报报告...
+2026-06-06 13:49:38 | INFO    | src.reporters.json_reporter:generate:104 | JSON 报告生成: 7条采集 → 6条重要 → 6条深度分析
+2026-06-06 13:49:38 | INFO    | src.reporters.json_reporter:save:129 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:38 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23874 字符)
+2026-06-06 13:49:38 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23874 字符)
+2026-06-06 13:49:38 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:38 | INFO    | __main__:run:200 | ✅ 报告生成完成: JSON=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json, HTML=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:38 | INFO    | __main__:run:203 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-06 13:49:38 | INFO    | __main__:run:206 | 
+📬 [步骤 9/10] 发送通知...
+2026-06-06 13:49:38 | INFO    | __main__:_send_notifications:352 |    🚨 发现高优先级情报，立即通知！
+2026-06-06 13:49:38 | WARNING | src.notifiers.email_notifier:send_report:68 | SMTP 未配置，跳过邮件发送
+2026-06-06 13:49:38 | INFO    | __main__:run:208 | ✅ 通知跳过（SMTP未配置）
+2026-06-06 13:49:38 | INFO    | __main__:run:211 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-06 13:49:38 | INFO    | src.storage.database:save_report:192 | 报告已保存，ID=2
+2026-06-06 13:49:38 | INFO    | __main__:run:214 | ✅ 数据已归档
+2026-06-06 13:49:38 | INFO    | __main__:run:230 | 
+============================================================
+2026-06-06 13:49:38 | INFO    | __main__:run:231 | 🎉 情报采集分析完成！
+2026-06-06 13:49:38 | INFO    | __main__:run:232 |    耗时: 0.1 秒
+2026-06-06 13:49:38 | INFO    | __main__:run:233 |    采集: 10 条 → 清洗: 7 条 → 重要分析: 6 条
+2026-06-06 13:49:38 | INFO    | __main__:run:235 |    渠道: 成功3 / 失败0
+2026-06-06 13:49:38 | INFO    | __main__:run:236 |    报告: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:38 | INFO    | __main__:run:238 |    HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:38 | INFO    | __main__:run:239 |    下次监控: 2026-06-22
+2026-06-06 13:49:38 | INFO    | __main__:run:240 | ============================================================
+2026-06-06 13:49:38 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭
+2026-06-06 13:49:55 | INFO    | __main__:main:666 | 🎭 启动模拟模式 — 使用内置Mock数据测试流水线
+2026-06-06 13:49:55 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 13:49:55 | DEBUG   | src.storage.database:_init_tables:101 | 数据库表初始化完成
+2026-06-06 13:49:55 | INFO    | __main__:run:133 | ============================================================
+2026-06-06 13:49:55 | INFO    | __main__:run:134 | 🚀 AI情报系统启动 [Job: job_20260606_134955_4dd404]
+2026-06-06 13:49:55 | INFO    | __main__:run:135 |    模式: Mock模拟
+2026-06-06 13:49:55 | INFO    | __main__:run:136 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-06 13:49:55 | INFO    | __main__:run:139 | ============================================================
+2026-06-06 13:49:55 | INFO    | __main__:run:148 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-06 13:49:55 | INFO    | __main__:_collect_data:280 |    🎭 使用模拟数据...
+2026-06-06 13:49:55 | INFO    | __main__:run:158 | ✅ 采集完成: 10 条原始数据
+2026-06-06 13:49:55 | INFO    | __main__:run:161 | 
+🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-06 13:49:55 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 10 条
+2026-06-06 13:49:55 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 10 条
+2026-06-06 13:49:55 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '美的智净3.0系列发布 3000G超大流量引领企业饮水新趋势' ≈ '美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代' (相似度: 83.8%)
+2026-06-06 13:49:55 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 9 条
+2026-06-06 13:49:55 | DEBUG   | src.processors.cleaner:_filter_irrelevant:217 | 过滤（招聘）: 美的净水诚聘研发工程师，薪资20-35K
+2026-06-06 13:49:55 | DEBUG   | src.processors.cleaner:_filter_irrelevant:212 | 过滤（黑名单）: 美的集团发布2026年智能冰箱新品，搭载AI食材管理
+2026-06-06 13:49:55 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 7 条
+2026-06-06 13:49:55 | INFO    | __main__:run:163 | ✅ 清洗完成: 7 条有效数据 (去重 0 条)
+2026-06-06 13:49:55 | INFO    | src.storage.database:save_raw_items:139 | 已保存 7 条原始数据到数据库
+2026-06-06 13:49:55 | INFO    | __main__:run:170 | 
+🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-06 13:49:55 | INFO    | src.analyzers.screener:screen:91 | 初筛开始: 7 条数据
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [1/7]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [2/7]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [3/7]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [4/7]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [5/7]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [6/7]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [7/7]: 某地自来水管道改造工程完成，惠及10万居民...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | INFO    | src.analyzers.screener:screen:115 | 初筛完成: 7条 → 相关6条 → 重要6条（高+中优先级）
+2026-06-06 13:49:55 | INFO    | __main__:run:172 | ✅ 初筛完成: 7条判定, 6条需要深度分析
+2026-06-06 13:49:55 | INFO    | __main__:run:177 | 
+🧠 [步骤 5/10] AI 深度分析 — 6 条重要情报...
+2026-06-06 13:49:55 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 6 条重要情报
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/6]: 《饮用净水水质标准》2026版发布，新增纳滤出水矿物质含量要求...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/6]: 美的智净3.0系列发布｜3000G超大流量，引领企业饮水新时代...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/6]: 2026上半年中国净水器市场报告：纳滤品类增长42%...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/6]: 华为2026年办公区直饮水系统招标启动，优先考虑纳滤技术方案...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/6]: 沁园发布2026年家用纳滤净水器新品QY-NF800...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/6]: 安吉尔获知名投资机构C轮融资5亿元，宣布进军海外市场...
+2026-06-06 13:49:55 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 13:49:55 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 6条 → 高紧急度(≥7分): 0条
+2026-06-06 13:49:55 | INFO    | __main__:run:179 | ✅ 深度分析完成: 6条
+2026-06-06 13:49:55 | INFO    | __main__:run:182 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-06 13:49:55 | INFO    | __main__:run:186 | 
+📝 [步骤 7/10] 生成情报报告...
+2026-06-06 13:49:55 | INFO    | src.reporters.json_reporter:generate:104 | JSON 报告生成: 7条采集 → 6条重要 → 6条深度分析
+2026-06-06 13:49:55 | INFO    | src.reporters.json_reporter:save:129 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:55 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23874 字符)
+2026-06-06 13:49:55 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (23874 字符)
+2026-06-06 13:49:55 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:55 | INFO    | __main__:run:200 | ✅ 报告生成完成: JSON=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json, HTML=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:55 | INFO    | __main__:run:203 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-06 13:49:55 | INFO    | __main__:run:206 | 
+📬 [步骤 9/10] 发送通知...
+2026-06-06 13:49:55 | INFO    | __main__:_send_notifications:352 |    🚨 发现高优先级情报，立即通知！
+2026-06-06 13:49:55 | WARNING | src.notifiers.email_notifier:send_report:68 | SMTP 未配置，跳过邮件发送
+2026-06-06 13:49:55 | INFO    | __main__:run:208 | ✅ 通知跳过（SMTP未配置）
+2026-06-06 13:49:55 | INFO    | __main__:run:211 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-06 13:49:55 | INFO    | src.storage.database:save_report:192 | 报告已保存，ID=3
+2026-06-06 13:49:55 | INFO    | __main__:run:214 | ✅ 数据已归档
+2026-06-06 13:49:55 | INFO    | __main__:run:230 | 
+============================================================
+2026-06-06 13:49:55 | INFO    | __main__:run:231 | 🎉 情报采集分析完成！
+2026-06-06 13:49:55 | INFO    | __main__:run:232 |    耗时: 0.1 秒
+2026-06-06 13:49:55 | INFO    | __main__:run:233 |    采集: 10 条 → 清洗: 7 条 → 重要分析: 6 条
+2026-06-06 13:49:55 | INFO    | __main__:run:235 |    渠道: 成功3 / 失败0
+2026-06-06 13:49:55 | INFO    | __main__:run:236 |    报告: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:55 | INFO    | __main__:run:238 |    HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:55 | INFO    | __main__:run:239 |    下次监控: 2026-06-22
+2026-06-06 13:49:55 | INFO    | __main__:run:240 | ============================================================
+2026-06-06 13:49:55 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭
+2026-06-06 13:49:55 | INFO    | __main__:main:674 | ============================================================
+2026-06-06 13:49:55 | INFO    | __main__:main:675 | [模拟运行报告摘要]
+2026-06-06 13:49:55 | INFO    | __main__:main:676 | ============================================================
+2026-06-06 13:49:55 | INFO    | __main__:main:677 |   采集总数: 10
+2026-06-06 13:49:55 | INFO    | __main__:main:678 |   深度分析: 6
+2026-06-06 13:49:55 | INFO    | __main__:main:679 |   报告路径: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:55 | INFO    | __main__:main:680 |   HTML路径: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:49:55 | INFO    | __main__:main:681 |   耗时: 0.1秒
+2026-06-06 13:49:55 | INFO    | __main__:main:682 | 报告文件:
+2026-06-06 13:49:55 | INFO    | __main__:main:683 |   JSON: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 13:49:55 | INFO    | __main__:main:684 |   HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 13:50:27 | ERROR   | __main__:main:650 | 配置验证失败: 缺少 ANTHROPIC_API_KEY 环境变量
+2026-06-06 13:59:10 | WARNING | __main__:run_once:604 | 配置警告: 缺少 ANTHROPIC_API_KEY 环境变量
+2026-06-06 13:59:10 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 13:59:10 | DEBUG   | src.storage.database:_init_tables:101 | 数据库表初始化完成
+2026-06-06 13:59:10 | INFO    | __main__:run:133 | ============================================================
+2026-06-06 13:59:10 | INFO    | __main__:run:134 | 🚀 AI情报系统启动 [Job: job_20260606_135910_69e581]
+2026-06-06 13:59:10 | INFO    | __main__:run:135 |    模式: 真实采集
+2026-06-06 13:59:10 | INFO    | __main__:run:136 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-06 13:59:10 | INFO    | __main__:run:139 | ============================================================
+2026-06-06 13:59:10 | INFO    | __main__:run:148 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-06 13:59:10 | INFO    | src.crawlers.wechat:crawl:48 | [微信爬虫] 开始采集 3 个公众号，时间范围: 14天
+2026-06-06 13:59:10 | INFO    | src.crawlers.website:crawl:49 | [官网爬虫] 开始采集 3 个网站
+2026-06-06 13:59:10 | INFO    | src.crawlers.news:crawl:55 | [新闻爬虫] 开始搜索 8 个关键词 在 3 个平台，时间范围: 14天
+2026-06-06 13:59:16 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 13:59:18 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 美的净水: 获取 0 篇文章
+2026-06-06 13:59:18 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 美的净水: 该公众号14天无更新，建议人工检查
+2026-06-06 13:59:26 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 沁园净水器官方: 获取 0 篇文章
+2026-06-06 13:59:26 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 沁园净水器官方: 该公众号14天无更新，建议人工检查
+2026-06-06 13:59:28 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第2/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 13:59:36 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 安吉尔官方: 获取 0 篇文章
+2026-06-06 13:59:36 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 安吉尔官方: 该公众号14天无更新，建议人工检查
+2026-06-06 13:59:36 | WARNING | __main__:_collect_data:316 |    ⚠ wechat: 0 条
+2026-06-06 13:59:37 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第3/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 13:59:37 | ERROR   | src.crawlers.base:fetch:94 | 请求彻底失败(1次连续失败): https://water.midea.com/news/
+2026-06-06 13:59:37 | WARNING | src.crawlers.website:_crawl_site:78 | [官网爬虫] 无法访问 https://water.midea.com/news/
+2026-06-06 13:59:37 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 美的净水: 获取 0 条新闻
+2026-06-06 13:59:47 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://so.toutiao.com/search?dvpf=pc&source=input&keyword=%E7%9B%B4%E9%A5%AE%E6%B0%B4%E6%94%BF%E7%AD%96 — Zstandard data is incomplete
+2026-06-06 13:59:47 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 13:59:57 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第2/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:00:07 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第3/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:00:07 | ERROR   | src.crawlers.base:fetch:94 | 请求彻底失败(2次连续失败): https://www.qinyuan.com.cn/news/
+2026-06-06 14:00:07 | WARNING | src.crawlers.website:_crawl_site:78 | [官网爬虫] 无法访问 https://www.qinyuan.com.cn/news/
+2026-06-06 14:00:07 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 沁园: 获取 0 条新闻
+2026-06-06 14:00:20 | DEBUG   | src.crawlers.website:_crawl_site:105 | [官网爬虫] 安吉尔: 未匹配标准选择器，尝试通用解析
+2026-06-06 14:00:20 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 安吉尔: 获取 11 条新闻
+2026-06-06 14:00:20 | INFO    | src.crawlers.base:cache_raw_data:125 | 已缓存 11 条数据到 C:\Users\86158\ai-employee\data\raw\cache_website_all.json
+2026-06-06 14:00:20 | INFO    | __main__:_collect_data:313 |    ✅ website: 11 条
+2026-06-06 14:02:40 | INFO    | src.crawlers.base:cache_raw_data:125 | 已缓存 17 条数据到 C:\Users\86158\ai-employee\data\raw\cache_news_all.json
+2026-06-06 14:02:40 | INFO    | src.crawlers.news:crawl:74 | [新闻爬虫] 总计采集 17 条新闻
+2026-06-06 14:02:40 | INFO    | __main__:_collect_data:313 |    ✅ news: 17 条
+2026-06-06 14:02:40 | INFO    | __main__:run:158 | ✅ 采集完成: 28 条原始数据
+2026-06-06 14:02:40 | INFO    | __main__:run:161 | 
+🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-06 14:02:40 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 28 条
+2026-06-06 14:02:40 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 28 条
+2026-06-06 14:02:40 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）' (相似度: 95.4%)
+2026-06-06 14:02:40 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）' (相似度: 95.4%)
+2026-06-06 14:02:40 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 15 条
+2026-06-06 14:02:40 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 15 条
+2026-06-06 14:02:40 | INFO    | __main__:run:163 | ✅ 清洗完成: 15 条有效数据 (去重 0 条)
+2026-06-06 14:02:40 | INFO    | src.storage.database:save_raw_items:139 | 已保存 15 条原始数据到数据库
+2026-06-06 14:02:40 | INFO    | __main__:run:170 | 
+🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-06 14:02:40 | INFO    | src.analyzers.screener:screen:91 | 初筛开始: 15 条数据
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [1/15]: 品牌大事件...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [2/15]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [3/15]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [4/15]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [5/15]: 安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [6/15]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [7/15]: 安吉尔携手同济大学亮相米兰国际三年展：以水科技书写 “动平衡” 的文明答卷...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [8/15]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [9/15]: 新华网｜安吉尔：净与竞共生发展，打造品牌与技术双重奏...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [10/15]: 中方始终将老挝视作周边外交重要方向...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [11/15]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [12/15]: 2022年管道直饮水主要产业政策、重点企业经营情况及行业发展......
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [13/15]: 01:39纳滤滤芯净水机里面的猫腻#纳滤 ...桶装水茶饮机胖总...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [14/15]: 01:28净水器十大品牌净水器十大品牌 ...净水器张同学...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [15/15]: 净水器哪个牌子好?内行人心中的最新十大排名，看完榜单再下单!...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | INFO    | src.analyzers.screener:screen:115 | 初筛完成: 15条 → 相关11条 → 重要11条（高+中优先级）
+2026-06-06 14:02:40 | INFO    | __main__:run:172 | ✅ 初筛完成: 15条判定, 11条需要深度分析
+2026-06-06 14:02:40 | INFO    | __main__:run:177 | 
+🧠 [步骤 5/10] AI 深度分析 — 11 条重要情报...
+2026-06-06 14:02:40 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 11 条重要情报
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/11]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/11]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/11]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/11]: 安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/11]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/11]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [7/11]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [8/11]: 2022年管道直饮水主要产业政策、重点企业经营情况及行业发展......
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [9/11]: 01:39纳滤滤芯净水机里面的猫腻#纳滤 ...桶装水茶饮机胖总...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [10/11]: 01:28净水器十大品牌净水器十大品牌 ...净水器张同学...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [11/11]: 净水器哪个牌子好?内行人心中的最新十大排名，看完榜单再下单!...
+2026-06-06 14:02:40 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:02:40 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 11条 → 高紧急度(≥7分): 0条
+2026-06-06 14:02:40 | INFO    | __main__:run:179 | ✅ 深度分析完成: 11条
+2026-06-06 14:02:40 | INFO    | __main__:run:182 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-06 14:02:40 | INFO    | __main__:run:186 | 
+📝 [步骤 7/10] 生成情报报告...
+2026-06-06 14:02:40 | INFO    | src.reporters.json_reporter:generate:104 | JSON 报告生成: 15条采集 → 11条重要 → 11条深度分析
+2026-06-06 14:02:40 | INFO    | src.reporters.json_reporter:save:129 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 14:02:40 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (38609 字符)
+2026-06-06 14:02:40 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (38609 字符)
+2026-06-06 14:02:40 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:02:40 | INFO    | __main__:run:200 | ✅ 报告生成完成: JSON=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json, HTML=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:02:40 | INFO    | __main__:run:203 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-06 14:02:40 | INFO    | __main__:run:206 | 
+📬 [步骤 9/10] 发送通知...
+2026-06-06 14:02:40 | INFO    | __main__:_send_notifications:352 |    🚨 发现高优先级情报，立即通知！
+2026-06-06 14:02:40 | WARNING | src.notifiers.email_notifier:send_report:68 | SMTP 未配置，跳过邮件发送
+2026-06-06 14:02:40 | INFO    | __main__:run:208 | ✅ 通知跳过（SMTP未配置）
+2026-06-06 14:02:40 | INFO    | __main__:run:211 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-06 14:02:40 | INFO    | src.storage.database:save_report:192 | 报告已保存，ID=4
+2026-06-06 14:02:40 | INFO    | __main__:run:214 | ✅ 数据已归档
+2026-06-06 14:02:41 | INFO    | __main__:run:230 | 
+============================================================
+2026-06-06 14:02:41 | INFO    | __main__:run:231 | 🎉 情报采集分析完成！
+2026-06-06 14:02:41 | INFO    | __main__:run:232 |    耗时: 210.6 秒
+2026-06-06 14:02:41 | INFO    | __main__:run:233 |    采集: 28 条 → 清洗: 15 条 → 重要分析: 11 条
+2026-06-06 14:02:41 | INFO    | __main__:run:235 |    渠道: 成功2 / 失败1
+2026-06-06 14:02:41 | INFO    | __main__:run:236 |    报告: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 14:02:41 | INFO    | __main__:run:238 |    HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:02:41 | INFO    | __main__:run:239 |    下次监控: 2026-06-22
+2026-06-06 14:02:41 | INFO    | __main__:run:240 | ============================================================
+2026-06-06 14:02:41 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭
+2026-06-06 14:07:40 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 14:07:40 | DEBUG   | src.storage.database:_init_tables:101 | 数据库表初始化完成
+2026-06-06 14:07:40 | INFO    | __main__:run:133 | ============================================================
+2026-06-06 14:07:40 | INFO    | __main__:run:134 | 🚀 AI情报系统启动 [Job: job_20260606_140740_494f9e]
+2026-06-06 14:07:40 | INFO    | __main__:run:135 |    模式: 真实采集
+2026-06-06 14:07:40 | INFO    | __main__:run:136 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-06 14:07:40 | INFO    | __main__:run:139 | ============================================================
+2026-06-06 14:07:40 | INFO    | __main__:run:148 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-06 14:07:40 | INFO    | src.crawlers.wechat:crawl:48 | [微信爬虫] 开始采集 3 个公众号，时间范围: 14天
+2026-06-06 14:07:40 | INFO    | src.crawlers.website:crawl:49 | [官网爬虫] 开始采集 3 个网站
+2026-06-06 14:07:40 | INFO    | src.crawlers.news:crawl:55 | [新闻爬虫] 开始搜索 8 个关键词 在 3 个平台，时间范围: 14天
+2026-06-06 14:07:48 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 美的净水: 获取 0 篇文章
+2026-06-06 14:07:48 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 美的净水: 该公众号14天无更新，建议人工检查
+2026-06-06 14:07:52 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:07:57 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 沁园净水器官方: 获取 0 篇文章
+2026-06-06 14:07:57 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 沁园净水器官方: 该公众号14天无更新，建议人工检查
+2026-06-06 14:08:02 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第2/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:08:06 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 安吉尔官方: 获取 0 篇文章
+2026-06-06 14:08:06 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 安吉尔官方: 该公众号14天无更新，建议人工检查
+2026-06-06 14:08:06 | WARNING | __main__:_collect_data:316 |    ⚠ wechat: 0 条
+2026-06-06 14:08:11 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第3/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:08:11 | ERROR   | src.crawlers.base:fetch:94 | 请求彻底失败(1次连续失败): https://water.midea.com/news/
+2026-06-06 14:08:11 | WARNING | src.crawlers.website:_crawl_site:78 | [官网爬虫] 无法访问 https://water.midea.com/news/
+2026-06-06 14:08:11 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 美的净水: 获取 0 条新闻
+2026-06-06 14:08:19 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:08:29 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第2/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:08:39 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第3/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:08:39 | ERROR   | src.crawlers.base:fetch:94 | 请求彻底失败(2次连续失败): https://www.qinyuan.com.cn/news/
+2026-06-06 14:08:39 | WARNING | src.crawlers.website:_crawl_site:78 | [官网爬虫] 无法访问 https://www.qinyuan.com.cn/news/
+2026-06-06 14:08:39 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 沁园: 获取 0 条新闻
+2026-06-06 14:08:49 | DEBUG   | src.crawlers.website:_crawl_site:105 | [官网爬虫] 安吉尔: 未匹配标准选择器，尝试通用解析
+2026-06-06 14:08:49 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 安吉尔: 获取 11 条新闻
+2026-06-06 14:08:49 | INFO    | src.crawlers.base:cache_raw_data:125 | 已缓存 11 条数据到 C:\Users\86158\ai-employee\data\raw\cache_website_all.json
+2026-06-06 14:08:49 | INFO    | __main__:_collect_data:313 |    ✅ website: 11 条
+2026-06-06 14:10:49 | INFO    | src.crawlers.base:cache_raw_data:125 | 已缓存 7 条数据到 C:\Users\86158\ai-employee\data\raw\cache_news_all.json
+2026-06-06 14:10:49 | INFO    | src.crawlers.news:crawl:74 | [新闻爬虫] 总计采集 7 条新闻
+2026-06-06 14:10:49 | INFO    | __main__:_collect_data:313 |    ✅ news: 7 条
+2026-06-06 14:10:49 | INFO    | __main__:run:158 | ✅ 采集完成: 18 条原始数据
+2026-06-06 14:10:49 | INFO    | __main__:run:161 | 
+🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-06 14:10:49 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 18 条
+2026-06-06 14:10:49 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 18 条
+2026-06-06 14:10:49 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）' (相似度: 95.4%)
+2026-06-06 14:10:49 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）' (相似度: 95.4%)
+2026-06-06 14:10:49 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 12 条
+2026-06-06 14:10:49 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 12 条
+2026-06-06 14:10:49 | INFO    | __main__:run:163 | ✅ 清洗完成: 12 条有效数据 (去重 0 条)
+2026-06-06 14:10:49 | INFO    | src.storage.database:save_raw_items:139 | 已保存 12 条原始数据到数据库
+2026-06-06 14:10:49 | INFO    | __main__:run:170 | 
+🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-06 14:10:49 | INFO    | src.analyzers.screener:screen:91 | 初筛开始: 12 条数据
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [1/12]: 品牌大事件...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [2/12]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [3/12]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [4/12]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [5/12]: 安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [6/12]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [7/12]: 安吉尔携手同济大学亮相米兰国际三年展：以水科技书写 “动平衡” 的文明答卷...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [8/12]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [9/12]: 新华网｜安吉尔：净与竞共生发展，打造品牌与技术双重奏...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [10/12]: 中方始终将老挝视作周边外交重要方向...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [11/12]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [12/12]: 孝义市看守所询价采购孝义市看守所直饮水设备采购及安装的采......
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | INFO    | src.analyzers.screener:screen:115 | 初筛完成: 12条 → 相关8条 → 重要8条（高+中优先级）
+2026-06-06 14:10:49 | INFO    | __main__:run:172 | ✅ 初筛完成: 12条判定, 8条需要深度分析
+2026-06-06 14:10:49 | INFO    | __main__:run:177 | 
+🧠 [步骤 5/10] AI 深度分析 — 8 条重要情报...
+2026-06-06 14:10:49 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 8 条重要情报
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/8]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/8]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/8]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/8]: 安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/8]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/8]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [7/8]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [8/8]: 孝义市看守所询价采购孝义市看守所直饮水设备采购及安装的采......
+2026-06-06 14:10:49 | ERROR   | src.analyzers.llm_client:chat:79 | LLM 客户端未初始化（缺少 API Key）
+2026-06-06 14:10:49 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 8条 → 高紧急度(≥7分): 0条
+2026-06-06 14:10:49 | INFO    | __main__:run:179 | ✅ 深度分析完成: 8条
+2026-06-06 14:10:49 | INFO    | __main__:run:182 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-06 14:10:49 | INFO    | __main__:run:186 | 
+📝 [步骤 7/10] 生成情报报告...
+2026-06-06 14:10:49 | INFO    | src.reporters.json_reporter:generate:104 | JSON 报告生成: 12条采集 → 8条重要 → 8条深度分析
+2026-06-06 14:10:49 | INFO    | src.reporters.json_reporter:save:129 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 14:10:49 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (29212 字符)
+2026-06-06 14:10:49 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (29212 字符)
+2026-06-06 14:10:49 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:10:49 | INFO    | __main__:run:200 | ✅ 报告生成完成: JSON=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json, HTML=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:10:49 | INFO    | __main__:run:203 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-06 14:10:49 | INFO    | __main__:run:206 | 
+📬 [步骤 9/10] 发送通知...
+2026-06-06 14:10:49 | INFO    | __main__:_send_notifications:352 |    🚨 发现高优先级情报，立即通知！
+2026-06-06 14:10:50 | ERROR   | src.notifiers.email_notifier:send_report:95 | 邮件发送失败: [Errno 11001] getaddrinfo failed
+2026-06-06 14:10:50 | INFO    | __main__:run:208 | ✅ 通知跳过（SMTP未配置）
+2026-06-06 14:10:50 | INFO    | __main__:run:211 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-06 14:10:50 | INFO    | src.storage.database:save_report:192 | 报告已保存，ID=5
+2026-06-06 14:10:50 | INFO    | __main__:run:214 | ✅ 数据已归档
+2026-06-06 14:10:50 | INFO    | __main__:run:230 | 
+============================================================
+2026-06-06 14:10:50 | INFO    | __main__:run:231 | 🎉 情报采集分析完成！
+2026-06-06 14:10:50 | INFO    | __main__:run:232 |    耗时: 190.3 秒
+2026-06-06 14:10:50 | INFO    | __main__:run:233 |    采集: 18 条 → 清洗: 12 条 → 重要分析: 8 条
+2026-06-06 14:10:50 | INFO    | __main__:run:235 |    渠道: 成功2 / 失败1
+2026-06-06 14:10:50 | INFO    | __main__:run:236 |    报告: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 14:10:50 | INFO    | __main__:run:238 |    HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:10:50 | INFO    | __main__:run:239 |    下次监控: 2026-06-22
+2026-06-06 14:10:50 | INFO    | __main__:run:240 | ============================================================
+2026-06-06 14:10:50 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭
+2026-06-06 14:12:11 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-06 14:12:11 | DEBUG   | src.storage.database:_init_tables:101 | 数据库表初始化完成
+2026-06-06 14:12:14 | INFO    | __main__:run:133 | ============================================================
+2026-06-06 14:12:14 | INFO    | __main__:run:134 | 🚀 AI情报系统启动 [Job: job_20260606_141211_71af7d]
+2026-06-06 14:12:14 | INFO    | __main__:run:135 |    模式: 真实采集
+2026-06-06 14:12:14 | INFO    | __main__:run:136 |    监控范围: 3公众号 + 3网站 + 8关键词
+2026-06-06 14:12:14 | INFO    | __main__:run:139 | ============================================================
+2026-06-06 14:12:14 | INFO    | __main__:run:148 | 
+📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...
+2026-06-06 14:12:14 | INFO    | src.crawlers.wechat:crawl:48 | [微信爬虫] 开始采集 3 个公众号，时间范围: 14天
+2026-06-06 14:12:14 | INFO    | src.crawlers.website:crawl:49 | [官网爬虫] 开始采集 3 个网站
+2026-06-06 14:12:14 | INFO    | src.crawlers.news:crawl:55 | [新闻爬虫] 开始搜索 8 个关键词 在 3 个平台，时间范围: 14天
+2026-06-06 14:12:21 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:12:22 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 美的净水: 获取 0 篇文章
+2026-06-06 14:12:22 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 美的净水: 该公众号14天无更新，建议人工检查
+2026-06-06 14:12:29 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 沁园净水器官方: 获取 0 篇文章
+2026-06-06 14:12:29 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 沁园净水器官方: 该公众号14天无更新，建议人工检查
+2026-06-06 14:12:30 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第2/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:12:37 | INFO    | src.crawlers.wechat:crawl:54 | [微信爬虫] 安吉尔官方: 获取 0 篇文章
+2026-06-06 14:12:37 | WARNING | src.crawlers.wechat:crawl:58 | [微信爬虫] 安吉尔官方: 该公众号14天无更新，建议人工检查
+2026-06-06 14:12:37 | WARNING | __main__:_collect_data:316 |    ⚠ wechat: 0 条
+2026-06-06 14:12:39 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第3/3次): https://water.midea.com/news/ — HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:12:39 | ERROR   | src.crawlers.base:fetch:94 | 请求彻底失败(1次连续失败): https://water.midea.com/news/
+2026-06-06 14:12:39 | WARNING | src.crawlers.website:_crawl_site:78 | [官网爬虫] 无法访问 https://water.midea.com/news/
+2026-06-06 14:12:39 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 美的净水: 获取 0 条新闻
+2026-06-06 14:12:51 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第1/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:12:58 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第2/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:13:05 | WARNING | src.crawlers.base:fetch:91 | 请求失败 (第3/3次): https://www.qinyuan.com.cn/news/ — HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)')))
+2026-06-06 14:13:05 | ERROR   | src.crawlers.base:fetch:94 | 请求彻底失败(2次连续失败): https://www.qinyuan.com.cn/news/
+2026-06-06 14:13:05 | WARNING | src.crawlers.website:_crawl_site:78 | [官网爬虫] 无法访问 https://www.qinyuan.com.cn/news/
+2026-06-06 14:13:05 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 沁园: 获取 0 条新闻
+2026-06-06 14:13:13 | DEBUG   | src.crawlers.website:_crawl_site:105 | [官网爬虫] 安吉尔: 未匹配标准选择器，尝试通用解析
+2026-06-06 14:13:13 | INFO    | src.crawlers.website:crawl:58 | [官网爬虫] 安吉尔: 获取 11 条新闻
+2026-06-06 14:13:13 | INFO    | src.crawlers.base:cache_raw_data:125 | 已缓存 11 条数据到 C:\Users\86158\ai-employee\data\raw\cache_website_all.json
+2026-06-06 14:13:13 | INFO    | __main__:_collect_data:313 |    ✅ website: 11 条
+2026-06-06 14:15:16 | INFO    | src.crawlers.base:cache_raw_data:125 | 已缓存 3 条数据到 C:\Users\86158\ai-employee\data\raw\cache_news_all.json
+2026-06-06 14:15:16 | INFO    | src.crawlers.news:crawl:74 | [新闻爬虫] 总计采集 3 条新闻
+2026-06-06 14:15:16 | INFO    | __main__:_collect_data:313 |    ✅ news: 3 条
+2026-06-06 14:15:16 | INFO    | __main__:run:158 | ✅ 采集完成: 14 条原始数据
+2026-06-06 14:15:16 | INFO    | __main__:run:161 | 
+🧹 [步骤 3/10] 数据清洗与去重...
+2026-06-06 14:15:16 | INFO    | src.processors.cleaner:process:61 | [清洗] 原始数据: 14 条
+2026-06-06 14:15:16 | INFO    | src.processors.cleaner:process:68 | [清洗] 时效性过滤后: 14 条
+2026-06-06 14:15:16 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（中）' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）' (相似度: 95.4%)
+2026-06-06 14:15:16 | DEBUG   | src.processors.cleaner:_deduplicate:187 | 去重: '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（上）' ≈ '安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）' (相似度: 95.4%)
+2026-06-06 14:15:16 | INFO    | src.processors.cleaner:process:72 | [清洗] 去重后: 11 条
+2026-06-06 14:15:16 | INFO    | src.processors.cleaner:process:76 | [清洗] 内容过滤后: 11 条
+2026-06-06 14:15:16 | INFO    | __main__:run:163 | ✅ 清洗完成: 11 条有效数据 (去重 0 条)
+2026-06-06 14:15:16 | INFO    | src.storage.database:save_raw_items:139 | 已保存 11 条原始数据到数据库
+2026-06-06 14:15:16 | INFO    | __main__:run:170 | 
+🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...
+2026-06-06 14:15:16 | INFO    | src.analyzers.screener:screen:91 | 初筛开始: 11 条数据
+2026-06-06 14:15:16 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [1/11]: 品牌大事件...
+2026-06-06 14:15:19 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [2/11]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）...
+2026-06-06 14:15:21 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [3/11]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态...
+2026-06-06 14:15:24 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [4/11]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10...
+2026-06-06 14:15:27 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [5/11]: 安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点...
+2026-06-06 14:15:29 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [6/11]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国...
+2026-06-06 14:15:32 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [7/11]: 安吉尔携手同济大学亮相米兰国际三年展：以水科技书写 “动平衡” 的文明答卷...
+2026-06-06 14:15:34 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [8/11]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学...
+2026-06-06 14:15:37 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [9/11]: 新华网｜安吉尔：净与竞共生发展，打造品牌与技术双重奏...
+2026-06-06 14:15:39 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [10/11]: 中方始终将老挝视作周边外交重要方向...
+2026-06-06 14:15:40 | DEBUG   | src.analyzers.screener:_screen_single:137 | 初筛 [11/11]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-06 14:15:42 | INFO    | src.analyzers.screener:screen:115 | 初筛完成: 11条 → 相关10条 → 重要10条（高+中优先级）
+2026-06-06 14:15:42 | INFO    | __main__:run:172 | ✅ 初筛完成: 11条判定, 10条需要深度分析
+2026-06-06 14:15:42 | INFO    | __main__:run:177 | 
+🧠 [步骤 5/10] AI 深度分析 — 10 条重要情报...
+2026-06-06 14:15:42 | INFO    | src.analyzers.deep_analyzer:analyze:120 | 深度分析开始: 10 条重要情报
+2026-06-06 14:15:42 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [1/10]: 品牌大事件...
+2026-06-06 14:15:50 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [2/10]: 安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）...
+2026-06-06 14:15:58 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [3/10]: 2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态...
+2026-06-06 14:16:04 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [4/10]: 守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10...
+2026-06-06 14:16:12 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [5/10]: 安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点...
+2026-06-06 14:16:21 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [6/10]: 安吉尔印尼战略启动——全球领先净水科技，启航万岛之国...
+2026-06-06 14:16:29 | WARNING | src.analyzers.llm_client:_extract_json:217 | JSON 解析失败: {\n  "ai_summary": "安吉尔宣布启动印尼战略，进军东南亚市场。作为主要竞品，安吉尔拥有部分纳滤产品线且定位中高端。此举旨在利用印尼人口红利和基础设施需求，扩大全球影响力，可能间接提升...
+2026-06-06 14:16:29 | WARNING | src.analyzers.llm_client:_extract_json:219 | 无法从响应中提取 JSON: ThinkingBlock(signature='2176a8cf-8a3f-4cd0-b335-d231bc2f8fa7', thinking='我们分析安吉尔印尼战略启动的情报。安吉尔是主要竞品，部分纳滤产品线，中高端定位。其海外战略可能增强品牌实力和市场份额，间接影响国内竞争格局。对朴道水汇的影响：安吉尔拓展国际市场，可能提升品牌全球知名度，但短期内对朴道核心的国内商用市场直接冲击不大。然而...
+2026-06-06 14:16:29 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [7/10]: 安吉尔携手同济大学亮相米兰国际三年展：以水科技书写 “动平衡” 的文明答卷...
+2026-06-06 14:16:37 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [8/10]: 安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学...
+2026-06-06 14:16:43 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [9/10]: 新华网｜安吉尔：净与竞共生发展，打造品牌与技术双重奏...
+2026-06-06 14:16:51 | DEBUG   | src.analyzers.deep_analyzer:_analyze_single:167 | 深度分析 [10/10]: 净水器行业新增两项新国标|163-手机网易网...
+2026-06-06 14:17:00 | INFO    | src.analyzers.deep_analyzer:analyze:137 | 深度分析完成: 10条 → 高紧急度(≥7分): 3条
+2026-06-06 14:17:00 | INFO    | __main__:run:179 | ✅ 深度分析完成: 10条
+2026-06-06 14:17:00 | INFO    | __main__:run:182 | 
+📋 [步骤 6/10] 竞品动态汇总...
+2026-06-06 14:17:00 | INFO    | __main__:run:186 | 
+📝 [步骤 7/10] 生成情报报告...
+2026-06-06 14:17:00 | INFO    | src.reporters.json_reporter:generate:104 | JSON 报告生成: 11条采集 → 10条重要 → 10条深度分析
+2026-06-06 14:17:00 | INFO    | src.reporters.json_reporter:save:129 | 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 14:17:00 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (40636 字符)
+2026-06-06 14:17:00 | INFO    | src.reporters.html_reporter:render:46 | HTML 报告已渲染 (40636 字符)
+2026-06-06 14:17:00 | INFO    | src.reporters.html_reporter:save:66 | HTML 报告已保存: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:17:00 | INFO    | __main__:run:200 | ✅ 报告生成完成: JSON=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json, HTML=C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:17:00 | INFO    | __main__:run:203 | 
+📎 [步骤 8/10] 附件处理 — MVP版本跳过
+2026-06-06 14:17:00 | INFO    | __main__:run:206 | 
+📬 [步骤 9/10] 发送通知...
+2026-06-06 14:17:00 | INFO    | __main__:_send_notifications:352 |    🚨 发现高优先级情报，立即通知！
+2026-06-06 14:17:00 | ERROR   | src.notifiers.email_notifier:send_report:95 | 邮件发送失败: [Errno 11001] getaddrinfo failed
+2026-06-06 14:17:00 | INFO    | __main__:run:208 | ✅ 通知跳过（SMTP未配置）
+2026-06-06 14:17:00 | INFO    | __main__:run:211 | 
+💾 [步骤 10/10] 数据存储与归档...
+2026-06-06 14:17:00 | INFO    | src.storage.database:save_report:192 | 报告已保存，ID=6
+2026-06-06 14:17:00 | INFO    | __main__:run:214 | ✅ 数据已归档
+2026-06-06 14:17:00 | INFO    | __main__:run:230 | 
+============================================================
+2026-06-06 14:17:00 | INFO    | __main__:run:231 | 🎉 情报采集分析完成！
+2026-06-06 14:17:00 | INFO    | __main__:run:232 |    耗时: 286.5 秒
+2026-06-06 14:17:00 | INFO    | __main__:run:233 |    采集: 14 条 → 清洗: 11 条 → 重要分析: 10 条
+2026-06-06 14:17:00 | INFO    | __main__:run:235 |    渠道: 成功2 / 失败1
+2026-06-06 14:17:00 | INFO    | __main__:run:236 |    报告: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.json
+2026-06-06 14:17:00 | INFO    | __main__:run:238 |    HTML: C:\Users\86158\ai-employee\data\reports\intelligence_report_2026-06-06.html
+2026-06-06 14:17:00 | INFO    | __main__:run:239 |    下次监控: 2026-06-22
+2026-06-06 14:17:00 | INFO    | __main__:run:240 | ============================================================
+2026-06-06 14:17:00 | DEBUG   | src.storage.database:close:283 | 数据库连接已关闭

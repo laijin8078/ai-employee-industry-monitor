@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞品与行业动态情报报告 — 2026-06-06</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .header .meta {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 13px;
+        }
+        .header .meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* 摘要区 */
+        .summary-box {
+            background: #e8f0fe;
+            border-left: 4px solid #1a73e8;
+            margin: 24px 32px;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: #1a237e;
+        }
+
+        /* 分区 */
+        .section {
+            padding: 0 32px 24px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a73e8;
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .badge {
+            font-size: 13px;
+            background: #1a73e8;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        /* 情报卡片 */
+        .intel-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .intel-card:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .intel-card.priority-high {
+            border-left: 4px solid #e53935;
+        }
+        .intel-card.priority-medium {
+            border-left: 4px solid #fb8c00;
+        }
+        .intel-card.priority-low {
+            border-left: 4px solid #9e9e9e;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            background: #fafafa;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .card-header .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            flex: 1;
+        }
+        .card-header .meta-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+            white-space: nowrap;
+        }
+        .priority-tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .priority-tag.high { background: #ffebee; color: #c62828; }
+        .priority-tag.medium { background: #fff3e0; color: #e65100; }
+        .priority-tag.low { background: #f5f5f5; color: #616161; }
+
+        .card-body {
+            padding: 16px 20px;
+        }
+        .field {
+            margin-bottom: 12px;
+        }
+        .field-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .field-value {
+            font-size: 14px;
+            color: #444;
+        }
+
+        /* 影响类型标签 */
+        .impact-threat { color: #c62828; font-weight: 600; }
+        .impact-opportunity { color: #2e7d32; font-weight: 600; }
+        .impact-neutral { color: #616161; font-weight: 600; }
+
+        /* 应对策略 */
+        .response-list {
+            list-style: none;
+            padding: 0;
+        }
+        .response-list li {
+            padding: 6px 0 6px 16px;
+            font-size: 13px;
+            color: #555;
+            border-left: 2px solid #e0e0e0;
+            margin-bottom: 4px;
+        }
+        .response-list li .dim-tag {
+            display: inline-block;
+            font-size: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-right: 6px;
+            font-weight: 600;
+        }
+
+        /* 竞品汇总 */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+        }
+        .competitor-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .competitor-card h4 {
+            font-size: 15px;
+            color: #1a73e8;
+            margin-bottom: 6px;
+        }
+        .competitor-card p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* 底部 */
+        .footer {
+            background: #fafafa;
+            padding: 24px 32px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .footer p { margin-bottom: 4px; }
+
+        .recommendation-box {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .recommendation-box .field-label { color: #f57f17; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="header">
+        <h1>🔍 竞品与行业动态情报报告</h1>
+        <div class="subtitle">朴道水汇 · AI 情报系统自动生成</div>
+        <div class="meta">
+            <span>📅 2026-06-06</span>
+            <span>📊 周期：2026-05-23 至 2026-06-06（两周）</span>
+            <span>📈 共 11 条，重要 10 条</span>
+        </div>
+    </div>
+
+    <!-- 摘要 -->
+    
+    <div class="summary-box">
+        <strong>📋 本期摘要：</strong>本期发现2条高优先级情报：；「安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）」（竞品动态）；「净水器行业新增两项新国标|163-手机网易网」（行业政策）
+    </div>
+    
+
+    <!-- 综合建议 -->
+    
+    <div class="section">
+        <div class="recommendation-box">
+            <div class="field-label">💡 综合建议</div>
+            <div class="field-value">建议本周内采取行动：针对「安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）」，需关注营销策略/技术研发；针对「净水器行业新增两项新国标|163-手机网易网」，需关注合规动作/产品策略；针对「安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子」，需关注技术研发/产品策略</div>
+        </div>
+    </div>
+    
+
+    <!-- 分类情报 -->
+    
+        
+        <div class="section">
+            <div class="section-title">
+                🏢
+                
+                竞品动态
+                <span class="badge">9 条</span>
+            </div>
+
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 8/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.884048</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔举办矿物质饮水机新品发布会，推出主打保留矿物质的新品，直接对标朴道水汇的核心技术优势（DPM纳滤保留矿物质），威胁其在商用净水市场的差异化定位，可能影响与华为、阿里等大客户的合作基础。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-threat">
+                                威胁
+                            </span>
+                        </div>
+                        <div class="field-value">安吉尔作为中高端净水品牌，近期获融资后发力矿物质技术路线，直接冲击朴道的核心差异化卖点（健康水/保留矿物质）。短期（6个月内）可能引发大客户对技术路线的重新评估与对比测试；长期若安吉尔产品价格更低或渠道更强，将侵蚀朴道在科技企业中的份额。对技术路线（DPM纳滤）优势的削弱程度中等，但对品牌形象和客户信任度影响较大。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">技术研发</span>
+                                加速下一代DPM纳滤膜升级，量化证明矿物质含量稳定性和抗菌优势，形成可公开的第三方检测报告
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                制作安吉尔新品与朴道名士K2的对比内容，突出DPM在钙镁比例、TDS值控制、智能物联维护方面的综合优势
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">销售策略</span>
+                                主动向华为、阿里等核心客户预约技术交流会，提供对比测试数据，巩固‘健康水’标准制定者地位
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">公关动作</span>
+                                联合行业媒体发布‘矿物质水技术白皮书’，强调DPM技术的原创性与10年商用验证，构成行业壁垒
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 7/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.885998</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔在2025国际地下水会议上发布AIMS技术，解决矿物质离子浓度检测难题。该技术可能用于其纳滤净水器，增强其在“健康水”概念上的技术支撑，从而对朴道水汇的DPM纳滤技术差异化优势构成潜在威胁。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-threat">
+                                威胁
+                            </span>
+                        </div>
+                        <div class="field-value">安吉尔AIMS技术直接冲击朴道“保留矿物质”的核心差异化卖点。若安吉尔将检测技术集成到商用净水器中，可实时展示出水矿物质含量，削弱朴道在健康水话术上的独占性。影响集中在技术壁垒和品牌信任度，程度重大，时效短期（安吉尔可能1-2年内产品化），需立即应对。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                在名士K2等旗舰机型中增加内置矿物质在线监测模块，实时显示钙镁离子浓度，强化透明化健康水体验
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">技术研发</span>
+                                评估AIMS技术原理，加速研发朴道自有矿物质检测专利（如基于电化学的快速检测），巩固技术护城河
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                制作对比白皮书，强调朴道DPM纳滤不仅保留矿物质，更通过智能物联实现水质全程可追溯，超越单一检测点
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">公关动作</span>
+                                参加下届国际地下水会议或净水行业论坛，发布朴道水质健康指数白皮书，展示DPM技术综合优势
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        品牌大事件
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 6/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.883204</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">2026年6月6日，竞品安吉尔发布‘品牌大事件’，具体内容未披露。安吉尔拥有部分纳滤产品线，近期获融资，中高端定位。该事件可能涉及新产品、品牌升级或重大合作，需密切关注其对商用净水器市场的潜在冲击。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-threat">
+                                威胁
+                            </span>
+                        </div>
+                        <div class="field-value">影响领域：市场、品牌、客户关系。程度：重大（若事件为商用新品或重磅合作，将直接威胁朴道核心客户群）。时效：短期（事件发布后1-3个月为观察窗口）。安吉尔纳滤产品与朴道DPM技术存在直接竞争，品牌大事件可能提升其市场声量，分割朴道的科技企业客户资源。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                启动竞品监控专项，24小时内收集安吉尔事件完整信息，分析其战略意图
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">销售策略</span>
+                                提前与华为、阿里等核心客户沟通，巩固现有合作，强调朴道DPM技术的矿物质保留与智能物联优势
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                快速准备名士K2/K1的对比测试数据，突出大流量下矿物质保留率的差异化指标，应对可能的纳滤性能对比
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP10
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 6/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.885613</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔荣登CBNData“健康好品牌”榜单TOP10，该榜单由第一财经商业数据中心发布，旨在表彰在健康消费领域表现突出的品牌。安吉尔作为朴道核心竞品，此次上榜提升了其在健康饮水领域的品牌形象，可能影响消费者和企业的认知。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-threat">
+                                威胁
+                            </span>
+                        </div>
+                        <div class="field-value">该情报对朴道水汇的品牌差异化产生直接威胁。安吉尔利用健康榜单强化其品牌形象，可能削弱朴道‘健康水’（保留矿物质）的独占认知，尤其在商用市场客户（如HR、行政决策者）中造成混淆。影响程度为中等，时效为短期至中期。安吉尔可能借此在商用净水招标中增加议价筹码，但朴道在头部科技企业的关系稳固，短期内客户流失风险较低。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                立即制作‘健康水标准白皮书’，引用第三方数据（如中国疾控中心）证明矿物质水优于纯净水，并主动提交至CBNData等榜单机构，争取朴道纳入健康品牌评选。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">品牌公关</span>
+                                联合华为、阿里等标杆客户发布‘企业健康饮水案例’，强调DPM纳滤技术保留钙镁离子的实际健康效益（如降低骨质疏松风险），形成舆论背书。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">销售策略</span>
+                                针对大客户（500人以上企业）更新投标方案，加入‘对比安吉尔RO/纳滤’的差异化表格，重点突出朴道出水矿物质含量30-50mg/L优于竞品，并提供免费水质检测服务。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        新华网｜安吉尔：净与竞共生发展，打造品牌与技术双重奏
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 6/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.888551</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔通过新华网发布品牌与技术宣传文章，强调“净与竞共生发展”，意在强化中高端定位和纳滤技术形象，可能加大商用市场投入，对朴道水汇构成潜在竞争压力。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-threat">
+                                威胁
+                            </span>
+                        </div>
+                        <div class="field-value">安吉尔此次品牌与技术宣传动作，旨在提升其在中高端净水市场的认知度，尤其可能强化其纳滤技术路线与朴道的相似性。由于安吉尔在商用领域影响力较弱，短期内对朴道核心客户（华为、阿里等）的直接竞争冲击有限，但长期可能分化市场认知，削弱朴道“健康水”的独家优势。需要警惕安吉尔借品牌声量切入商用领域，尤其在其获得融资后可能加大商用渠道投入。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">品牌策略</span>
+                                启动一轮面向大客户的专项沟通，强化‘DPM纳滤=真健康水’的技术定义权，通过白皮书或联合实验报告巩固专业形象。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                制作对比内容，突出朴道商用直饮机在大型企业中的实际部署案例（如华为园区），用客户背书抵消安吉尔的品牌宣传。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">渠道策略</span>
+                                针对安吉尔可能渗透的商用场景（如科技园区、办公楼宇），提前锁定1-2个标杆客户进行深度合作，展示运维服务优势。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔印尼战略启动——全球领先净水科技，启航万岛之国
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.886377</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔印尼战略启动——全球领先净水科技，启航万岛之国（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.887544</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔空间大师系列获红鼎大奖，主打全屋净水创新设计。安吉尔是朴道核心竞品，该奖项提升其品牌影响力和市场认知，可能间接影响商用净水市场竞争格局，需警惕其向商用扩展。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-threat">
+                                威胁
+                            </span>
+                        </div>
+                        <div class="field-value">安吉尔此次获奖主要聚焦家用全屋净水，对朴道专注的商用净水市场直接威胁较小。但安吉尔作为中高端净水品牌，获奖可能增强其在企业客户中的品牌声誉，间接影响朴道与大客户的合作谈判（如客户对比品牌实力）。此外，安吉尔部分产品线采用纳滤技术，与朴道DPM技术路线有重叠，可能借奖项强化‘健康水’概念，削弱朴道差异化定位。影响程度为一般，时效偏长期。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                制作对比分析内容，强调朴道DPM纳滤技术保留矿物质的科学依据（如钙镁离子含量数据），突出商用场景下的专业性与可靠性。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">品牌建设</span>
+                                主动参与行业奖项评选（如中国设计红星奖、净水行业品牌评选），提升朴道在商用净水领域的权威背书。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">销售策略</span>
+                                在重点客户（如华为、阿里）维护中，强化朴道商用净水案例与运维服务优势，降低安吉尔品牌光环对客户决策的影响。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔携手同济大学亮相米兰国际三年展：以水科技书写 “动平衡” 的文明答卷
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 3/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.886759</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔与同济大学合作亮相米兰国际三年展，展示水科技与“动平衡”理念。这是品牌国际化与学术合作行为，未涉及具体产品发布或市场进攻，对朴道直接威胁有限。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">此消息对朴道水汇影响轻微，主要体现在品牌层面。安吉尔通过国际展览和高校背书提升中高端品牌形象，可能间接强化其技术实力认知，对朴道“健康水”定位形成长期软性竞争。但该动作不涉及产品、渠道或价格战，且短期内不会改变客户采购决策。对朴道商用净水器市场和重点客户关系无立即冲击。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                策划朴道自身的品牌高端化活动，如与国内顶级高校（清华、浙大）联合发布水健康白皮书，巩固技术权威形象。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">公关动作</span>
+                                在行业媒体和客户内刊中强调朴道DPM纳滤技术的中国原创性与市场验证案例（华为、阿里等），对冲安吉尔的国际曝光影响。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 2/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T14:13:13.885232</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔在2025家装新质践行大会上推广全屋净水方案，旨在布局家装产业链生态，提升品牌在家用市场影响力，对朴道水汇的商用净水器市场直接影响有限，但可能间接增强安吉尔整体品牌竞争力。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">此情报主要影响安吉尔品牌在家用市场的渗透，对朴道水汇的商用净水器核心市场（企业直饮水）影响轻微。安吉尔全屋净水聚焦家庭场景，与朴道主打的商用DPM纳滤技术路线客户群重合度低，短期内不会直接威胁朴道在华为、阿里等大型企业的合作关系。但需警惕安吉尔通过家装渠道积累口碑后，未来可能跨界商用市场，或利用全屋净水概念在政府采购中提供整体方案。影响程度为轻微，时效为长期。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                持续强化&#39;健康水&#39;（保留矿物质）在商用场景的不可替代性，避免陷入家用全屋净水的竞争叙事。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                评估将DPM纳滤技术延伸至家用小型化产品的可行性，作为长期备用选项，但短期不调整商用产品线。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">市场监测</span>
+                                建立安吉尔商用市场拓展的追踪机制，每月检视其是否推出商用级全屋方案或进入企业招标名单。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    
+        
+        <div class="section">
+            <div class="section-title">
+                📜
+                
+                行业政策
+                <span class="badge">1 条</span>
+            </div>
+
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        净水器行业新增两项新国标|163-手机网易网
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 8/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">今日头条 · 2026-06-06T14:12:26.486693</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">2026年6月6日，净水器行业发布两项新国标，直接影响产品合规性。朴道水汇需评估DPM纳滤技术是否符合新标准，尤其关注矿物质保留指标与有害物去除要求，以确保商用净水器产品顺利进入市场，维护华为、阿里等重点客户关系。</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-opportunity">
+                                机会
+                            </span>
+                        </div>
+                        <div class="field-value">新国标对朴道水汇影响重大：产品层面，需确保DPM纳滤技术满足新国标对水质安全、矿物质含量及能效的强制性要求，若标准偏向RO反渗透（如严格限制总溶解固体或矿物质含量），则构成威胁；市场层面，合规性可能成为大型企业客户（如华为、腾讯）招标的硬性门槛，朴道需率先通过认证以保持竞争力；品牌层面，新国标可能强化‘健康水’概念，若国标认可矿物质保留，则成为朴道差异化优势。影响时效为短期，需立即采取行动。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">合规动作</span>
+                                立即组建专项团队，详细研究两项新国标的条文，特别是水质指标、检测方法及认证流程，与标准制定机构（如全国家用电器标准化技术委员会）建立沟通，确保朴道DPM纳滤技术路线与新国标一致。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                对名士K2、K1及S系列产品进行合规性自查与改造，如调整纳滤膜孔径或增加后置过滤单元以完全满足新国标，必要时启动产品升级项目，在3个月内完成送检与认证。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">营销策略</span>
+                                若新国标支持保留矿物质，立即制作宣传材料强调朴道产品‘符合新国标健康水标准’；若标准偏向RO，则联合行业协会倡议‘健康水指标应包含矿物质’，争取标准解释权，维护朴道技术路线优势。
+                            </li>
+                            
+                            <li>
+                                <span class="dim-tag">公关动作</span>
+                                主动向华为、阿里巴巴等核心客户通报朴道对新国标的积极响应与合规进展，提供合规证明文件，增强客户信心，防止因标准变更导致客户流失。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&amp;aid=4916&amp;jtoken=" target="_blank" style="color:#1a73e8;font-size:13px;">https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&amp;aid=4916&amp;jtoken=</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    
+
+    <!-- 竞品汇总 -->
+    
+    <div class="section">
+        <div class="section-title">📋 竞品动态汇总</div>
+        <div class="competitor-grid">
+            
+            <div class="competitor-card">
+                <h4>美的净水</h4>
+                <p>本期无重大动态</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    0条高优 · 共0条
+                </p>
+            </div>
+            
+            <div class="competitor-card">
+                <h4>沁园</h4>
+                <p>本期无重大动态</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    0条高优 · 共0条
+                </p>
+            </div>
+            
+            <div class="competitor-card">
+                <h4>安吉尔</h4>
+                <p>⚠ 本期9条动态（1条高优）。安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）；安吉尔出席2025国际地下水会议，AIMS技术破解矿物质离子浓度检测痛点；品牌大事件</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    1条高优 · 共9条
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <!-- 底部 -->
+    <div class="footer">
+        <p>📬 本报告已发送至：董素梅 &lt;dongmei@example.com&gt;, 销售总监 &lt;sales@example.com&gt;, 产品经理 &lt;product@example.com&gt;, 市场总监 &lt;marketing@example.com&gt;</p>
+        <p>⏰ 下次监控日期：2026-06-22 | 由 AI 情报系统自动生成</p>
+        <p style="margin-top:8px;">如有疑问或需要调整监控范围，请联系管理员</p>
+    </div>
+</div>
+</body>
+</html>
