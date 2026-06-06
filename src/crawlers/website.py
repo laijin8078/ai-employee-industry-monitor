@@ -75,48 +75,55 @@ class WebsiteCrawler(BaseCrawler):
         self, site_name: str, site_url: str, cutoff_date: datetime
     ) -> list[RawItem]:
         """
-        两级采集策略：
-        1. 先尝试 requests（快，无浏览器开销）
-        2. requests 失败/内容为空 → Playwright 浏览器兜底
-        3. Playwright 也失败 → 使用缓存
+        三级采集策略：
+        1. requests（快，无浏览器开销）→ 含 SSLError 自动升级到 Playwright
+        2. Playwright 浏览器兜底
+        3. 最近 7 天缓存降级
         """
         strategy_used = "requests"
+        fallback_used = False
 
         # === Level 1: requests ===
-        html = self.fetch(site_url)
+        html = self.fetch(site_url, source_name=site_name)
         if html and len(html) > 1000:
             items = self._parse_news_html(html, site_name, site_url, cutoff_date)
             if items:
-                logger.debug(f"   [{site_name}] requests 成功: {len(items)} 条")
+                self.record_source_health(site_name, "ok", len(items))
                 return items
 
         # === Level 2: Playwright 浏览器兜底 ===
-        strategy_used = "playwright"
         if self.browser.is_available:
-            logger.info(f"   [{site_name}] requests 失败，启用 Playwright 浏览器兜底...")
+            strategy_used = "playwright"
+            fallback_used = True
+            logger.info(f"   [{site_name}] requests 失败（SSL/反爬），启用 Playwright...")
             result = self.browser.fetch_html(site_url, wait_selector=None)
             if result["html"] and len(result["html"]) > 1000:
                 items = self._parse_news_html(
                     result["html"], site_name, site_url, cutoff_date
                 )
                 if items:
+                    self.record_source_health(site_name, "ok", len(items), fallback_used=True)
                     logger.info(f"   [{site_name}] Playwright 成功: {len(items)} 条")
                     return items
 
-            logger.warning(f"   [{site_name}] Playwright 也失败: {result.get('error', '未知')}")
-            strategy_used = f"playwright_failed: {result.get('error', '')[:80]}"
+            logger.warning(f"   [{site_name}] Playwright 失败: {result.get('error', '未知')[:80]}")
         else:
             logger.info(f"   [{site_name}] Playwright 未安装，跳过浏览器兜底")
 
-        # === Level 3: 缓存降级 ===
-        cached = self.load_cached_data(f"{self.CHANNEL}_{site_name}")
+        # === Level 3: 最近 7 天缓存降级 ===
+        cached = self.load_cached_data_recent(f"{self.CHANNEL}_{site_name}", max_age_days=7)
         if cached:
-            logger.info(f"   [{site_name}] 使用缓存数据（{len(cached)}条）")
-            # 标记来源状态
+            strategy_used = "cache"
+            fallback_used = True
+            self.record_source_health(site_name, "degraded", len(cached),
+                                       error=strategy_used, fallback_used=True)
+            logger.info(f"   [{site_name}] 使用缓存兜底（{len(cached)}条）")
             for c in cached:
                 c.raw_metadata["source_health"] = strategy_used
             return cached
 
+        self.record_source_health(site_name, "failed", 0,
+                                   error="所有策略均失败", fallback_used=fallback_used)
         logger.warning(f"   [{site_name}] 所有策略均失败")
         return []
 

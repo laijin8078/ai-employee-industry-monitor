@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
 import Reports from './pages/Reports'
 import ReportDetail from './pages/ReportDetail'
+import CollectionLog from './pages/CollectionLog'
 import Config from './pages/Config'
 import Settings from './pages/Settings'
 
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/reports/:id" element={<ReportDetail />} />
+          <Route path="/collection" element={<CollectionLog />} />
           <Route path="/config" element={<Config />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

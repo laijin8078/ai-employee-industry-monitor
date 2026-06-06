@@ -1,0 +1,3212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞品与行业动态情报报告 — 2026-06-07</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .header .meta {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 13px;
+        }
+        .header .meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* 摘要区 */
+        .summary-box {
+            background: #e8f0fe;
+            border-left: 4px solid #1a73e8;
+            margin: 24px 32px;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: #1a237e;
+        }
+
+        /* 分区 */
+        .section {
+            padding: 0 32px 24px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a73e8;
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .badge {
+            font-size: 13px;
+            background: #1a73e8;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        /* 情报卡片 */
+        .intel-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .intel-card:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .intel-card.priority-high {
+            border-left: 4px solid #e53935;
+        }
+        .intel-card.priority-medium {
+            border-left: 4px solid #fb8c00;
+        }
+        .intel-card.priority-low {
+            border-left: 4px solid #9e9e9e;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            background: #fafafa;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .card-header .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            flex: 1;
+        }
+        .card-header .meta-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+            white-space: nowrap;
+        }
+        .priority-tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .priority-tag.high { background: #ffebee; color: #c62828; }
+        .priority-tag.medium { background: #fff3e0; color: #e65100; }
+        .priority-tag.low { background: #f5f5f5; color: #616161; }
+
+        .card-body {
+            padding: 16px 20px;
+        }
+        .field {
+            margin-bottom: 12px;
+        }
+        .field-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .field-value {
+            font-size: 14px;
+            color: #444;
+        }
+
+        /* 影响类型标签 */
+        .impact-threat { color: #c62828; font-weight: 600; }
+        .impact-opportunity { color: #2e7d32; font-weight: 600; }
+        .impact-neutral { color: #616161; font-weight: 600; }
+
+        /* 应对策略 */
+        .response-list {
+            list-style: none;
+            padding: 0;
+        }
+        .response-list li {
+            padding: 6px 0 6px 16px;
+            font-size: 13px;
+            color: #555;
+            border-left: 2px solid #e0e0e0;
+            margin-bottom: 4px;
+        }
+        .response-list li .dim-tag {
+            display: inline-block;
+            font-size: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-right: 6px;
+            font-weight: 600;
+        }
+
+        /* 竞品汇总 */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+        }
+        .competitor-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .competitor-card h4 {
+            font-size: 15px;
+            color: #1a73e8;
+            margin-bottom: 6px;
+        }
+        .competitor-card p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* 底部 */
+        .footer {
+            background: #fafafa;
+            padding: 24px 32px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .footer p { margin-bottom: 4px; }
+
+        .recommendation-box {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .recommendation-box .field-label { color: #f57f17; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="header">
+        <h1>🔍 竞品与行业动态情报报告</h1>
+        <div class="subtitle">朴道水汇 · AI 情报系统自动生成</div>
+        <div class="meta">
+            <span>📅 2026-06-07</span>
+            <span>📊 周期：2026-05-24 至 2026-06-07（两周）</span>
+            <span>📈 共 66 条，重要 46 条</span>
+        </div>
+    </div>
+
+    <!-- 摘要 -->
+    
+    <div class="summary-box">
+        <strong>📋 本期摘要：</strong>本期发现10条高优先级情报：；「安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22」（竞品动态）；「净水器行业新增两项新国标|163-手机网易网」（行业政策）；「15个高水平净水器品牌率先通过新国标GB/T30307-2023检测|净...」（行业政策）
+    </div>
+    
+
+    <!-- 综合建议 -->
+    
+    <div class="section">
+        <div class="recommendation-box">
+            <div class="field-label">💡 综合建议</div>
+            <div class="field-value">建议关注10条高优情报，可将相关分析转发给产品和市场部门参考。</div>
+        </div>
+    </div>
+    
+
+    <!-- 分类情报 -->
+    
+        
+        <div class="section">
+            <div class="section-title">
+                🏢
+                
+                竞品动态
+                <span class="badge">20 条</span>
+            </div>
+
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T23:23:09.415402</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔空间大师热销暨首创矿物质饮水机新品发布会圆满举行（下）2025-09-22（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/9514" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/9514</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态2025-07-28
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T23:23:09.416062</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态2025-07-28（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/9071" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/9071</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP102025-07-22
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T23:23:09.416523</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP102025-07-22（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/9070" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/9070</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学2025-05-13
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T23:23:09.418083</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学2025-05-13（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/8958" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/8958</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔印尼战略启动——全球领先净水科技，启航万岛之国2025-06-16
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">安吉尔 · 2026-06-06T23:23:09.417404</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔印尼战略启动——全球领先净水科技，启航万岛之国2025-06-16（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.angelgroup.com.cn/news/8994" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.angelgroup.com.cn/news/8994</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        全国科技工作者日|对话安吉尔赵凯:做难而正确的事,让创新净水科技...
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.910649</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">全国科技工作者日|对话安吉尔赵凯:做难而正确的事,让创新净水科技...（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHVxagQWrJFr899RikIfw1um8UCOqlm4Aqqz4zFX8Bs5GTulC_Hsshm_SwleWD995LEt7LRLMi5hujDEpO5OnMLkV1nb1zK6X1_-C-O5ZmeJauVX9A23qNHi4NfYSg_oX5lb5lFg7Wv0gGtahhOSZNY1R56F9k8eoO8BJqUpFQ3GbvJinVZoULqcStBoHPhBLGqilUBZicz7rh_JMwKPE2JdbIUQGZnDe_kKXJBQNOwMSK" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHVxagQWrJFr899RikIfw1um8UCOqlm4Aqqz4zFX8Bs5GTulC_Hsshm_SwleWD995LEt7LRLMi5hujDEpO5OnMLkV1nb1zK6X1_-C-O5ZmeJauVX9A23qNHi4NfYSg_oX5lb5lFg7Wv0gGtahhOSZNY1R56F9k8eoO8BJqUpFQ3GbvJinVZoULqcStBoHPhBLGqilUBZicz7rh_JMwKPE2JdbIUQGZnDe_kKXJBQNOwMSK</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔:如何再次定义净水新时代
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.912079</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔:如何再次定义净水新时代（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHVFLDM-9ikpMwVmUKpkGOoI4DRo7Qerbp9p7UvLMsLA8XVLn2rRwZ2KBTtyEhCWeFdY1kz-1LmYDX3XlJt8mwECKSUlqk4zQEMLzhQnCCG6AhT-c9THiT6sRw9qKyG7lFHHdrp9hDYSPZ4xJm5eqZCDiw0vPW5Skl2O7Ly35Ka8FLA9gDPp2Uo4JDaWe9oJL71uWBFOrN8OaTXBxEqV--jNkdGniRGVxJN_ja97y_yqqa" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHVFLDM-9ikpMwVmUKpkGOoI4DRo7Qerbp9p7UvLMsLA8XVLn2rRwZ2KBTtyEhCWeFdY1kz-1LmYDX3XlJt8mwECKSUlqk4zQEMLzhQnCCG6AhT-c9THiT6sRw9qKyG7lFHHdrp9hDYSPZ4xJm5eqZCDiw0vPW5Skl2O7Ly35Ka8FLA9gDPp2Uo4JDaWe9oJL71uWBFOrN8OaTXBxEqV--jNkdGniRGVxJN_ja97y_yqqa</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        【协会动态】安吉尔“长效反渗透膜”正式获得欧洲发明专利
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.913638</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">【协会动态】安吉尔“长效反渗透膜”正式获得欧洲发明专利（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHT2Y_75u4GahsyUl9AghttLPDTB3FQVkK_JDlS0zvgAGc_2HHUYyuahlxItTseOo0EiofUwRORVpXw4xw87vDWF2laTfO0kcfITvEALl9V6na1OBtYg9zWEz470l4tz9tZfpsx4E2XYRmP0xzswJC36ei3RoJQZlXJo-r2SL9V6VamLI1ikM0sJubjvnWpI-6w10nbEW_vzpvH4KKa9vIbisevucjulyaPijr3w-AZqe_" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHT2Y_75u4GahsyUl9AghttLPDTB3FQVkK_JDlS0zvgAGc_2HHUYyuahlxItTseOo0EiofUwRORVpXw4xw87vDWF2laTfO0kcfITvEALl9V6na1OBtYg9zWEz470l4tz9tZfpsx4E2XYRmP0xzswJC36ei3RoJQZlXJo-r2SL9V6VamLI1ikM0sJubjvnWpI-6w10nbEW_vzpvH4KKa9vIbisevucjulyaPijr3w-AZqe_</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        开启家用净水微生物控制新篇章安吉尔APCM航天除菌科技获年度技术...
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.914349</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">开启家用净水微生物控制新篇章安吉尔APCM航天除菌科技获年度技术...（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHV_7S-X0YcWvgXeT6kFvkjYcuWKAQwsGfYohmuaQp1TDlTNmuQFv_7BHr11Recc24FXmR6onJTcr57qLr2keJ2Ly8IHkEEDa-Aj_Z3oUcat375bMhwZowMO3kDClzkXI5rASv4O0cQskajyFjBxyUTPUEBPLt0o1iZBf1aETofgnJg9934fyzLVyLD8IikXvJcyZBwqdPT5PoH3cfb_Z1degczwQEhDjHVE9B3FIdqgo_" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHV_7S-X0YcWvgXeT6kFvkjYcuWKAQwsGfYohmuaQp1TDlTNmuQFv_7BHr11Recc24FXmR6onJTcr57qLr2keJ2Ly8IHkEEDa-Aj_Z3oUcat375bMhwZowMO3kDClzkXI5rASv4O0cQskajyFjBxyUTPUEBPLt0o1iZBf1aETofgnJg9934fyzLVyLD8IikXvJcyZBwqdPT5PoH3cfb_Z1degczwQEhDjHVE9B3FIdqgo_</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        企业风采∣“安吉尔”打造净饮水领域“中国芯”
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.915002</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">企业风采∣“安吉尔”打造净饮水领域“中国芯”（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHTCYjxYs6Imq2D_rezoDQoCejDqQHyqRiFrAop79Ni9h7QLZT7aXc3J8pK_F84pRjOmxHetGwWnRrP_6Gk7lY_ndZ_Rrd-c-uCEGPpZ8-DnqLU2F4CRkBxQGpuUPAScnymbU_XXmArdN1xDVPcRGk-fru6_VfU_6J8uoBnkJqMM-Wik2gmrNYqRHRBP4A-WOExvge6Dn9y-fNDxkfxrdAVgNVZwPUF7aRc7xYfH5G7U5a" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHTCYjxYs6Imq2D_rezoDQoCejDqQHyqRiFrAop79Ni9h7QLZT7aXc3J8pK_F84pRjOmxHetGwWnRrP_6Gk7lY_ndZ_Rrd-c-uCEGPpZ8-DnqLU2F4CRkBxQGpuUPAScnymbU_XXmArdN1xDVPcRGk-fru6_VfU_6J8uoBnkJqMM-Wik2gmrNYqRHRBP4A-WOExvge6Dn9y-fNDxkfxrdAVgNVZwPUF7aRc7xYfH5G7U5a</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        高端净水黑科技,安吉尔A7 lite为你打造五星级全屋净水新体验
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.917580</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">高端净水黑科技,安吉尔A7 lite为你打造五星级全屋净水新体验（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHSN0kflFp-ickzIvDAFe3rqlkvseGSly1XhTQwXqNLIANLZj2EwgaJCSoo4-ruDbmmqIgf0M7jRoS4VlAsiWIiibcO8GLCfKg1D9RfS7VRZHFAgRu-auDSL036mX-Sj-u41Cqdl8-1OL6a_r_BDn9V5sbo55pxzGiHFSoSK49yeAfXN7TzH9HxdkUNcb8-11DKQAPsvDOk0dfGQ50vCYcHhJg3gp5fOvpot9xJunxeaGq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHSN0kflFp-ickzIvDAFe3rqlkvseGSly1XhTQwXqNLIANLZj2EwgaJCSoo4-ruDbmmqIgf0M7jRoS4VlAsiWIiibcO8GLCfKg1D9RfS7VRZHFAgRu-auDSL036mX-Sj-u41Cqdl8-1OL6a_r_BDn9V5sbo55pxzGiHFSoSK49yeAfXN7TzH9HxdkUNcb8-11DKQAPsvDOk0dfGQ50vCYcHhJg3gp5fOvpot9xJunxeaGq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔饮水机四个滤芯多久换一次?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:53:50.582833</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔饮水机四个滤芯多久换一次?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://g.pconline.com.cn/ask/354859.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://g.pconline.com.cn/ask/354859.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        2026世界食品安全日|饮水健康,安吉尔在行动
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:53:50.583261</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">2026世界食品安全日|饮水健康,安吉尔在行动（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://baijiahao.baidu.com/s?id=1867134288627844110&amp;wfr=spider&amp;for=pc" target="_blank" style="color:#1a73e8;font-size:13px;">https://baijiahao.baidu.com/s?id=1867134288627844110&amp;wfr=spider&amp;for=pc</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔饮水机的用法支持多温出水吗?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:53:50.583556</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔饮水机的用法支持多温出水吗?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://g.pconline.com.cn/ask/261339.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://g.pconline.com.cn/ask/261339.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔饮水机加热灯亮但自动停了咋办
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:53:50.583837</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔饮水机加热灯亮但自动停了咋办（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://g.pconline.com.cn/ask/303233.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://g.pconline.com.cn/ask/303233.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔饮水机怎么清洗使用?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:53:50.584129</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔饮水机怎么清洗使用?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://g.pconline.com.cn/ask/350385.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://g.pconline.com.cn/ask/350385.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔饮水机怎么设置童锁使用?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:53:50.584412</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔饮水机怎么设置童锁使用?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://g.pconline.com.cn/ask/350383.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://g.pconline.com.cn/ask/350383.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        净水器站上“刚需”风口:科技领跑的安吉尔如何定义行业未来?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:54:12.947506</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水器站上“刚需”风口:科技领跑的安吉尔如何定义行业未来?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKzdqazDKUHbEwI4cFghJ9XhVBOQoQF-dNnPV8MUoYyL8sQ87gbm-nP9VD7eiWm2xX9c0zA_ghUZn5yvXB2YSlGSEn5Ddnx7HKldLo87-2Xoe1TV3thbIiGJG8wz7N5kXNwUrWdWJkEZ4yaBuMtfyr7IZv_7uUUtxQsYCpKmAhG8zt-ETZdAeM8fSJzVg1PPK54mymctrESZf2q6S35sIURHdm8KFplsjuaPa3I8-UKfYq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKzdqazDKUHbEwI4cFghJ9XhVBOQoQF-dNnPV8MUoYyL8sQ87gbm-nP9VD7eiWm2xX9c0zA_ghUZn5yvXB2YSlGSEn5Ddnx7HKldLo87-2Xoe1TV3thbIiGJG8wz7N5kXNwUrWdWJkEZ4yaBuMtfyr7IZv_7uUUtxQsYCpKmAhG8zt-ETZdAeM8fSJzVg1PPK54mymctrESZf2q6S35sIURHdm8KFplsjuaPa3I8-UKfYq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        深圳安吉尔饮水产业集团有限公司
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:54:12.951794</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">深圳安吉尔饮水产业集团有限公司（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKzpUh1iMhV28Y4KugwKvt2ARgLGk6OuGnEbhlWVbqV38FUmHivml9Vh4JRew5_7hMgQoL3nmexJOPyj0r6-0DOQVmHZDaMduUySPV_coj1iS9NwvXor8MpYrng7zlKOwZ5WpFX3s2992h91KCgegJbMWbDfLQwrtYss6TfoszA2CMI5g_OaFlMuw9VenjpygkXCowmjqZZvNkvi07qBr6VIrWq2Xj15-uleXSMKd1ovJq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKzpUh1iMhV28Y4KugwKvt2ARgLGk6OuGnEbhlWVbqV38FUmHivml9Vh4JRew5_7hMgQoL3nmexJOPyj0r6-0DOQVmHZDaMduUySPV_coj1iS9NwvXor8MpYrng7zlKOwZ5WpFX3s2992h91KCgegJbMWbDfLQwrtYss6TfoszA2CMI5g_OaFlMuw9VenjpygkXCowmjqZZvNkvi07qBr6VIrWq2Xj15-uleXSMKd1ovJq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        安吉尔赵凯:诠释“好部品”,引领净饮水技术创新
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:54:12.954458</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">安吉尔赵凯:诠释“好部品”,引领净饮水技术创新（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKzKEHM6yVoUsMVDk6FhMTQUaBeMHP-FHchghP6IXmtUaK4w156W3CEzL-fm95qWnjts-ogSWrGpFylYxUmwMoGHzIN8aHrU6NsNAtHquXje8Q_o3uC1HU2vM7APb-DMPdowQqk5fvQVAgnHJV5NrHGQzf1ev11-Hic2AKmLsH12hs95qXz26eToLqTNXKS_0TKsNXL0KiTXhRgPiCjoCV3Z5P1BjKr-YsdmN6o7bfn5bK" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKzKEHM6yVoUsMVDk6FhMTQUaBeMHP-FHchghP6IXmtUaK4w156W3CEzL-fm95qWnjts-ogSWrGpFylYxUmwMoGHzIN8aHrU6NsNAtHquXje8Q_o3uC1HU2vM7APb-DMPdowQqk5fvQVAgnHJV5NrHGQzf1ev11-Hic2AKmLsH12hs95qXz26eToLqTNXKS_0TKsNXL0KiTXhRgPiCjoCV3Z5P1BjKr-YsdmN6o7bfn5bK</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    
+        
+        <div class="section">
+            <div class="section-title">
+                📜
+                
+                行业政策
+                <span class="badge">10 条</span>
+            </div>
+
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        净水器行业新增两项新国标|163-手机网易网
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">今日头条 · 2026-06-07T00:20:42.827227</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水器行业新增两项新国标|163-手机网易网（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&amp;aid=4916&amp;jtoken=" target="_blank" style="color:#1a73e8;font-size:13px;">https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&amp;aid=4916&amp;jtoken=</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        15个高水平净水器品牌率先通过新国标GB/T30307-2023检测|净...
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">今日头条 · 2026-06-07T00:03:49.428875</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">15个高水平净水器品牌率先通过新国标GB/T30307-2023检测|净...（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://sou.toutiao.com/search/jump?url=https%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FIUTLPA5U051189P5.html&amp;aid=4916&amp;jtoken=" target="_blank" style="color:#1a73e8;font-size:13px;">https://sou.toutiao.com/search/jump?url=https%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FIUTLPA5U051189P5.html&amp;aid=4916&amp;jtoken=</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        净水器滤芯越多越好吗?新国标给出解答
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:00.710439</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水器滤芯越多越好吗?新国标给出解答（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.ccn.com.cn/Content/2024/04-08/1939107245.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.ccn.com.cn/Content/2024/04-08/1939107245.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        净水机新国标实施,净水器额定总净水量不得低于2000升
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:00.712229</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水机新国标实施,净水器额定总净水量不得低于2000升（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.tmtpost.com/nictation/6166565.html" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.tmtpost.com/nictation/6166565.html</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        净水机新规出台迎“首考” 家电院公布首批新国标测试产品
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:00.712739</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水机新规出台迎“首考” 家电院公布首批新国标测试产品（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://tech.ifeng.com/a/20171206/44793748_0.shtml" target="_blank" style="color:#1a73e8;font-size:13px;">https://tech.ifeng.com/a/20171206/44793748_0.shtml</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        净水器新国标实行月余乱象依旧 业内吁统一标准
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:00.713216</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水器新国标实行月余乱象依旧 业内吁统一标准（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.chinanews.com.cn/sh/2014/09-18/6603544.shtml" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.chinanews.com.cn/sh/2014/09-18/6603544.shtml</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        Friend,您家的直饮水机符合新国标吗?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:38:41.215437</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">Friend,您家的直饮水机符合新国标吗?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHZmE1g2leilmFp4n_Hw3w7rZVG3y4YDQrLH0uzJFNeSk3be75QTXr3-ZeKA6yYopk7tWj7D3FlWf5RAV7JTG8r_0i3y2aWZRijSRufMvSzuglSL-45b-Ew6qdYEuNkZpv0koiv98lJ-yUWSjsB1YzgADg4BsqgDQT_QeDkrISz2UmuFoGEtr-1htX-EPgBNQEb0m_E3t1Zh9BpDfskM5uJqgjw1CirwJhq67od7RXhDha" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHZmE1g2leilmFp4n_Hw3w7rZVG3y4YDQrLH0uzJFNeSk3be75QTXr3-ZeKA6yYopk7tWj7D3FlWf5RAV7JTG8r_0i3y2aWZRijSRufMvSzuglSL-45b-Ew6qdYEuNkZpv0koiv98lJ-yUWSjsB1YzgADg4BsqgDQT_QeDkrISz2UmuFoGEtr-1htX-EPgBNQEb0m_E3t1Zh9BpDfskM5uJqgjw1CirwJhq67od7RXhDha</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        新国标实施,净水器功能参数怎么标?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:38:41.216893</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">新国标实施,净水器功能参数怎么标?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHZlrazJxICCCH4iyiLdLFzosXazISgCB7JSPBq3kc_JbULnB8rirYC-RPS2gYkp9lWgNboN9RrFwAQt3OA_5wOhnO9FlXoReQDzDHsdkFxtKgJiRh5SZR0Pob49wMHftq6GCf6L2eS4BKhLhhFNebNRqfLi89zx_P7ib6pNN9vQxdb4ZPQCJb-oiYIfQOnFmxi3kqf2-7Z_5w6LYQvcu7ObXkFcIBMMKJxVMdplBA3Jvq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHZlrazJxICCCH4iyiLdLFzosXazISgCB7JSPBq3kc_JbULnB8rirYC-RPS2gYkp9lWgNboN9RrFwAQt3OA_5wOhnO9FlXoReQDzDHsdkFxtKgJiRh5SZR0Pob49wMHftq6GCf6L2eS4BKhLhhFNebNRqfLi89zx_P7ib6pNN9vQxdb4ZPQCJb-oiYIfQOnFmxi3kqf2-7Z_5w6LYQvcu7ObXkFcIBMMKJxVMdplBA3Jvq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-高">
+                <div class="card-header">
+                    <div class="title">
+                        关于直饮水服务政策调整的通知
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag high">
+                            高优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:39:13.510766</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">关于直饮水服务政策调整的通知（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVOGdqEX2gnOwVOlP3OKemtHChqBibYIXq4lYWkaO3rG-7SccFPqNHVvAmDxW9U7VLfphwPqwSlLzmBTO10K159cNB00-vHHg3RV0RE3y1cyFYyXEzofLmApr3hzP-YxEvps_N1-mCumkoBn7NFPIzjAEH7I9kIkc6gOomWUN-pabFse_8Hv-9kxrhgeH1VTFXV8O5R64higb3AeVfA-i4QlMKZPnAzq9hUkPmXSycchNK" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVOGdqEX2gnOwVOlP3OKemtHChqBibYIXq4lYWkaO3rG-7SccFPqNHVvAmDxW9U7VLfphwPqwSlLzmBTO10K159cNB00-vHHg3RV0RE3y1cyFYyXEzofLmApr3hzP-YxEvps_N1-mCumkoBn7NFPIzjAEH7I9kIkc6gOomWUN-pabFse_8Hv-9kxrhgeH1VTFXV8O5R64higb3AeVfA-i4QlMKZPnAzq9hUkPmXSycchNK</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        净水机水效等级标准来了!听听专家说了啥
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:38:41.224654</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净水机水效等级标准来了!听听专家说了啥（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHYejsRZoAdccNj1ZXB7KxmtAYIINQt44U6KD7pJfwFxC0fRILBe2r41W45nrETRyUHWF-QBxMI6nGMXLRBUBFMXh8FObgFXYA2j8-jR6IlTGHnBL7xzTpH9WMvLJFSp90FdWNsH-gcmpQBrkD0lcRTqyaNo7jmF3PV-m7qIVGBPaYmDPqbJ106aGRlSAlCSb3cVm8wz2-uSuBOKCbUv6D1hlvjtsfh1t1syBu-xeZebFq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHYejsRZoAdccNj1ZXB7KxmtAYIINQt44U6KD7pJfwFxC0fRILBe2r41W45nrETRyUHWF-QBxMI6nGMXLRBUBFMXh8FObgFXYA2j8-jR6IlTGHnBL7xzTpH9WMvLJFSp90FdWNsH-gcmpQBrkD0lcRTqyaNo7jmF3PV-m7qIVGBPaYmDPqbJ106aGRlSAlCSb3cVm8wz2-uSuBOKCbUv6D1hlvjtsfh1t1syBu-xeZebFq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    
+        
+        <div class="section">
+            <div class="section-title">
+                📊
+                
+                行业动态
+                <span class="badge">15 条</span>
+            </div>
+
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        孝义市看守所询价采购孝义市看守所直饮水设备采购及安装的采...
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">今日头条 · 2026-06-07T00:07:16.122663</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">孝义市看守所询价采购孝义市看守所直饮水设备采购及安装的采...（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.ccgp-shanxi.gov.cn%2Fluban%2Fdetail%3FarticleId%3DIj3pAwjPP4WCmLzYGP30og%3D%3D%26parentId%3D138010&amp;aid=4916&amp;jtoken=" target="_blank" style="color:#1a73e8;font-size:13px;">https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.ccgp-shanxi.gov.cn%2Fluban%2Fdetail%3FarticleId%3DIj3pAwjPP4WCmLzYGP30og%3D%3D%26parentId%3D138010&amp;aid=4916&amp;jtoken=</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        2026年口碑TOP10家用净水器:高性价比长效机型,净水器过滤器家用
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:00.713699</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">2026年口碑TOP10家用净水器:高性价比长效机型,净水器过滤器家用（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://stock.10jqka.com.cn/20260601/c677116734.shtml" target="_blank" style="color:#1a73e8;font-size:13px;">https://stock.10jqka.com.cn/20260601/c677116734.shtml</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        全国十大品牌净水器排名2026|主流机型深度实测与行业解析
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:00.714149</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">全国十大品牌净水器排名2026|主流机型深度实测与行业解析（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="https://www.ithome.com/0/958/163.htm" target="_blank" style="color:#1a73e8;font-size:13px;">https://www.ithome.com/0/958/163.htm</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        国家淘汰了一批不合格净水器,你中招了吗?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:38:41.219445</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">国家淘汰了一批不合格净水器,你中招了吗?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHWDcGg4e9t3dhQ9dz_VBiLap4lHuvcFfgLkEh7861Lzx1ER_dfqnYovcTvGrCiyMlVYIzuH_ZcYi9qpQIUsmjoqSd5z7r7cDhz0TC0tPm9dlCT7FO_P-JJTptDgCKhDqf0TRXdCP-_mTN1o0i8jBhQUreHmyjgfMFXQ-pOrOwQjfAccpCiWZL_VWwYaGyvdvYgZlLgGawyrWybz0uQSsh7qkg3TfGSmhtVPVjDTeghrq_" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHWDcGg4e9t3dhQ9dz_VBiLap4lHuvcFfgLkEh7861Lzx1ER_dfqnYovcTvGrCiyMlVYIzuH_ZcYi9qpQIUsmjoqSd5z7r7cDhz0TC0tPm9dlCT7FO_P-JJTptDgCKhDqf0TRXdCP-_mTN1o0i8jBhQUreHmyjgfMFXQ-pOrOwQjfAccpCiWZL_VWwYaGyvdvYgZlLgGawyrWybz0uQSsh7qkg3TfGSmhtVPVjDTeghrq_</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        今天(7月1日)起,此类净水器已被淘汰!别买错了……
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:38:41.222469</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">今天(7月1日)起,此类净水器已被淘汰!别买错了……（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHXlzTBQLMoN7Nq6UIJ2pps9UgGaJgCuzSEV4ZABzqBx9TsFy9MmbhK7Qcfyd9IG6gv8YicuZeW2QrIm7TdQMKpBxleZgSriPNtK-3vaQ-w1jWucl5Ep8ovDZeIjUMZpHG4vj7avuMt5wfAqwRAVuS5bT6UO9tvjP8EVBd7ncGKgYnLNjCHCK-HD1zYpXLnnpcIB2LpsQHcfGmKehAjDKfvia5Ne_vHtnI7zDDrUgkTKgq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHXlzTBQLMoN7Nq6UIJ2pps9UgGaJgCuzSEV4ZABzqBx9TsFy9MmbhK7Qcfyd9IG6gv8YicuZeW2QrIm7TdQMKpBxleZgSriPNtK-3vaQ-w1jWucl5Ep8ovDZeIjUMZpHG4vj7avuMt5wfAqwRAVuS5bT6UO9tvjP8EVBd7ncGKgYnLNjCHCK-HD1zYpXLnnpcIB2LpsQHcfGmKehAjDKfvia5Ne_vHtnI7zDDrUgkTKgq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        国家明令:此类净水器已被禁止销售!千万不要再买了!
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:38:41.226570</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">国家明令:此类净水器已被禁止销售!千万不要再买了!（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHX2dDkNJh_1H589zHnlyImeDrYqJdDAq88V7hN9GPAHopVrsPnel-EQmtufGyox4Z6O4hE8-paVg7CqXfdd7mi-wfCqC9Vlzvqqt2nyeZBXuFR7Q5Cu8-dIxsOaCjYJc-P3lQmKhBJGP25NOZ7VCpsE-j6nHT3ZxE2cwAg_TkprOxRmwslYRFQtY8DfmTA3DX-aNi7CyP3tKw76SVnQEfQiQ2dBoWOb3cSV9q30wpp5DK" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=-mF71POB-gTgjJRrPU2pNomt_TqbB7847g4Fzr3PiHX2dDkNJh_1H589zHnlyImeDrYqJdDAq88V7hN9GPAHopVrsPnel-EQmtufGyox4Z6O4hE8-paVg7CqXfdd7mi-wfCqC9Vlzvqqt2nyeZBXuFR7Q5Cu8-dIxsOaCjYJc-P3lQmKhBJGP25NOZ7VCpsE-j6nHT3ZxE2cwAg_TkprOxRmwslYRFQtY8DfmTA3DX-aNi7CyP3tKw76SVnQEfQiQ2dBoWOb3cSV9q30wpp5DK</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        东莞市水乡未来学校管道直饮水系统采购项目招标公告
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:47.702442</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">东莞市水乡未来学校管道直饮水系统采购项目招标公告（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202604/t20260409_26379687.htm" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202604/t20260409_26379687.htm</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        新设立一体化直饮水机维护服务(第二次)(JLP25C00116)公开招标公告
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:47.703508</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">新设立一体化直饮水机维护服务(第二次)(JLP25C00116)公开招标公告（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202512/t20251205_25865841.htm" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202512/t20251205_25865841.htm</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        浅议城市供水行业发展之“直饮水”现象
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:39:13.512858</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">浅议城市供水行业发展之“直饮水”现象（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVOGdqEX2gnOwVOlP3OKemtHgiOMa1wKKu6GTILxJW1LFh3Fht0W_IdbwvcB1BWMqURA6vVn2ROw3Htl6PqWM9PwnF_taf0ZHr9uyk7WxgHvE_W-fBnA1YnkXIN-aLrGkR9HDrsVDNoG-uvj4mYz6qBy_er3jCi-ledxQyA0tEPdoSYm4mwDUAoAQDud4MHIXWqWQ-ws-ZgsHtFd8kSKBrx_s7C2vFdn5F97m-E5rLGsaK" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVOGdqEX2gnOwVOlP3OKemtHgiOMa1wKKu6GTILxJW1LFh3Fht0W_IdbwvcB1BWMqURA6vVn2ROw3Htl6PqWM9PwnF_taf0ZHr9uyk7WxgHvE_W-fBnA1YnkXIN-aLrGkR9HDrsVDNoG-uvj4mYz6qBy_er3jCi-ledxQyA0tEPdoSYm4mwDUAoAQDud4MHIXWqWQ-ws-ZgsHtFd8kSKBrx_s7C2vFdn5F97m-E5rLGsaK</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        让更多内江市民喝上高品质的放心水!管道直饮水到底是什么——
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:39:13.518195</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">让更多内江市民喝上高品质的放心水!管道直饮水到底是什么——（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVOIbEhMn6PSaiuh6n-bHyeOjHsSUPJsUGgdeKFprSmWg11RVrgLF1uLCiABQu-eUXBE46Ov-e4GlPnMJa6ZybXXdvhSd_qmr6O71OxXfpGsmIkYUZa2HJPVX8xPvgcL5O4lhK16T2xkZN6gmOR-Nghu8N_nopV6uW3UekMHhnlLXGkZtc0JQFn9kvPDDdhfUoNvOAU5r1PML1XTnl8Ol2neGw3n9oQE3b5EB-S7Wo570q" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVOIbEhMn6PSaiuh6n-bHyeOjHsSUPJsUGgdeKFprSmWg11RVrgLF1uLCiABQu-eUXBE46Ov-e4GlPnMJa6ZybXXdvhSd_qmr6O71OxXfpGsmIkYUZa2HJPVX8xPvgcL5O4lhK16T2xkZN6gmOR-Nghu8N_nopV6uW3UekMHhnlLXGkZtc0JQFn9kvPDDdhfUoNvOAU5r1PML1XTnl8Ol2neGw3n9oQE3b5EB-S7Wo570q</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        南昌:加速迈向全城直饮水时代
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:39:13.521573</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">南昌:加速迈向全城直饮水时代（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVRfnXtt_dhHc-fDQGXeYkBGQNHRnKwLKvCyNdOUZsgBYva93ah4-rEZgN2rScjoG1zvT4EBK_1j2_5dpnMje873nINUpcigpJyPtfaM1Xwj1Y_wll2zJMwHvwrNiklNb0tMpztGYByhKBtvh9-s3LDVQr-ncU0x94qSFRtLRL8ORkgKVwEYT5GrMnXiqgmBY2V4SnZEOwquWJI0RbzeHX5Xd1pDnAQ7kdQ9uWNrQeuzmq" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVRfnXtt_dhHc-fDQGXeYkBGQNHRnKwLKvCyNdOUZsgBYva93ah4-rEZgN2rScjoG1zvT4EBK_1j2_5dpnMje873nINUpcigpJyPtfaM1Xwj1Y_wll2zJMwHvwrNiklNb0tMpztGYByhKBtvh9-s3LDVQr-ncU0x94qSFRtLRL8ORkgKVwEYT5GrMnXiqgmBY2V4SnZEOwquWJI0RbzeHX5Xd1pDnAQ7kdQ9uWNrQeuzmq</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        中国管道直饮水面面观
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:39:13.523441</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">中国管道直饮水面面观（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVPLmkWRgxj9yUvANI7uqWyd3XuUDTfFqer_c9ckfrAyw-ZsN-z3XHyBdgA4wGpizrsOxS5F6EQ9K4uh1KaweIXB-vnkTWTXPHQK5wkOpVpssl9Km3j7sBVzrZmiOm50QzwakA2AxKpMf5b3Z0bu1h_azF-AUuBGqEZNSCNOmfKpxg5I6CKiIpzwVU5t37bzP9vCBUKjJuLPoooHDNR4IC_aE53TFn0vGxzqyKyBMVIm0q" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVPLmkWRgxj9yUvANI7uqWyd3XuUDTfFqer_c9ckfrAyw-ZsN-z3XHyBdgA4wGpizrsOxS5F6EQ9K4uh1KaweIXB-vnkTWTXPHQK5wkOpVpssl9Km3j7sBVzrZmiOm50QzwakA2AxKpMf5b3Z0bu1h_azF-AUuBGqEZNSCNOmfKpxg5I6CKiIpzwVU5t37bzP9vCBUKjJuLPoooHDNR4IC_aE53TFn0vGxzqyKyBMVIm0q</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        “第九届”获奖论文悦享|高伟:浅议城市供水行业发展之“直饮水...
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:39:13.526084</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">“第九届”获奖论文悦享|高伟:浅议城市供水行业发展之“直饮水...（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVRC3v8QeVO0j-nW6gOaJ5qLwH0eFUI8XfJjxKWLErM96TGnGUg5uAefKoPbz8whjGh52JOsgcp0dbnXNO4GhOEvsfESREzHv_b6Nz5F7OEmNAw5wszVEBSqcHrqrGd5grv751ripnLgk4UABIBSNN_-0r93L4Go7dgwQ3R2PJz0_3HHOE7gH7_FzyKv_gmiANluY6j4FougrogGQ3pxLmiuGYVnnPh9DD-F_Z15gYt5Ja" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=1XQOreic8NVvyGXemPtbBqLYUFkzAV_m7rJYPIKbUVRC3v8QeVO0j-nW6gOaJ5qLwH0eFUI8XfJjxKWLErM96TGnGUg5uAefKoPbz8whjGh52JOsgcp0dbnXNO4GhOEvsfESREzHv_b6Nz5F7OEmNAw5wszVEBSqcHrqrGd5grv751ripnLgk4UABIBSNN_-0r93L4Go7dgwQ3R2PJz0_3HHOE7gH7_FzyKv_gmiANluY6j4FougrogGQ3pxLmiuGYVnnPh9DD-F_Z15gYt5Ja</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        实测:“黑科技”净水器为啥这么多“大佬”推荐?
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:53:40.915586</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">实测:“黑科技”净水器为啥这么多“大佬”推荐?（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHSXGL70TFr9LnrSKn_KFI9CXYuPAye3IRkSRYqbpvMVoTIpi3u0fzl336JqlGV5re40nUv-mppoX3kdZOuQ0Du6ZTD-qNunugYk8e_-XUxdcrTDmNpcOSCJpO2GW1gRPgfkPZdOw7OuzxvMy3QIcNSga4k7RUzMVZiXhFdhpZEA8rMRF9bA39i-wN6zBkFs2nc1k57JokEfP7nmFyu8cmT8o_NSXEHdBHNJ6gix1YOnoa" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=n6-gf_0npsOyWmqze68wgLdTn31tSxy02yilh0p6HHSXGL70TFr9LnrSKn_KFI9CXYuPAye3IRkSRYqbpvMVoTIpi3u0fzl336JqlGV5re40nUv-mppoX3kdZOuQ0Du6ZTD-qNunugYk8e_-XUxdcrTDmNpcOSCJpO2GW1gRPgfkPZdOw7OuzxvMy3QIcNSga4k7RUzMVZiXhFdhpZEA8rMRF9bA39i-wN6zBkFs2nc1k57JokEfP7nmFyu8cmT8o_NSXEHdBHNJ6gix1YOnoa</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        净饮水新时代,渠道持续提质升级的新命题
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">微信搜索 · 2026-06-06T23:54:12.952995</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">净饮水新时代,渠道持续提质升级的新命题（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKyX-DkPDcYqa_6hzAJodNIZbgjx0v8PvltgX8MsdZwUln6oBb6B1YXi9jq7Wx1pcFCBRturRfDeKuPWRd9IMYOni6N7Ei35iSZMN8GJynh7gRj6qZ4HMfoFFItPD3zmrSZ1HoIBFKId4zYN8BP1zBe7lukU3zSerbPcSd4TqHXRmZMEjqIx_4JY9NeXzIw4bCPaBhxbbmHHWbWSgMhFkL7ELmTg0CEHHAZ8c6uBZOHJ2_" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.baidu.com/link?url=MfkQCRmWh2bvInVyMLzPRe29wIcJLnK_dmY3QGFPcKyX-DkPDcYqa_6hzAJodNIZbgjx0v8PvltgX8MsdZwUln6oBb6B1YXi9jq7Wx1pcFCBRturRfDeKuPWRd9IMYOni6N7Ei35iSZMN8GJynh7gRj6qZ4HMfoFFItPD3zmrSZ1HoIBFKId4zYN8BP1zBe7lukU3zSerbPcSd4TqHXRmZMEjqIx_4JY9NeXzIw4bCPaBhxbbmHHWbWSgMhFkL7ELmTg0CEHHAZ8c6uBZOHJ2_</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    
+        
+        <div class="section">
+            <div class="section-title">
+                🔬
+                
+                技术突破
+                <span class="badge">1 条</span>
+            </div>
+
+            
+            <div class="intel-card priority-中">
+                <div class="card-header">
+                    <div class="title">
+                        西乡县职业技术高中西乡职中——一中教学点直饮水机采购项目竞争...
+                    </div>
+                    <div class="meta-row">
+                        <span class="priority-tag medium">
+                            中优先级
+                        </span>
+                        <span>⏱ 紧急度 5/10</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 来源 -->
+                    <div class="field">
+                        <span class="field-label">来源</span>
+                        <span class="field-value">百度新闻 · 2026-06-06T23:38:47.703049</span>
+                    </div>
+
+                    <!-- AI 摘要 -->
+                    <div class="field">
+                        <div class="field-label">📝 核心摘要</div>
+                        <div class="field-value">西乡县职业技术高中西乡职中——一中教学点直饮水机采购项目竞争...（AI分析不可用：LLM分析失败）</div>
+                    </div>
+
+                    <!-- 影响分析 -->
+                    <div class="field">
+                        <div class="field-label">📊 影响分析 ·
+                            <span class="impact-neutral">
+                                中性
+                            </span>
+                        </div>
+                        <div class="field-value">无法自动分析，请人工评估影响。</div>
+                    </div>
+
+                    <!-- 应对策略 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🎯 建议应对策略</div>
+                        <ul class="response-list">
+                            
+                            <li>
+                                <span class="dim-tag">产品策略</span>
+                                请人工查看本条情报并评估是否需要应对。
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+
+                    <!-- 相关链接 -->
+                    
+                    <div class="field">
+                        <div class="field-label">🔗 相关链接</div>
+                        
+                        <div><a href="http://www.ccgp.gov.cn/cggg/dfgg/jzxtpgg/202512/t20251215_25929344.htm" target="_blank" style="color:#1a73e8;font-size:13px;">http://www.ccgp.gov.cn/cggg/dfgg/jzxtpgg/202512/t20251215_25929344.htm</a></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    
+
+    <!-- 竞品汇总 -->
+    
+    <div class="section">
+        <div class="section-title">📋 竞品动态汇总</div>
+        <div class="competitor-grid">
+            
+            <div class="competitor-card">
+                <h4>美的净水</h4>
+                <p>本期无重大动态</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    0条高优 · 共0条
+                </p>
+            </div>
+            
+            <div class="competitor-card">
+                <h4>沁园</h4>
+                <p>本期无重大动态</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    0条高优 · 共0条
+                </p>
+            </div>
+            
+            <div class="competitor-card">
+                <h4>安吉尔</h4>
+                <p>⚠ 本期20条动态（1条高优）。2025家装新质践行大会：安吉尔以全屋净水破局，共筑家装产业链新生态2025-0；守护健康饮水，安吉尔荣登CBNData“健康好品牌”榜单TOP102025-07；安吉尔空间大师系列斩获红鼎大奖，以全屋净水创新重塑家装功能美学2025-05-1</p>
+                <p style="margin-top:4px;font-size:12px;color:#aaa;">
+                    1条高优 · 共20条
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <!-- 底部 -->
+    <!-- 来源健康度 -->
+    
+
+    <div class="footer">
+        <p>📬 本报告已发送至：2477395349@qq.com, 董素梅 &lt;dongmei@example.com&gt;, 销售总监 &lt;sales@example.com&gt;, 产品经理 &lt;product@example.com&gt;, 市场总监 &lt;marketing@example.com&gt;</p>
+        <p>⏰ 下次监控日期：2026-06-22 | 由 AI 情报系统自动生成</p>
+        <p style="margin-top:8px;">如有疑问或需要调整监控范围，请联系管理员</p>
+    </div>
+</div>
+</body>
+</html>

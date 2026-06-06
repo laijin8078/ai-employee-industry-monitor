@@ -39,6 +39,11 @@ from .notifiers import EmailNotifier
 from .storage import IntelligenceDB
 
 
+class JobCancelledError(Exception):
+    """任务被用户取消"""
+    pass
+
+
 # ============================================
 # 日志配置
 # ============================================
@@ -72,14 +77,20 @@ def setup_logging():
 class IntelligencePipeline:
     """情报采集分析流水线"""
 
-    def __init__(self, mock_mode: bool = False):
+    def __init__(self, mock_mode: bool = False, log_callback=None, job_id_override: str = None, cancel_check=None):
         """
         Args:
             mock_mode: 使用模拟数据（用于测试，不需要真实爬虫和API）
+            log_callback: 可选回调函数，用于实时推送日志到前端
+                         签名: (level: str, message: str, step: str, source: str, status: str)
+            job_id_override: 外部指定的 job_id（API层传入），为空则自动生成
+            cancel_check: 可选回调 () -> bool，返回 True 表示任务已被取消
         """
         self.mock_mode = mock_mode
+        self.log_callback = log_callback
+        self.cancel_check = cancel_check or (lambda: False)
         self.settings = get_settings()
-        self.job_id = f"job_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+        self.job_id = job_id_override or f"job_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
 
         # 初始化数据库
         self.db = IntelligenceDB(self.settings.db_path)
@@ -98,6 +109,9 @@ class IntelligencePipeline:
             self.wechat_crawler = WechatCrawler(self.settings, self.settings.raw_data_dir)
             self.website_crawler = WebsiteCrawler(self.settings, self.settings.raw_data_dir)
             self.news_crawler = NewsCrawler(self.settings, self.settings.raw_data_dir)
+            # 注入取消检查回调
+            for c in [self.wechat_crawler, self.website_crawler, self.news_crawler]:
+                c.cancel_check = self.cancel_check
 
         # 初始化处理器
         self.cleaner = DataCleaner(
@@ -120,6 +134,33 @@ class IntelligencePipeline:
         # 初始化通知器
         self.notifier = EmailNotifier(self.settings.smtp_config)
 
+    # ==================== 日志辅助 ====================
+
+    def _emit_log(self, level: str, message: str, step: str = "", source: str = "", status: str = ""):
+        """发送日志到 logger 和可选的 log_callback。每次调用同时检查取消信号。"""
+        # 先检查取消（确保高频调用点能及时响应中断）
+        if self.cancel_check and self.cancel_check():
+            raise JobCancelledError(self.job_id)
+        log_func = getattr(logger, level, logger.info)
+        log_func(message)
+        if self.log_callback:
+            try:
+                self.log_callback(level, message, step, source, status)
+            except Exception:
+                pass
+
+    def _check_cancelled(self):
+        """检查任务是否被取消，若已取消则抛出异常中断流水线"""
+        if self.cancel_check and self.cancel_check():
+            raise JobCancelledError(self.job_id)
+
+    def _update_heartbeat(self, stage: str = "", items_collected: int = None):
+        """更新任务心跳（防止被标记为超时）"""
+        try:
+            self.db.update_job_heartbeat(self.job_id, stage=stage, items_collected=items_collected)
+        except Exception:
+            pass
+
     # ==================== 主流程 ====================
 
     def run(self) -> dict:
@@ -130,21 +171,24 @@ class IntelligencePipeline:
             执行结果摘要字典
         """
         start_time = time.time()
-        logger.info("=" * 60)
-        logger.info(f"🚀 AI情报系统启动 [Job: {self.job_id}]")
-        logger.info(f"   模式: {'Mock模拟' if self.mock_mode else '真实采集'}")
-        logger.info(f"   监控范围: {len(self.settings.competitor_wechat)}公众号 "
-                    f"+ {len(self.settings.competitor_websites)}网站 "
-                    f"+ {len(self.settings.industry_keywords)}关键词")
-        logger.info("=" * 60)
-
-        # 创建任务记录
-        self.db.create_job(self.job_id)
         channels_succeeded = []
         channels_failed = []
 
         try:
+            self._emit_log("info", "=" * 50, step="启动")
+            self._emit_log("info", f"🚀 AI情报系统启动 [Job: {self.job_id}]", step="启动")
+            self._emit_log("info", f"   模式: {'Mock模拟' if self.mock_mode else '真实采集'}", step="启动")
+            self._emit_log("info", f"   监控范围: {len(self.settings.competitor_wechat)}公众号 "
+                        f"+ {len(self.settings.competitor_websites)}网站 "
+                        f"+ {len(self.settings.industry_keywords)}关键词", step="启动")
+            self._emit_log("info", "=" * 50, step="启动")
+
+            # 创建任务记录
+            self.db.create_job(self.job_id)
+            self._update_heartbeat(stage="starting")
             # === 步骤 2: 数据采集（3个渠道并行） ===
+            self._check_cancelled()
+            self._update_heartbeat(stage="collecting")
             logger.info("\n📡 [步骤 2/10] 数据采集 — 3个渠道并行启动...")
             raw_items, channels_succeeded, channels_failed, source_health = self._collect_data()
 
@@ -156,34 +200,45 @@ class IntelligencePipeline:
                     return self._empty_result(channels_failed)
 
             logger.info(f"✅ 采集完成: {len(raw_items)} 条原始数据")
+            self._update_heartbeat(stage="collecting", items_collected=len(raw_items))
 
             # === 步骤 3: 数据清洗与去重 ===
-            logger.info(f"\n🧹 [步骤 3/10] 数据清洗与去重...")
+            self._check_cancelled()
+            self._update_heartbeat(stage="cleaning", items_collected=len(raw_items))
+            self._emit_log("info", "🧹 [步骤 3/10] 数据清洗与去重...", step="清洗")
             cleaned_items = self.cleaner.process(raw_items)
-            logger.info(f"✅ 清洗完成: {len(cleaned_items)} 条有效数据 "
-                        f"(去重 {self.cleaner.get_dedup_stats(cleaned_items)['duplicates_removed']} 条)")
+            dedup_count = self.cleaner.get_dedup_stats(cleaned_items).get('duplicates_removed', 0)
+            self._emit_log("success", f"✅ 清洗完成: {len(cleaned_items)} 条有效数据 (去重 {dedup_count} 条)", step="清洗", status="success")
 
             # 保存原始数据
             self.db.save_raw_items(self.job_id, [c.raw for c in cleaned_items])
 
             # === 步骤 4: AI 初筛 ===
-            logger.info(f"\n🔍 [步骤 4/10] AI 初筛 — 判断相关性和优先级...")
+            self._check_cancelled()
+            self._update_heartbeat(stage="screening", items_collected=len(cleaned_items))
+            self._emit_log("info", f"🔍 [步骤 4/10] AI 初筛 — {len(cleaned_items)} 条数据判断相关性和优先级...", step="AI初筛")
+            # 注入进度回调，前端可看到实时进度
+            self.screener._progress_callback = lambda msg: self._emit_log("info", msg, step="AI初筛")
             screening_results = self.screener.screen(cleaned_items)
-            logger.info(f"✅ 初筛完成: {len(screening_results)}条判定, "
-                        f"{len(self.screener.filter_important(screening_results))}条需要深度分析")
+            important_count = len(self.screener.filter_important(screening_results))
+            self._emit_log("success", f"✅ 初筛完成: {len(screening_results)}条判定, {important_count}条需要深度分析", step="AI初筛", status="success")
 
             # === 步骤 5: AI 深度分析 ===
+            self._check_cancelled()
             important = self.screener.filter_important(screening_results)
-            logger.info(f"\n🧠 [步骤 5/10] AI 深度分析 — {len(important)} 条重要情报...")
+            self._update_heartbeat(stage="analyzing")
+            self._emit_log("info", f"🧠 [步骤 5/10] AI 深度分析 — {len(important)} 条重要情报...", step="深度分析")
             deep_analyses = self.deep_analyzer.analyze(important)
-            logger.info(f"✅ 深度分析完成: {len(deep_analyses)}条")
+            self._emit_log("success", f"✅ 深度分析完成: {len(deep_analyses)}条", step="深度分析", status="success")
 
             # === 步骤 6: 竞品汇总 ===
+            self._update_heartbeat(stage="summarizing")
             logger.info(f"\n📋 [步骤 6/10] 竞品动态汇总...")
             # (汇总在 json_reporter.generate 中完成)
 
             # === 步骤 7: 生成报告 ===
-            logger.info(f"\n📝 [步骤 7/10] 生成情报报告...")
+            self._update_heartbeat(stage="reporting")
+            self._emit_log("info", "📝 [步骤 7/10] 生成情报报告...", step="报告生成")
             report = self.json_reporter.generate(
                 analyses=deep_analyses,
                 all_screening_results=screening_results,
@@ -198,15 +253,18 @@ class IntelligencePipeline:
             # 生成 HTML 报告
             html_content = self.html_reporter.render(report)
             html_path = self.html_reporter.save(report, self.settings.reports_dir)
-            logger.info(f"✅ 报告生成完成: JSON={json_path}, HTML={html_path}")
+            self._emit_log("success", f"✅ 报告生成完成: JSON={Path(json_path).name}, HTML={Path(html_path).name if html_path else 'N/A'}", step="报告生成", status="success")
 
             # === 步骤 8: 附件处理（MVP 跳过） ===
             logger.info(f"\n📎 [步骤 8/10] 附件处理 — MVP版本跳过")
 
             # === 步骤 9: 发送通知 ===
-            logger.info(f"\n📬 [步骤 9/10] 发送通知...")
+            self._update_heartbeat(stage="notifying")
+            self._emit_log("info", "📬 [步骤 9/10] 发送通知...", step="通知")
             notification_sent = self._send_notifications(report, html_content, json_path)
-            logger.info(f"✅ 通知{'已发送' if notification_sent else '跳过（SMTP未配置）'}")
+            self._emit_log("info" if notification_sent else "warning",
+                f"{'✅ 通知已发送' if notification_sent else '⚠ 通知跳过（SMTP未配置）'}", step="通知",
+                status="success" if notification_sent else "warning")
 
             # === 步骤 10: 数据归档 ===
             logger.info(f"\n💾 [步骤 10/10] 数据存储与归档...")
@@ -214,11 +272,19 @@ class IntelligencePipeline:
             self.db.cleanup_old_data(max_age_days=90)
             logger.info("✅ 数据已归档")
 
-            # === 更新任务状态 ===
+            # === 确定最终状态 ===
             elapsed = time.time() - start_time
+            if channels_failed and not channels_succeeded:
+                final_status = "failed"
+            elif channels_failed and channels_succeeded:
+                final_status = "partial"  # 部分渠道成功
+            else:
+                final_status = "success"
+
+            self._update_heartbeat(stage="completed")
             self.db.update_job(
                 self.job_id,
-                status="success",
+                status=final_status,
                 channels_succeeded=channels_succeeded,
                 channels_failed=channels_failed,
                 total_items_collected=len(raw_items),
@@ -228,28 +294,47 @@ class IntelligencePipeline:
             )
 
             # 输出最终摘要
-            logger.info("\n" + "=" * 60)
-            logger.info(f"🎉 情报采集分析完成！")
-            logger.info(f"   耗时: {elapsed:.1f} 秒")
-            logger.info(f"   采集: {len(raw_items)} 条 → 清洗: {len(cleaned_items)} 条 "
-                        f"→ 重要分析: {len(deep_analyses)} 条")
-            logger.info(f"   渠道: 成功{len(channels_succeeded)} / 失败{len(channels_failed)}")
-            logger.info(f"   报告: {json_path}")
-            if html_path:
-                logger.info(f"   HTML: {html_path}")
-            logger.info(f"   下次监控: {report.next_monitoring_date}")
-            logger.info("=" * 60)
+            status_emoji = "🎉" if final_status == "success" else ("⚠️" if final_status == "partial" else "❌")
+            self._emit_log("success" if final_status == "success" else "warning",
+                f"{status_emoji} 情报采集分析完成！", step="完成", status=final_status)
+            self._emit_log("info", f"   耗时: {elapsed:.1f} 秒", step="完成")
+            self._emit_log("info", f"   采集: {len(raw_items)} 条 → 清洗: {len(cleaned_items)} 条 → 重要分析: {len(deep_analyses)} 条", step="完成")
+            self._emit_log("info", f"   渠道: 成功{len(channels_succeeded)} / 失败{len(channels_failed)}", step="完成")
+            if channels_failed:
+                self._emit_log("warning", f"   失败渠道: {', '.join(channels_failed)}", step="完成")
+            self._emit_log("info", f"   下次监控: {report.next_monitoring_date}", step="完成")
 
             return {
-                "status": "success",
+                "status": final_status,
                 "job_id": self.job_id,
                 "total_collected": len(raw_items),
                 "cleaned": len(cleaned_items),
                 "deep_analyzed": len(deep_analyses),
+                "channels_succeeded": channels_succeeded,
+                "channels_failed": channels_failed,
                 "report_path": json_path,
                 "html_path": html_path,
                 "duration_seconds": round(elapsed, 1),
             }
+
+        except JobCancelledError:
+            # 注意：不能调用 _emit_log（会再次触发取消检查），直接用 logger 和 callback
+            elapsed = time.time() - start_time
+            logger.warning("🛑 用户中断采集")
+            if self.log_callback:
+                try:
+                    self.log_callback("warning", "🛑 用户中断采集", "取消", "", "cancelled")
+                except Exception:
+                    pass
+            self.db.update_job(
+                self.job_id,
+                status="failed",
+                channels_succeeded=channels_succeeded,
+                channels_failed=channels_failed,
+                error_message="用户手动中断",
+                duration_seconds=round(elapsed, 1),
+            )
+            return {"status": "cancelled", "job_id": self.job_id, "duration_seconds": round(elapsed, 1)}
 
         except Exception as e:
             logger.exception(f"❌ 流水线执行异常: {e}")
@@ -279,56 +364,138 @@ class IntelligencePipeline:
         source_health = {}  # source_name → {"status": ..., "strategy": ..., "count": ..., "error": ...}
 
         if self.mock_mode:
-            logger.info("   🎭 使用模拟数据...")
+            self._emit_log("info", "🎭 使用模拟数据...", step="采集")
             all_items = generate_mock_data()
-            source_health = {
-                "wechat": {"status": "ok", "strategy": "mock", "count": 3, "error": None},
-                "website": {"status": "ok", "strategy": "mock", "count": 4, "error": None},
-                "news": {"status": "ok", "strategy": "mock", "count": 3, "error": None},
+            aggregated_health = {
+                "wechat:美的净水": {"channel": "wechat", "source": "美的净水", "status": "ok", "error": "", "raw_count": 3, "fallback_used": False},
+                "website:沁园": {"channel": "website", "source": "沁园", "status": "ok", "error": "", "raw_count": 2, "fallback_used": False},
+                "website:安吉尔": {"channel": "website", "source": "安吉尔", "status": "ok", "error": "", "raw_count": 1, "fallback_used": False},
+                "news:百度新闻": {"channel": "news", "source": "百度新闻", "status": "ok", "error": "", "raw_count": 4, "fallback_used": False},
             }
-            return all_items, ["wechat", "website", "news"], [], source_health
+            return all_items, ["wechat", "website", "news"], [], aggregated_health
+
+        # 输出各渠道具体监控目标
+        wechat_names = self.settings.competitor_wechat
+        website_configs = self.settings.competitor_websites
+        keywords = self.settings.industry_keywords
+
+        self._emit_log("info", f"📡 启动并行采集: {len(wechat_names)}个公众号 + {len(website_configs)}个网站 + 新闻搜索", step="采集", status="running")
 
         # 并行执行3个爬虫
         with ThreadPoolExecutor(max_workers=3) as executor:
             futures = {}
 
-            # 提交任务
             futures["wechat"] = executor.submit(
                 self.wechat_crawler.crawl,
-                self.settings.competitor_wechat,
+                wechat_names,
                 self.settings.max_news_age_days,
             )
             futures["website"] = executor.submit(
                 self.website_crawler.crawl,
-                self.settings.competitor_websites,
+                website_configs,
                 self.settings.max_news_age_days,
             )
             futures["news"] = executor.submit(
                 self.news_crawler.crawl,
-                self.settings.industry_keywords,
+                keywords,
                 self.settings.news_sources,
                 self.settings.max_news_age_days,
             )
 
-            # 收集结果（30分钟超时）
+            # 收集结果（30分钟总超时，每30秒检查一次取消信号）
             for channel, future in futures.items():
+                channel_label = {"wechat": "微信公众号", "website": "竞品官网", "news": "行业新闻"}.get(channel, channel)
                 try:
-                    items = future.result(timeout=1800)  # 30分钟
+                    self._emit_log("info", f"⏳ {channel_label} 采集中...", step="采集", source=channel, status="running")
+                    # 分段等待，每5秒检查取消信号（确保快速响应中断）
+                    items = None
+                    waited = 0
+                    chunk = 5  # 每5秒检查一次
+                    total_timeout = 1800  # 总超时30分钟
+                    while waited < total_timeout:
+                        try:
+                            items = future.result(timeout=chunk)
+                            break
+                        except TimeoutError:
+                            waited += chunk
+                            self._check_cancelled()  # 检查用户是否点了停止
+                            self._update_heartbeat(stage="collecting")  # 保持心跳
+                    if items is None:
+                        raise TimeoutError(f"{channel_label} 采集超时（>{total_timeout}秒）")
                     if items:
+                        # 按来源统计
+                        source_counts = {}
+                        for item in items:
+                            src = getattr(item, 'source_name', '未知')
+                            source_counts[src] = source_counts.get(src, 0) + 1
+
                         all_items.extend(items)
                         succeeded.append(channel)
                         source_health[channel] = {"status": "ok", "strategy": "requests", "count": len(items), "error": None}
-                        logger.info(f"   ✅ {channel}: {len(items)} 条")
+
+                        # 详细日志：每个来源的结果
+                        for src_name, count in source_counts.items():
+                            self._emit_log("success", f"✅ [{channel_label}] {src_name}: 获取 {count} 条", step="采集", source=src_name, status="success")
+                        self._emit_log("success", f"✅ {channel_label}: 共获取 {len(items)} 条", step="采集", source=channel, status="success")
                     else:
                         failed.append(channel)
                         source_health[channel] = {"status": "empty", "strategy": "requests", "count": 0, "error": "0条结果"}
-                        logger.warning(f"   ⚠ {channel}: 0 条")
+                        self._emit_log("warning", f"⚠ {channel_label}: 0 条结果", step="采集", source=channel, status="empty")
+                        # 输出该渠道每个目标的状态
+                        if channel == "wechat":
+                            for name in wechat_names:
+                                wname = name if isinstance(name, str) else name.get("name", str(name))
+                                self._emit_log("warning", f"  ⚠ 公众号「{wname}」: 未获取到数据", step="采集", source=wname, status="empty")
+                        elif channel == "website":
+                            for ws in website_configs:
+                                wname = ws.get("name", "") if isinstance(ws, dict) else str(ws)
+                                self._emit_log("warning", f"  ⚠ 网站「{wname}」: 未获取到数据", step="采集", source=wname, status="empty")
+
                 except Exception as e:
                     failed.append(channel)
-                    source_health[channel] = {"status": "failed", "strategy": "timeout", "count": 0, "error": str(e)[:100]}
+                    err_msg = str(e)[:100]
+                    source_health[channel] = {"status": "failed", "strategy": "timeout", "count": 0, "error": err_msg}
+                    self._emit_log("error", f"❌ {channel_label}: {err_msg}", step="采集", source=channel, status="failed")
+                    # 该渠道所有目标标记失败
+                    if channel == "wechat":
+                        for name in wechat_names:
+                            wname = name if isinstance(name, str) else name.get("name", str(name))
+                            self._emit_log("error", f"  ❌ 公众号「{wname}」: 采集异常", step="采集", source=wname, status="failed")
+                    elif channel == "website":
+                        for ws in website_configs:
+                            wname = ws.get("name", "") if isinstance(ws, dict) else str(ws)
+                            self._emit_log("error", f"  ❌ 网站「{wname}」: 采集异常", step="采集", source=wname, status="failed")
                     logger.error(f"   ❌ {channel}: {e}")
 
-        return all_items, succeeded, failed, source_health
+        # 汇总来源健康（从各爬虫实例收集）
+        aggregated_health = {}
+        for channel, crawler in [("wechat", getattr(self, 'wechat_crawler', None)),
+                                  ("website", getattr(self, 'website_crawler', None)),
+                                  ("news", getattr(self, 'news_crawler', None))]:
+            if crawler and hasattr(crawler, 'source_health'):
+                for src_name, health in crawler.source_health.items():
+                    key = f"{channel}:{src_name}"
+                    aggregated_health[key] = {
+                        "channel": channel, "source": src_name,
+                        "status": health.get("status", "unknown"),
+                        "error": health.get("error", ""),
+                        "raw_count": health.get("raw_count", 0),
+                        "fallback_used": health.get("fallback_used", False),
+                    }
+
+        self._emit_log("info",
+            f"📊 采集汇总: 成功渠道 {len(succeeded)}/3, 共 {len(all_items)} 条原始数据",
+            step="采集", status="success" if succeeded else "failed")
+
+        # 有被屏蔽/降级的源输出合并日志（前端只显示一条）
+        blocked_entries = {k: v for k, v in aggregated_health.items() if v["status"] in ("blocked", "degraded")}
+        if blocked_entries:
+            blocked_list = [f"{v['source']}({v['status']})" for v in blocked_entries.values()]
+            self._emit_log("warning",
+                f"🛡️ 反爬/降级源: {', '.join(blocked_list)}（已跳过，由正常源补偿）",
+                step="采集", status="warning")
+
+        return all_items, succeeded, failed, aggregated_health
 
     def _load_all_cached(self) -> list[RawItem]:
         """从缓存加载所有渠道数据（失败回退）"""
@@ -602,7 +769,7 @@ def run_scheduled():
         logger.info("定时调度已停止")
 
 
-def run_once():
+def run_once(job_id: str = None):
     """执行一次情报采集流水线"""
     setup_logging()
 
@@ -614,13 +781,31 @@ def run_once():
             logger.warning(f"配置警告: {e}")
         # 仅警告，不阻止运行（LLM API Key 可能用于仅爬取+规则分析）
 
-    pipeline = IntelligencePipeline(mock_mode=False)
+    pipeline = IntelligencePipeline(mock_mode=False, job_id_override=job_id)
     result = pipeline.run()
 
     # 清理
     pipeline.db.close()
 
     return result
+
+
+def cleanup_jobs(older_than_days: int = 7):
+    """清理异常任务记录（超时/失败的任务）"""
+    setup_logging()
+    settings = get_settings()
+    db = IntelligenceDB(settings.db_path)
+
+    # 先标记超时任务
+    timed_out = db.mark_stale_jobs_as_timeout(timeout_minutes=10)
+    logger.info(f"标记超时任务: {timed_out} 个")
+
+    # 清理旧任务
+    stats = db.cleanup_jobs(older_than_days=older_than_days)
+    logger.info(f"清理结果: failed={stats['failed']}, timeout={stats['timeout']}, raw_data={stats['raw_intelligence']}")
+
+    db.close()
+    logger.info("✅ 任务清理完成")
 
 
 # ============================================
@@ -637,6 +822,7 @@ def main():
   python -m src.main --once --mock       # 使用模拟数据测试完整流程
   python -m src.main --schedule          # 启动定时调度（每两周）
   python -m src.main --validate          # 验证配置
+  python -m src.main --cleanup-jobs      # 清理超时/失败的旧任务
         """,
     )
 
@@ -645,6 +831,7 @@ def main():
     group.add_argument("--schedule", action="store_true", help="启动定时调度")
     group.add_argument("--validate", action="store_true", help="验证配置文件")
     group.add_argument("--mock", action="store_true", help="使用模拟数据运行")
+    group.add_argument("--cleanup-jobs", action="store_true", help="清理超时和失败的旧任务记录")
 
     parser.add_argument("--config", type=str, help="指定配置文件路径")
 
@@ -698,6 +885,11 @@ def main():
     if args.once:
         result = run_once()
         return result
+
+    # 清理异常任务
+    if args.cleanup_jobs:
+        cleanup_jobs()
+        return
 
     # 定时调度
     if args.schedule:

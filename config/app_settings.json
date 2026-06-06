@@ -1,0 +1,8 @@
+{
+  "execution_schedule": "每两周周一 09:00",
+  "email_enabled": true,
+  "email_address": "2477395349@qq.com",
+  "wechat_enabled": false,
+  "wechat_webhook": "",
+  "alert_level": "medium"
+}

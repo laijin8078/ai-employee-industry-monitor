@@ -80,7 +80,7 @@ class IntelligenceDB:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 job_id TEXT UNIQUE NOT NULL,
                 execution_time TEXT NOT NULL,
-                status TEXT DEFAULT 'running',       -- running/success/failed/partial
+                status TEXT DEFAULT 'running',       -- running/success/partial/failed/timeout
                 channels_succeeded TEXT DEFAULT '[]',-- JSON array
                 channels_failed TEXT DEFAULT '[]',   -- JSON array
                 total_items_collected INTEGER DEFAULT 0,
@@ -98,7 +98,102 @@ class IntelligenceDB:
             CREATE INDEX IF NOT EXISTS idx_reports_date ON reports(report_date);
             CREATE INDEX IF NOT EXISTS idx_jobs_time ON jobs(execution_time);
         """)
+
+        # 增量迁移：为旧数据库添加新列
+        self._migrate_schema(conn)
         logger.debug("数据库表初始化完成")
+
+    def _migrate_schema(self, conn: sqlite3.Connection):
+        """增量 schema 迁移，兼容旧数据库"""
+        migrations = [
+            ("current_stage", "TEXT DEFAULT ''"),
+            ("last_heartbeat", "TEXT DEFAULT ''"),
+        ]
+        existing = {row[1] for row in conn.execute("PRAGMA table_info(jobs)")}
+        for col_name, col_def in migrations:
+            if col_name not in existing:
+                try:
+                    conn.execute(f"ALTER TABLE jobs ADD COLUMN {col_name} {col_def}")
+                    logger.info(f"数据库迁移: jobs 表添加列 {col_name}")
+                except Exception as e:
+                    logger.warning(f"数据库迁移 {col_name} 失败（可能已存在）: {e}")
+
+    # ==================== 心跳与活跃任务 ====================
+
+    def update_job_heartbeat(self, job_id: str, stage: str = "", items_collected: int = None):
+        """更新任务心跳（当前阶段、采集数量、心跳时间）"""
+        conn = self._get_conn()
+        fields = {"last_heartbeat": datetime.now().isoformat()}
+        if stage:
+            fields["current_stage"] = stage
+        if items_collected is not None:
+            fields["total_items_collected"] = items_collected
+        set_clause = ", ".join(f"{k} = ?" for k in fields)
+        values = list(fields.values()) + [job_id]
+        conn.execute(f"UPDATE jobs SET {set_clause} WHERE job_id = ?", values)
+        conn.commit()
+
+    def get_active_jobs(self) -> list[dict]:
+        """获取所有状态为 running 的任务（同一时间应有且仅有一个）"""
+        conn = self._get_conn()
+        cursor = conn.execute(
+            "SELECT * FROM jobs WHERE status = 'running' ORDER BY execution_time DESC"
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def mark_stale_jobs_as_timeout(self, timeout_minutes: int = 10) -> int:
+        """
+        将超过 N 分钟未更新心跳的 running 任务标记为 timeout。
+        返回被标记的数量。
+        """
+        conn = self._get_conn()
+        cutoff = (datetime.now() - timedelta(minutes=timeout_minutes)).isoformat()
+
+        # 优先用 last_heartbeat 判断；若为空则用 execution_time 兜底
+        cursor = conn.execute(
+            """UPDATE jobs SET status = 'timeout',
+                      error_message = '任务超时：超过 ' || ? || ' 分钟未响应'
+               WHERE status = 'running'
+                 AND (CASE WHEN last_heartbeat != ''
+                           THEN last_heartbeat
+                           ELSE execution_time
+                      END) < ?""",
+            (str(timeout_minutes), cutoff),
+        )
+        conn.commit()
+        count = cursor.rowcount
+        if count > 0:
+            logger.info(f"标记 {count} 个超时任务为 timeout（>{timeout_minutes}分钟）")
+        return count
+
+    def cleanup_jobs(self, older_than_days: int = 7) -> dict:
+        """
+        清理旧的失败/超时任务记录。
+        返回各状态清理数量。
+        """
+        conn = self._get_conn()
+        cutoff = (datetime.now() - timedelta(days=older_than_days)).isoformat()
+        stats = {}
+        for status in ["failed", "timeout"]:
+            cursor = conn.execute(
+                "DELETE FROM jobs WHERE status = ? AND execution_time < ?",
+                (status, cutoff),
+            )
+            conn.commit()
+            stats[status] = cursor.rowcount
+        # 同时清理关联的原始数据
+        total_raw = 0
+        stale_jobs = conn.execute(
+            "SELECT job_id FROM jobs WHERE status IN ('failed','timeout') AND execution_time < ?",
+            (cutoff,),
+        ).fetchall()
+        for row in stale_jobs:
+            c = conn.execute("DELETE FROM raw_intelligence WHERE job_id = ?", (row["job_id"],))
+            total_raw += c.rowcount
+        conn.commit()
+        stats["raw_intelligence"] = total_raw
+        logger.info(f"清理完成: jobs failed={stats['failed']} timeout={stats['timeout']}, raw_data={total_raw}")
+        return stats
 
     # ==================== 原始数据操作 ====================
 

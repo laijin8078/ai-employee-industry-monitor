@@ -2,8 +2,156 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ====== Impeccable-inspired Design Tokens ====== */
+:root {
+  /* Typography — system stack with excellent CJK rendering */
+  --font-sans: 'Segoe UI', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei',
+    'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+
+  /* Colors — warmer, more refined than generic SaaS blue */
+  --color-accent: oklch(0.55 0.18 260);       /* deep indigo */
+  --color-accent-soft: oklch(0.85 0.04 260);
+  --color-success: oklch(0.58 0.18 150);       /* forest green */
+  --color-warning: oklch(0.68 0.16 85);        /* warm amber */
+  --color-danger: oklch(0.54 0.22 20);         /* rich crimson */
+  --color-surface: oklch(0.985 0 0);           /* near-white */
+  --color-surface-raised: #fff;
+  --color-text: oklch(0.15 0.01 260);          /* nearly black with hint of blue */
+  --color-text-muted: oklch(0.45 0.01 260);
+
+  /* Spatial */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+/* ====== Global Reset ====== */
+* { box-sizing: border-box; }
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  margin: 0; padding: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: oklch(0.97 0.005 260);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ====== Ant Design Overrides ====== */
+
+/* Softer cards */
+.ant-card {
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid oklch(0.92 0.01 260) !important;
+  transition: box-shadow 0.2s ease;
+}
+.ant-card:hover {
+  box-shadow: var(--shadow-md);
+}
+.ant-card-head {
+  border-bottom: 1px solid oklch(0.94 0.01 260) !important;
+  font-weight: 600;
+}
+
+/* Refined buttons */
+.ant-btn-primary {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-radius: var(--radius-sm) !important;
+}
+.ant-btn-primary:hover {
+  filter: brightness(1.08);
+}
+.ant-btn {
+  border-radius: var(--radius-sm) !important;
+  font-weight: 500;
+}
+.ant-btn-danger {
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Softer table */
+.ant-table {
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.ant-table-thead > tr > th {
+  background: oklch(0.96 0.005 260) !important;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Refined tags */
+.ant-tag {
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Sidebar refinements */
+.ant-layout-sider {
+  background: oklch(0.12 0.02 260) !important;
+}
+.ant-menu-dark {
+  background: transparent !important;
+}
+.ant-menu-dark .ant-menu-item-selected {
+  background: oklch(0.28 0.05 260) !important;
+  border-radius: var(--radius-sm);
+  margin: 2px 8px !important;
+  width: auto !important;
+}
+
+/* Form elements */
+.ant-input, .ant-select-selector, .ant-picker {
+  border-radius: var(--radius-sm) !important;
+}
+.ant-input:focus, .ant-select-focused .ant-select-selector {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 2px var(--color-accent-soft) !important;
+}
+
+/* Switch */
+.ant-switch-checked {
+  background: var(--color-accent) !important;
+}
+
+/* Modal */
+.ant-modal-content {
+  border-radius: var(--radius-lg) !important;
+}
+
+/* Statistics */
+.ant-statistic-title {
+  font-size: 12px !important;
+  color: var(--color-text-muted) !important;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.ant-statistic-content {
+  font-family: var(--font-sans);
+}
+
+/* Progress bar */
+.ant-progress-bg {
+  border-radius: 100px !important;
+}
+
+/* Message/notification */
+.ant-message-notice-content {
+  border-radius: var(--radius-md) !important;
+}
+
+/* Spin */
+.ant-spin-dot-item {
+  background: var(--color-accent) !important;
 }

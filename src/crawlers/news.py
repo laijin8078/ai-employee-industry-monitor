@@ -10,6 +10,7 @@
 
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
@@ -207,6 +208,15 @@ class WechatSearchAdapter(NewsSourceAdapter):
 # 多源聚合采集器
 # ============================================
 
+# 适配器元数据（标记是否需要快速路径/降级模式）
+ADAPTER_META = {
+    "百度新闻": {"priority": "normal", "cooldown_sec": 600},
+    "Bing新闻": {"priority": "normal", "cooldown_sec": 600},
+    "搜狗新闻": {"priority": "normal", "cooldown_sec": 900},  # 搜狗反爬严格，更长冷却
+    "今日头条": {"priority": "normal", "cooldown_sec": 600},
+    "微信搜索": {"priority": "degraded", "cooldown_sec": 600},  # 微信只能搜引擎检索，降级模式
+}
+
 # 默认新闻源注册表
 DEFAULT_NEWS_ADAPTERS: list[NewsSourceAdapter] = [
     BaiduNewsAdapter(max_results=10),
@@ -256,103 +266,138 @@ class NewsCrawler(BaseCrawler):
         max_per_keyword: int = 20,
     ) -> list[RawItem]:
         """
-        多源聚合搜索行业新闻。
+        多源并行聚合搜索行业新闻。
 
-        Args:
-            keywords: 行业关键词
-            sources: (已废弃，改用内置 adapters)
-            time_range_days: 时间范围
-            max_per_keyword: 每个关键词最大结果数
-
-        Returns:
-            去重后的 RawItem 列表
+        优化：adapter 级并行 + 短延迟 + 早停 + 精简竞品 query
         """
         if time_range_days is None:
             time_range_days = self.time_range_days
 
         cutoff_date = datetime.now() - timedelta(days=time_range_days)
-        all_items = []
-        source_stats = {}
+        all_items: list[RawItem] = []
+        source_stats: dict[str, int] = {}
 
-        # 合并关键词：行业关键词 + 竞品多 query
-        all_queries = list(keywords)
+        # === 精简查询：行业关键词 + 竞品核心 query（去重）===
+        all_queries = list(dict.fromkeys(keywords))  # 保留顺序去重
         for comp, queries in self.competitor_queries.items():
-            all_queries.extend(queries)
+            # 每个竞品只取前3个最有区分度的 query
+            all_queries.extend(queries[:3])
 
+        active_adapters = [a for a in self.adapters if not self.is_source_blocked(a.name)]
         logger.info(
-            f"[新闻聚合] {len(self.adapters)} 个源 × "
-            f"{len(all_queries)} 个 query（行业{len(keywords)} + 竞品{len(all_queries)-len(keywords)}）"
+            f"[新闻聚合] {len(active_adapters)}个源 × {len(all_queries)}个query "
+            f"(行业{len(keywords)} + 竞品{len(all_queries)-len(keywords)}) [并行模式]"
         )
 
-        # 对每个 query 并行查询所有源
-        for query in all_queries:
-            for adapter in self.adapters:
-                try:
-                    url = adapter.build_url(query)
-                    html = self.fetch(url)
-                    if html:
-                        items = adapter.parse_results(html, adapter.name, cutoff_date)
-                        all_items.extend(items)
-                        source_stats[adapter.name] = source_stats.get(adapter.name, 0) + len(items)
-                except Exception as e:
-                    logger.debug(f"[{adapter.name}] 搜索失败 '{query}': {e}")
+        # === 第一阶段：并行采集主要 query ===
+        target_results = 30  # 收集够 30 条就停
+        with ThreadPoolExecutor(max_workers=min(len(active_adapters), 4)) as pool:
+            # 对每个 query，并行投递到所有 adapter
+            for batch_idx in range(0, len(all_queries), 4):
+                batch_queries = all_queries[batch_idx:batch_idx + 4]
+                futures = {}
+                for q in batch_queries:
+                    for adapter in active_adapters:
+                        if self.is_source_blocked(adapter.name):
+                            continue
+                        url = adapter.build_url(q)
+                        futures[pool.submit(
+                            self._fetch_and_parse, adapter, url, cutoff_date
+                        )] = (adapter.name, q)
 
-        # === 补偿策略 ===
-        total = len(all_items)
-        if total < 10:
-            logger.warning(f"[新闻聚合] 结果偏少({total}条)，触发补偿...")
-            # 补偿1: 扩展关键词（用通用净水器关键词）
-            extra_keywords = [
-                "净水器", "直饮水机", "商用净水", "饮水设备",
-                "净水行业", "水质净化", "净水市场",
-            ]
-            for kw in extra_keywords[:5]:
-                for adapter in self.adapters[:2]:  # 只用最快的2个源
+                for future in as_completed(futures):
+                    adapter_name, query = futures[future]
                     try:
-                        url = adapter.build_url(kw)
-                        html = self.fetch(url)
-                        if html:
-                            items = adapter.parse_results(html, adapter.name, cutoff_date)
+                        items = future.result(timeout=15)
+                        if items:
                             all_items.extend(items)
+                            source_stats[adapter_name] = source_stats.get(adapter_name, 0) + len(items)
                     except Exception:
                         pass
 
-            # 补偿2: 放宽到30天
-            if len(all_items) < 10:
-                logger.info("[新闻聚合] 补偿2: 放宽时效到30天")
-                cutoff_30d = datetime.now() - timedelta(days=30)
-                for kw in keywords[:3]:
-                    for adapter in self.adapters[:2]:
-                        try:
-                            url = adapter.build_url(kw)
-                            html = self.fetch(url)
-                            if html:
-                                items = adapter.parse_results(html, adapter.name, cutoff_30d)
-                                all_items.extend(items)
-                        except Exception:
-                            pass
+                # 早停：已有足够结果就跳出
+                if len(all_items) >= target_results:
+                    logger.info(f"[新闻聚合] 已达目标({target_results}条)，提前结束采集")
+                    break
 
-            # 补偿3: 加载缓存
-            if len(all_items) < 10:
-                logger.info("[新闻聚合] 补偿3: 加载近期缓存")
-                cached = self.load_cached_data("news_all")
-                if cached:
-                    all_items.extend(cached)
+        # === 补偿：并行扩展关键词 ===
+        if len(all_items) < 10:
+            logger.warning(f"[新闻聚合] 结果偏少({len(all_items)}条)，并行补偿...")
+            extra_queries = ["净水器", "直饮水机", "商用净水", "饮水设备", "净水行业"]
+            with ThreadPoolExecutor(max_workers=min(len(active_adapters), 3)) as pool:
+                futures = {}
+                for kw in extra_queries[:4]:
+                    for adapter in active_adapters[:3]:
+                        if self.is_source_blocked(adapter.name):
+                            continue
+                        url = adapter.build_url(kw)
+                        futures[pool.submit(
+                            self._fetch_and_parse, adapter, url, cutoff_date
+                        )] = (adapter.name, kw)
+                for future in as_completed(futures):
+                    try:
+                        items = future.result(timeout=15)
+                        if items:
+                            all_items.extend(items)
+                            source_stats[futures[future][0]] = source_stats.get(futures[future][0], 0) + len(items)
+                    except Exception:
+                        pass
+
+        # === 兜底：加载缓存 ===
+        if len(all_items) < 10:
+            logger.info("[新闻聚合] 加载近7天缓存兜底")
+            cached = self.load_cached_data_recent("news_all", max_age_days=7)
+            if cached:
+                all_items.extend(cached)
 
         # 去重
         unique = self._dedup_by_title(all_items)
 
-        # 记录来源统计
+        # 记录来源健康
         for adapter in self.adapters:
             count = source_stats.get(adapter.name, 0)
-            logger.info(f"   [{adapter.name}] {count} 条")
+            meta = ADAPTER_META.get(adapter.name, {})
+            if self.is_source_blocked(adapter.name):
+                existing = self.source_health.get(adapter.name, {})
+                self.record_source_health(adapter.name, "blocked",
+                    count, error=existing.get("error", "反爬拦截"), fallback_used=False)
+            elif count > 0:
+                self.record_source_health(adapter.name, "ok", count)
+            elif meta.get("priority") == "degraded":
+                self.record_source_health(adapter.name, "degraded", 0,
+                    error="降级源无结果", fallback_used=False)
+            else:
+                self.record_source_health(adapter.name, "empty", 0)
 
-        # 缓存
+        blocked_names = [a.name for a in self.adapters if self.is_source_blocked(a.name)]
+        if blocked_names:
+            logger.info(f"[新闻聚合] 反爬屏蔽源: {', '.join(blocked_names)}（已跳过）")
+
+        for adapter in self.adapters:
+            count = source_stats.get(adapter.name, 0)
+            tag = ""
+            if self.is_source_blocked(adapter.name):
+                tag = " 🛡️"
+            elif ADAPTER_META.get(adapter.name, {}).get("priority") == "degraded" and count == 0:
+                tag = " ⚠降级"
+            logger.info(f"   [{adapter.name}] {count} 条{tag}")
+
         if unique:
             self.cache_raw_data(unique, "news_all")
 
         logger.info(f"[新闻聚合] 总计: {len(all_items)}条原始 → {len(unique)}条去重后")
         return unique
+
+    def _fetch_and_parse(
+        self, adapter: NewsSourceAdapter, url: str, cutoff_date: datetime
+    ) -> list[RawItem]:
+        """单个 adapter 的请求+解析（供并行调用）。每个请求前检查取消信号。"""
+        if self.cancel_check and self.cancel_check():
+            return []
+        html = self.fetch_fast(url, source_name=adapter.name)
+        if html:
+            return adapter.parse_results(html, adapter.name, cutoff_date)
+        return []
 
     def _dedup_by_title(self, items: list[RawItem]) -> list[RawItem]:
         """基于标题前缀相似度快速去重"""

@@ -9,6 +9,7 @@ import asyncio
 import json
 import re
 from typing import Optional
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
 
 from loguru import logger
 
@@ -34,6 +35,7 @@ class LLMClient:
         max_tokens: int = 4096,
         temperature: float = 0.3,
         max_concurrent: int = 5,
+        api_timeout: int = 30,
     ):
         """
         Args:
@@ -47,6 +49,9 @@ class LLMClient:
         self.max_tokens = max_tokens
         self.temperature = temperature
         self.max_concurrent = max_concurrent
+
+        # 单次 API 调用超时（秒），防止请求长时间阻塞
+        self.api_timeout = api_timeout
 
         self._client = Anthropic(api_key=api_key) if (api_key and _has_anthropic) else None
         self._semaphore = asyncio.Semaphore(max_concurrent)
@@ -85,26 +90,42 @@ class LLMClient:
             max_tokens = self.max_tokens
 
         try:
-            message = self._client.messages.create(
-                model=self.model,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                system=system_prompt,
-                messages=[{"role": "user", "content": user_message}],
-            )
+            # 设置超时防止长时间卡住（连接10s，读取30s）
+            import httpx
+            try:
+                # 使用线程池执行同步 SDK 调用，并设置超时以防阻塞
+                def _call():
+                    return self._client.messages.create(
+                        model=self.model,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                        system=system_prompt,
+                        messages=[{"role": "user", "content": user_message}],
+                    )
 
-            # 提取文本内容
-            content = message.content
-            if isinstance(content, list):
-                text = "".join(
-                    block.text if hasattr(block, "text") else str(block)
-                    for block in content
-                )
-            else:
-                text = str(content)
+                with ThreadPoolExecutor(max_workers=1) as ex:
+                    future = ex.submit(_call)
+                    try:
+                        message = future.result(timeout=self.api_timeout)
+                    except FuturesTimeout:
+                        logger.error(f"LLM 调用超时（>{self.api_timeout}s）")
+                        return None
 
-            return text
+                # 提取文本内容
+                content = message.content
+                if isinstance(content, list):
+                    text = "".join(
+                        block.text if hasattr(block, "text") else str(block)
+                        for block in content
+                    )
+                else:
+                    text = str(content)
 
+                return text
+
+            except Exception as e:
+                logger.error(f"LLM 调用失败: {e}")
+                return None
         except Exception as e:
             logger.error(f"LLM 调用失败: {e}")
             return None
