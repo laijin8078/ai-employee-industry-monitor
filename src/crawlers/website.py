@@ -1,29 +1,42 @@
 """
-竞品官网爬虫
-===========
-爬取竞品官网的新闻/动态页面，
-支持静态 HTML 解析和 Playwright 动态页面。
+竞品官网爬虫（两级策略）
+========================
+策略：requests 优先 → Playwright 浏览器兜底 → 缓存降级
+- 快的网站用 requests（安吉尔），不浪费浏览器资源
+- 难采的网站（美的/沁园 SSL 阻断）自动启用 Playwright
+- Playwright 失败也不阻塞流水线
 """
 
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Optional
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 from loguru import logger
 
 from .base import BaseCrawler
+from .browser_fetcher import BrowserFetcher
 from ..models.schemas import RawItem
 
 
 class WebsiteCrawler(BaseCrawler):
-    """竞品官网新闻采集器"""
+    """竞品官网新闻采集器（两级策略）"""
 
     CHANNEL = "website"
 
     def __init__(self, settings, cache_dir: Path):
         super().__init__(settings, cache_dir)
         self.time_range_days = settings.max_news_age_days
+        self._browser: Optional[BrowserFetcher] = None
+
+    @property
+    def browser(self) -> BrowserFetcher:
+        """懒加载浏览器采集器"""
+        if self._browser is None:
+            headless = self.crawler_config.get("headless", True)
+            self._browser = BrowserFetcher(headless=headless, timeout_ms=30000)
+        return self._browser
 
     def crawl(
         self,
@@ -31,14 +44,11 @@ class WebsiteCrawler(BaseCrawler):
         time_range_days: int = None,
     ) -> list[RawItem]:
         """
-        爬取竞品官网新闻列表。
+        爬取竞品官网新闻列表（两级策略）。
 
         Args:
-            sites: 网站列表 [{"name": "美的净水", "url": "https://water.midea.com/news/"}]
+            sites: [{"name": "美的净水", "url": "https://water.midea.com/news/"}]
             time_range_days: 时间范围
-
-        Returns:
-            RawItem 列表
         """
         if time_range_days is None:
             time_range_days = self.time_range_days
@@ -46,85 +56,117 @@ class WebsiteCrawler(BaseCrawler):
         cutoff_date = datetime.now() - timedelta(days=time_range_days)
         all_items = []
 
-        logger.info(f"[官网爬虫] 开始采集 {len(sites)} 个网站")
+        logger.info(f"[官网爬虫] 开始采集 {len(sites)} 个网站（requests优先→Playwright兜底）")
 
         for site in sites:
             site_name = site["name"]
             site_url = site["url"]
 
-            try:
-                items = self._crawl_site(site_name, site_url, cutoff_date)
-                all_items.extend(items)
-                logger.info(f"[官网爬虫] {site_name}: 获取 {len(items)} 条新闻")
-            except Exception as e:
-                logger.error(f"[官网爬虫] {site_name} 爬取失败: {e}")
-                # 缓存回退
-                cached = self.load_cached_data(f"{self.CHANNEL}_{site_name}")
-                if cached:
-                    logger.info(f"[官网爬虫] {site_name}: 使用缓存数据（{len(cached)}条）")
-                    all_items.extend(cached)
+            items = self._crawl_with_fallback(site_name, site_url, cutoff_date)
+            all_items.extend(items)
+            logger.info(f"[官网爬虫] {site_name}: {len(items)} 条")
 
         if all_items:
             self.cache_raw_data(all_items, f"{self.CHANNEL}_all")
 
         return all_items
 
-    def _crawl_site(
-        self, site_name: str, base_url: str, cutoff_date: datetime
+    def _crawl_with_fallback(
+        self, site_name: str, site_url: str, cutoff_date: datetime
     ) -> list[RawItem]:
-        """爬取单个网站的新闻列表页"""
-        html = self.fetch(base_url)
-        if not html:
-            logger.warning(f"[官网爬虫] 无法访问 {base_url}")
-            return []
+        """
+        两级采集策略：
+        1. 先尝试 requests（快，无浏览器开销）
+        2. requests 失败/内容为空 → Playwright 浏览器兜底
+        3. Playwright 也失败 → 使用缓存
+        """
+        strategy_used = "requests"
 
+        # === Level 1: requests ===
+        html = self.fetch(site_url)
+        if html and len(html) > 1000:
+            items = self._parse_news_html(html, site_name, site_url, cutoff_date)
+            if items:
+                logger.debug(f"   [{site_name}] requests 成功: {len(items)} 条")
+                return items
+
+        # === Level 2: Playwright 浏览器兜底 ===
+        strategy_used = "playwright"
+        if self.browser.is_available:
+            logger.info(f"   [{site_name}] requests 失败，启用 Playwright 浏览器兜底...")
+            result = self.browser.fetch_html(site_url, wait_selector=None)
+            if result["html"] and len(result["html"]) > 1000:
+                items = self._parse_news_html(
+                    result["html"], site_name, site_url, cutoff_date
+                )
+                if items:
+                    logger.info(f"   [{site_name}] Playwright 成功: {len(items)} 条")
+                    return items
+
+            logger.warning(f"   [{site_name}] Playwright 也失败: {result.get('error', '未知')}")
+            strategy_used = f"playwright_failed: {result.get('error', '')[:80]}"
+        else:
+            logger.info(f"   [{site_name}] Playwright 未安装，跳过浏览器兜底")
+
+        # === Level 3: 缓存降级 ===
+        cached = self.load_cached_data(f"{self.CHANNEL}_{site_name}")
+        if cached:
+            logger.info(f"   [{site_name}] 使用缓存数据（{len(cached)}条）")
+            # 标记来源状态
+            for c in cached:
+                c.raw_metadata["source_health"] = strategy_used
+            return cached
+
+        logger.warning(f"   [{site_name}] 所有策略均失败")
+        return []
+
+    def _parse_news_html(
+        self, html: str, site_name: str, base_url: str, cutoff_date: datetime
+    ) -> list[RawItem]:
+        """解析网站新闻列表页 HTML"""
         soup = BeautifulSoup(html, "lxml")
         items = []
 
-        # 尝试多种常见的新闻列表选择器
+        # 多种常见的新闻列表选择器
         news_selectors = [
-            ".news-item",
-            ".news-list li",
-            ".article-list li",
-            ".list-item",
-            ".news-box .item",
-            "article",
-            ".dynamic-list > div",
-            ".content-list > li",
-            ".post-item",
+            ".news-item", ".news-list li", ".article-list li", ".list-item",
+            ".news-box .item", "article", ".dynamic-list > div",
+            ".content-list > li", ".post-item", ".news-list .item",
+            "a[href*='news']", "a[href*='detail']", "a[href*='article']",
         ]
 
         news_elements = []
         for selector in news_selectors:
-            news_elements = soup.select(selector)
-            if news_elements:
-                break
+            found = soup.select(selector)
+            if len(found) > len(news_elements):
+                news_elements = found
 
-        # 如果都没匹配到，尝试找所有包含链接的元素
         if not news_elements:
-            logger.debug(f"[官网爬虫] {site_name}: 未匹配标准选择器，尝试通用解析")
-            news_elements = soup.select("a[href*='news'], a[href*='detail'], a[href*='article']")
+            # 通用：找所有带链接且有足够文本的元素
+            news_elements = [
+                el for el in soup.select("a[href]")
+                if len(el.get_text(strip=True)) > 8
+            ]
 
         for element in news_elements:
             try:
                 item = self._parse_news_element(element, site_name, base_url, cutoff_date)
                 if item:
                     items.append(item)
-            except Exception as e:
-                logger.debug(f"解析新闻条目失败: {e}")
+            except Exception:
+                continue
 
         return items
 
     def _parse_news_element(
-        self,
-        element,
-        site_name: str,
-        base_url: str,
-        cutoff_date: datetime,
-    ) -> RawItem | None:
-        """解析单个新闻条目 HTML 元素"""
+        self, element, site_name: str, base_url: str, cutoff_date: datetime,
+    ) -> Optional[RawItem]:
+        """解析单个新闻条目"""
         # 标题
-        title_tag = element.select_one("a, h2, h3, h4, .title, .news-title")
+        title_tag = element
+        if element.name != "a":
+            title_tag = element.select_one("a, h2, h3, h4, .title, .news-title")
+
         if title_tag and title_tag.name == "a":
             title = title_tag.get_text(strip=True)
             url = urljoin(base_url, title_tag.get("href", ""))
@@ -133,26 +175,29 @@ class WebsiteCrawler(BaseCrawler):
             link = element.select_one("a")
             url = urljoin(base_url, link.get("href", "")) if link else base_url
         else:
-            # 尝试从纯文本提取
-            text = element.get_text(strip=True)
-            if len(text) < 5:
-                return None
-            title = text[:100]
-            url = base_url
+            title = element.get_text(strip=True)[:100]
+            url = element.get("href", base_url) if hasattr(element, "get") else base_url
 
-        if not title or len(title) < 3:
+        if not title or len(title) < 5:
             return None
 
-        # 摘要
-        summary_tag = element.select_one(".summary, .desc, p, .content, .abstract")
-        summary = summary_tag.get_text(strip=True) if summary_tag else ""
+        # 过滤无关内容
+        skip_words = ["关于我们", "联系我们", "公司简介", "法律声明", "隐私政策"]
+        if any(w in title for w in skip_words):
+            return None
 
-        # 发布时间
-        time_tag = element.select_one(".time, .date, time, .pub-date, span[class*='time'], span[class*='date']")
+        # 摘要和日期
+        parent = element.parent if hasattr(element, "parent") and element.parent else element
+        full_text = parent.get_text(strip=True) if hasattr(parent, "get_text") else title
+        summary = full_text[:300]
+
+        time_tag = (
+            element.select_one(".time, .date, time, .pub-date, span[class*='time'], span[class*='date']")
+            if hasattr(element, "select_one") else None
+        )
         time_str = time_tag.get_text(strip=True) if time_tag else ""
         publish_date = self._parse_news_time(time_str)
 
-        # 时效性检查
         if publish_date and publish_date < cutoff_date:
             return None
 
@@ -170,17 +215,8 @@ class WebsiteCrawler(BaseCrawler):
         """解析新闻发布时间"""
         if not time_str:
             return datetime.now()
-
         time_str = time_str.strip()
-
-        for fmt in [
-            "%Y-%m-%d",
-            "%Y-%m-%d %H:%M",
-            "%Y/%m/%d",
-            "%Y年%m月%d日",
-            "%m-%d",
-            "%m月%d日",
-        ]:
+        for fmt in ["%Y-%m-%d", "%Y-%m-%d %H:%M", "%Y/%m/%d", "%Y年%m月%d日", "%m-%d", "%m月%d日"]:
             try:
                 dt = datetime.strptime(time_str, fmt)
                 if dt.year == 1900:
@@ -188,5 +224,4 @@ class WebsiteCrawler(BaseCrawler):
                 return dt
             except ValueError:
                 continue
-
         return datetime.now()

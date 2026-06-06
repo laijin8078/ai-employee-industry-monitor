@@ -1,42 +1,1770 @@
 {
-  "cached_at": "2026-06-06T14:15:16.458505",
+  "cached_at": "2026-06-06T16:14:06.663986",
   "channel": "news_all",
-  "count": 3,
+  "count": 147,
   "items": [
     {
       "source_channel": "news",
-      "source_name": "今日头条",
-      "title": "中方始终将老挝视作周边外交重要方向",
-      "url": "https://sou.toutiao.com/search/jump?url=https%3A%2F%2Fwww.toutiao.com%2Farticle%2F7647889614103790118%2F%3Fchannel%3D%26source%3Dnews&aid=4916&jtoken=",
+      "source_name": "百度新闻",
+      "title": "净水器滤芯越多越好吗?新国标给出解答",
+      "url": "https://www.ccn.com.cn/Content/2024/04-08/1939107245.html",
       "content": "",
-      "publish_date": "2026-06-06T14:12:26.449672",
+      "publish_date": "2026-06-06T15:52:14.715799",
       "raw_metadata": {
-        "source": "今日头条",
-        "search_keyword": "净水器新国标"
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "净水机新国标实施,净水器额定总净水量不得低于2000升",
+      "url": "https://www.tmtpost.com/nictation/6166565.html",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:14.716187",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "净水机新规出台迎“首考” 家电院公布首批新国标测试产品",
+      "url": "https://tech.ifeng.com/a/20171206/44793748_0.shtml",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:14.716487",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "净水器新国标实行月余乱象依旧 业内吁统一标准",
+      "url": "https://www.chinanews.com.cn/sh/2014/09-18/6603544.shtml",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:14.716779",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "2026年口碑TOP10家用净水器:高性价比长效机型,净水器过滤器家用",
+      "url": "https://stock.10jqka.com.cn/20260601/c677116734.shtml",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:14.717083",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "全国十大品牌净水器排名2026|主流机型深度实测与行业解析",
+      "url": "https://www.ithome.com/0/958/163.htm",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:14.717379",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "推荐性国家标准《家用和类似用途饮用水处理装置》4月1日实施",
+      "url": "https://www.cqn.com.cn/zj/content/2024-04/09/content_9044088.htm",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:14.717730",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "行业新闻_家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291NxYXx9S_4uf95-q1HMnru0a19wcpFLyET9HD0DjBwwWLrot8UM9Olxri2jTBr9OJ8.",
+      "content": "天极网2026年5月21日",
+      "publish_date": "2026-06-06T15:52:34.216124",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "_导购家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291PFQF4nvrpIghU8lWO3ABIV3nZD-Xogz9vl3Qq9WH_18LbAp6VRqT6Q",
+      "content": "天极网2026年4月30日",
+      "publish_date": "2026-06-06T15:52:34.216462",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "重磅官宣｜7月1日净水器新国标强制执行！近40%整机直接淘汰",
+      "url": "http://mp.weixin.qq.com/s?src=11&timestamp=1780732355&ver=6765&signature=p7ka54fOVkuHW-fZFK3SJK3n4HSTESSrkikFZW7T5Poas60fWImDwfMkn1XaOI4x6lcAB6ED9QcxjcHaVm*GBVLFRsXRNBozPe18UbQTKfSRVACzAdAmWKrqEle*8B9d&new=1",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:34.216828",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "选购指南_家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291NxYXx9S_4uf95-q1HMnru0nAWBIKL0dvFmjtVGcN6TU2OhQIkX07Nmri2jTBr9OJ8.",
+      "content": "天极网2026年5月13日",
+      "publish_date": "2026-06-06T15:52:34.217129",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "_新闻简讯冰箱_厨卫电器_家电频道_天极网",
+      "url": "/link?url=hedJjaC291PFQF4nvrpIghU8lWO3ABIVB7xEbtnRSIqNVnIpuBokcGXcV-K5ENzn",
+      "content": "天极网2026年5月16日",
+      "publish_date": "2026-06-06T15:52:34.217481",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "聚焦专项领域发展 提升采购专业化 《净水设备工程招标策划白皮书》...",
+      "url": "/link?url=6IqLFeTuIygpzGvkFoAXG_gQsr6UtAEFIIkXrqQjH3brTgHsdWxCnZnOzrWyhF8a8gW0QHT_ZCA.",
+      "content": "新浪地产网2026年5月19日",
+      "publish_date": "2026-06-06T15:52:34.217719",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "数字家电_天极网_专业IT门户",
+      "url": "/link?url=hedJjaC291O5Ry8oMe9cHbEUjpumoCW8YN0HZ3Zr9UhgEJUp21e7r4YwuIM99uFereaVHN88tHY.",
+      "content": "天极网2026年5月26日",
+      "publish_date": "2026-06-06T15:52:34.217939",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "最新更新数码_天极网2010暑促专区--笔记本,一体机,手机,数码相...",
+      "url": "/link?url=hedJjaC291O5Ry8oMe9cHbEUjpumoCW8_EII2byXLUVotXOt_u0dL3zeTgvqjrCF50dxfN50DVncnLXg1H9NOQ..",
+      "content": "天极网2026年5月19日",
+      "publish_date": "2026-06-06T15:52:34.218157",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "黄页--文章列表",
+      "url": "/link?url=hedJjaC291PkHmc7cS7ZXbjG5_LvRx2_q4rnSe51_a084Z3J1tKSNg..",
+      "content": "泡泡网2026年5月15日",
+      "publish_date": "2026-06-06T15:52:34.218363",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "【即时】新闻中心业界资讯_第2页新闻中心-中关村在线",
+      "url": "/link?url=hedJjaC291MhNCaDmeQmUSdQRoztLvNXDjjRo9upLFljpoJOYlr3V7bAp6VRqT6Q",
+      "content": "中关村在线2026年5月28日",
+      "publish_date": "2026-06-06T15:52:34.218520",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
       }
     },
     {
       "source_channel": "news",
       "source_name": "今日头条",
-      "title": "净水器行业新增两项新国标|163-手机网易网",
-      "url": "https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&aid=4916&jtoken=",
+      "title": "中老友谊历久弥坚启新程",
+      "url": "https://sou.toutiao.com/search/jump?url=https%3A%2F%2Fwww.toutiao.com%2Farticle%2F7648049178471465487%2F&aid=4916&jtoken=",
       "content": "",
-      "publish_date": "2026-06-06T14:12:26.486693",
+      "publish_date": "2026-06-06T15:52:45.147475",
       "raw_metadata": {
         "source": "今日头条",
-        "search_keyword": "净水器新国标"
+        "adapter": "toutiao"
       }
     },
     {
       "source_channel": "news",
-      "source_name": "今日头条",
-      "title": "净水器行业新增两项新国标|163-手机网易网",
-      "url": "https://sou.toutiao.com/search/jump?url=http%3A%2F%2Fwww.163.com%2Fdy%2Farticle%2FE26PHQLJ051188PA.html&aid=4916&jtoken=",
+      "source_name": "微信搜索",
+      "title": "Friend,您家的直饮水机符合新国标吗?",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrJjIUNvlhAaEhRNkkJ1MPEl1t72hqpFkoWGxPjG0v5qaMhh4jOLsCkL7MS8v1CqjUONUFQrG308iyS_XMkUXc_93SPFpa6tRvZwd8_JoS6i-K4zm5Yfxxkw0h72ah5i-mAivCM7AVE59d7CW-59vJ53c3Qd4anGWqwmAX-8x-qspjsiyFUt6oTlJ8bUSRDnZ3kIVrvfViPE9Ko8QqOW_oio6xaZlCUWp9gnqos-i8Cwmq",
       "content": "",
-      "publish_date": "2026-06-06T14:12:26.493174",
+      "publish_date": "2026-06-06T15:52:51.210237",
       "raw_metadata": {
-        "source": "今日头条",
-        "search_keyword": "净水器新国标"
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "新国标实施,净水器功能参数怎么标?",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrGksCQTocXWADF2jonoyHGoMnwWs1eMXrBIsujvL7X5xBfBCdfOy-3sWgjhZwdwwOss9CmtQjLkkldLc8Cre3moKk-09HHfAZ_sQsq2iLTJE5yX_7rcDQmQvdyb5B-sCOS2f5_nnF3UGJjE8G2avYfLe503-TUUJGnk9OXK8yuJKTa8yJ5lPLgxHkxwM6XJ3Op7GSj-tQV3ykxtk_P5RC6lmmelF3hQozqxKitj6Z14GK",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.212048",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "新水效国标正式实施,家乐事多款产品达到一级水效标准",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrI1OIK--58RZ27A343St_3CXejz5w9h9hJcGz8QQf5E4n2CdEq2IlZQOU8JFNeEBVlqoX1G8c4oUDDgUmElkcoL5OXsAnec57R3bJx22IrUSpRzKCb_gIDBa6vkQB-V_fIPO-Blgl8SIR7mixWpJgvuzlIm2P33lE_dDvzxIFU-4QzoS_Cq9SM40CDH6sMOkE8PetNTEHOmLCpujXDv-6Evc9MK9c0Dm9aJPvVvujqDja",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.212941",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "国家淘汰了一批不合格净水器,你中招了吗?",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrIrYge68cjoxgmeQEiC3ibgPHHGOx_m79URvyTBl9maW1j-tVfZXVlKxd9bqA8WtkoCDbJ67Zwl3kEsTgWu8TmuIH8s0U6jGXkAyoA_tsq8CHaJz4T_yIw2L_IM3b7AO_E3NwHnEVbOt0hYIEAbej_KNGbvUPVkpetgQWb1nBNGe2o6A113zXQjyEhujPmzUNJsg71l4LzAwLa2B0K-HiIqPgj3K9TCCyq6941QIroQa_",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.213784",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "《家用和类似用途饮用水处理滤芯》即将实施",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrGksCQTocXWADF2jonoyHGoL7g1ksmmSaPIvqBmd3BA3MxuBpuZYyZ8vtCoCUxebTXvl4hvVX1ZXT5852A2_wKIjAWrbCQ1EnMD1I6pSt3G1D_biAVOPJ8_TMXWxyhyFPoX8frmx4Q6LDnAjq-lI-T7Jc1F-MK-xZD_DurBVJsSt19fcLK7u_oeGcWs5yNAQeqBHUswwmFIipLoouXicrgWCtKyaza0hBmkaRbHv0G-5a",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.214537",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "今天(7月1日)起,此类净水器已被淘汰!别买错了……",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrHjYVVKzzqnxKtXv7DMERues_bqmMCmH_nXAm512ul1LETI-8T_L7jdPMrAbs5I5CDDaLgPOigrXTF8VWYYMqXs54L9yxvlVo_qeerg9bq8b7aOlXCSwB2rW-E1NB1u0wG-omq0B_zB7w3tlvpWUsKO7kiP5tlYKmjJNq9AJG2NCePTdVwL3-UCh1-FnJSLfrbMkTPPDbmMyqQkHg8AyyP_1PeZFReVvZ043E0JkmtzHa",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.215267",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "净水机水效等级标准来了!听听专家说了啥",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrIDB3xtZO_rwR9bMtXrXV6DG2laiq6w1vC6VLxakRTJr7CP51GZLBnm6-DmI61KpoT9_48ZTe-XfHfMmspdzoGIUb5CbgM3b_TopO3yph5xzuyf8PwjSn-3SIXXWJKL-VYkHeI89K2XjwghjCNxjmfZ-WtMojUthK4qY1XCfiecQIoHuhN4oR7ZwtW_y0x4tZCe_eRKdQbefurs-9QQfYJSq3O5Yj6S6ytYcBX22Nipxq",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.216297",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "国家明令:此类净水器已被禁止销售!千万不要再买了!",
+      "url": "http://www.baidu.com/link?url=XiV5P-ezudnQ2qm-7ebCOfEulYCxi1KNevqds6flvrJXc9GmjBWHcPGQ8XvK4EdcD8Eq8ej2uQsI871X8gFLbPrUN4LEMUmNiaFQhS888tipR-4pgQ7UvJCZTUMRTz6pHq_-AgVhnw-Jdqe3zIpIm-0Za5BV3nwd55Ac1E4P_y_G-RQOpRBsYGbeKNVPNxRQEqdmmqD-9YKMsWTal7kSFiI8IXTozKwMUA8A4FHqeITbmnglr3QeC7cS3CyGD6IMnIV_JsNPuSP57G3UAKt2Iq",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:51.217037",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "东莞市水乡未来学校管道直饮水系统采购项目招标公告",
+      "url": "http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202604/t20260409_26379687.htm",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:58.552888",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "西乡县职业技术高中西乡职中——一中教学点直饮水机采购项目竞争...",
+      "url": "http://www.ccgp.gov.cn/cggg/dfgg/jzxtpgg/202512/t20251215_25929344.htm",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:58.553388",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "新设立一体化直饮水机维护服务(第二次)(JLP25C00116)公开招标公告",
+      "url": "http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202512/t20251205_25865841.htm",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:58.553841",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "城市更新“十五五”规划出炉 威派格有望充分受益",
+      "url": "https://finance.eastmoney.com/a/202605293754623684.html",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:58.554401",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "评级研报丨国内特高压+海外电网投资加速,这一上游产品有望充分...",
+      "url": "https://www.21jingji.com/article/20240529/herald/4740a5b8d357c780a58e37614d01e693.html",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:58.554947",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "速览!关于疫情的最新热点,今天这场新闻发布会都回应了",
+      "url": "https://www.cqcb.com/hot/2020-02-14/2177356_pc.html",
+      "content": "",
+      "publish_date": "2026-06-06T15:52:58.555365",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "政策引爆千亿增量:教育部四部门发文,校园直饮水迎来强制普及黄金...",
+      "url": "/link?url=hedJjaC291Ok-E9WTygIKll2MrIoS4vq5BTt3-HXx8-wn6575fU7gK3mlRzfPLR2",
+      "content": "搜狐2026年6月1日",
+      "publish_date": "2026-06-06T15:53:14.298816",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "海天股份股票_数据_资料_信息 — 东方财富网",
+      "url": "/link?url=WaeIF24cBDu3hP1y3b24hf4T17ln4fKRqmptDq7Ikymimy6fVb4A66m-bUOiN4XD",
+      "content": "东方财富网2026年5月30日",
+      "publish_date": "2026-06-06T15:53:14.299165",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "2026年中国管道直饮水行业发展现状：政策规范、技术革新与全域普惠的高质量发展新征程",
+      "url": "http://mp.weixin.qq.com/s?src=11&timestamp=1780732395&ver=6765&signature=KeoW708Ar88tR*y98jGEt0BIXJVNJkejRUfVrkAVD9XbJZpi95sUS1df7y*YHaRBjUJoggcz2SMifa3BvFrWH*WIlrR3UplKQwJhfaR2Gc0S2U81NhYG4I*EvIvQJa64&new=1",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:14.299854",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "省委办公厅、省政府办公厅印发《关于加快国家省级水网先导区建设全...",
+      "url": "/link?url=DSOYnZeCC_rlFxfs11xdfFEjO9eGopdE9nTK5PokL-DOZ8SWv6vp5y3-_PpT-JXHQzOcV7Hfbjss0wzcsgXgag..",
+      "content": "山东省人民政府2026年5月21日",
+      "publish_date": "2026-06-06T15:53:14.300167",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "教育部办公厅等四部门关于印发《中小学基本办学条件底线要求》的通知",
+      "url": "/link?url=DSOYnZeCC_rI1hHilN6cwJF_W3vbfkbb3cSzYcyEwbLfDLu9HmnTNPdtnmFaU4TYlLXjlPO3bUeUF5CHrtOsSDh3ZfoXRJBg",
+      "content": "中国教育部2026年5月22日",
+      "publish_date": "2026-06-06T15:53:14.300470",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "关于印发《山东省物业管理条例》等法规的通知",
+      "url": "/link?url=DSOYnZeCC_rlFxfs11xdfFEjO9eGopdE9nTK5PokL-DS9J3gcA8o6OzGVdImUYUoMfqckKaxAI3QGuHk6xSRXg..",
+      "content": "山东省人民政府2026年5月29日",
+      "publish_date": "2026-06-06T15:53:14.300769",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "最高人民检察院",
+      "url": "/link?url=hedJjaC291OX6Bgv8JalNPSETxZQr74CrJYQSeICk6DXeLvDLgT9losOyataYZ-5A0Qz4JDzer_0LjiQEJWQoJHyGBtoyJfoF8iTJW8RK3c380gpcCqfEAu_d-ZHUQEp",
+      "content": "中华人民共和国最高人民检察院2026年6月1日",
+      "publish_date": "2026-06-06T15:53:14.301075",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "——习近平生态文明思想引领生物多样性保护事业开创新局面",
+      "url": "/link?url=DSOYnZeCC_rFnAdVO_Rb-VWSPSk83357PCT1BnKoZGve4hBXdaktiLW8cKCnDAqU4WwzCTMianfP3xP6kJDtjw..",
+      "content": "新华网2026年5月23日",
+      "publish_date": "2026-06-06T15:53:14.301383",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "最高检发布《未成年人检察工作白皮书(2025)》",
+      "url": "/link?url=hedJjaC291ND72rFEx5NeOBe3ZQanx0lhWTECVIQ00_aqA5-GylTwmYpP5eeJ1Ws",
+      "content": "腾讯网2026年6月1日",
+      "publish_date": "2026-06-06T15:53:14.301673",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "教育部新规!中小学办学底线明确!",
+      "url": "/link?url=hedJjaC291ND72rFEx5NeOBe3ZQanx0lCv_gnMF8cTL_6Lnnb_GQ6GYpP5eeJ1Ws",
+      "content": "腾讯网2026年5月29日",
+      "publish_date": "2026-06-06T15:53:14.301977",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "关于直饮水服务政策调整的通知",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0pyDK1V2bb49QWSnU200GxImPPthC7M8hwnH92_8srSHXJrHWmMSz11u5F9MGMBGSyBsRvhd1jyPVFp-00uPNtXnWawCeSoaCunZFB35JAwE-nN-6zftF467Jw5AXBFPY_DEQr0cLPkqsxRvS2wYIbS79tPoBJtFBKuLLC9VvYKs_vdNOAlc-_LQHMkIGUmZrXh_ingHo11FudT__FtU20FXd65sx9UYEiF_IMaJHqulxq",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.423671",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "浅议城市供水行业发展之“直饮水”现象",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0pyDK1V2bb49QWSnU200GxImPCQmX5l77cuOK7KdJVgzr-wVHuVbN6vR-rog-F7DBZDmYg6T7E5QrY9JXcUPxqwPm3d-mTng_0COttutscC0gILPocGEMq3p7UBia-j6HXm4E9E2BykQ7ZQv28lic68sXjFqBjzJJ8CCeuXOz3IKb8fWLvteP9Bw1GX6uOkFmKforOlQ5z64Ft3i0n9l1g6OaovbtqKELh-j_Iru_1NLJq",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.424795",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "《济南市市民泉水直饮工程规划(2021-2025)》印发",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0pyp8EHCvD8nadXcn95tdxRkA43xf0U0RGzEW6RUX1xa-koRTrGXYNLDhk63ZqpgIIeZqMBFIG0HFKP3IKUYprzpuCrpRgxpf5X1agedwIBOSj6V0DgA6fwAkVVPRhCa5BFs41KhJKSoL_I5E2Be4WvHPjDLSqUCOwFTS4Qay7VuFZf2PuRDbv_Qvu_2sWy-9l-f6TlJtVKr2MY35SVOa-F-kXxgF_Bg88Q4xU49nPWCc_",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.426159",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "让更多内江市民喝上高品质的放心水!管道直饮水到底是什么——",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0p59Dy8YPVoxBsyyf6iiog89Zrm-OiW-Q1eluiED_ZVINVOx7ye5Qmewth6ewKK-BNDHoep0fTDllCbQu1IFCtLFdW6rNau23WSNrQ9B0zCWowg7wV8MMhrLuc2dudRkdXRQ6KjB1bIZ-r-7H-C6KMGUpHFTrku2uh7rpg1WPMDTOKTRNC0lvN5chdZQmjYmEeCQ5qwH7qNkOrdtMii8-XjAEUg32pfBheyQgvULRYfD2a",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.429417",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "水利部关于加快推动农村供水高质量发展的指导意见",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0pyhjKmw0lVWPt2LpJrLWb8yj3Q2MazNGcglOQRyqurStJoF6miwIZoggpu9F9DlkHz2fAz55HqRHPeqZ2yU-C5UMEguRM4aTh4twUPEz6Wyib1efWU47kMNO6t27AvxNHgTlm7lQfnHi2QueR8UnT0ELzQMhizI2mIL2BNaNjOvpxKuVqM5inVZeKwgj_ZTqvVhFVFEg6zvvHQcnjOVi9RXZBz7ZCGU3JIG7olVXjNJhq",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.431232",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "南昌:加速迈向全城直饮水时代",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0pyCYVcSReGMq0dCcCzseewsKr_UDa4Awx1kj5TQZo_w49tBsXfsIBOfu8L4gyhyJgnHiKsYVOT0In6x8jHVZOxRHwAHEVA8tud1kZjCBJS4MCEUj2jwV-cdt5Agr-BM5EibtWG9kCdAkRrpqcYmWsRq6PqCL0jMyt1XkfRXSdYECNJB06jfsy14qs0psEcfB4IpZocOExdpYFi77KZr7uoPHIcNuW-EfgbAC14myd3RVa",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.432164",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "中国管道直饮水面面观",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0pzPkbhf96NDyA_0DHq8-7lz5xthEWCr2JA-Uxtg0-XMT9FtaRUFtvvH47a-HEcnHfyp9RaPZawShfka5nura3Ewom99dXGnxfYHIottmnFZEsJ4khdXBnjLGBGrvxxyzyljotUUkaZm06e8PjZMvyiWEpjUcJt6N5_j78Xe7mhky0dij29GaQQrR16oNNoO0uTAZwXMluiWG2JDS2oEwSRHeah9EgaBn38QdvTlCRqJ9a",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.433124",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "“第九届”获奖论文悦享|高伟:浅议城市供水行业发展之“直饮水...",
+      "url": "http://www.baidu.com/link?url=PZlhnr4IsJWGheoZEL9REDE5ltpieHWSwhAFlq_C0py2gUHTb4F44cXcjr4ugwgJprpRq92CEh96WY6QPqcifzgDT2geMrYdZryLINccl4cwjKfYlYikxRnKdvisCE5C04ZmHZ3z_MoX9Ty_UHyQSzzhGnyfsKmRn-xWBPz_9llkhXUCR-jdcXCVyfnN_elCCkwIhs-WLK8a5hq8sIpX__HBPehD1VKjgf76pOjrnu5UBIT90wehKcXIdcT1IFQBkef_IIF7qgTdDd-vbVzQXK",
+      "content": "",
+      "publish_date": "2026-06-06T15:53:27.434448",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "1DPM條碼讀取器市場概述",
+      "url": "/link?url=hedJjaC291Ofo3Uj0dERDEAm6TOksTtaZAqf5CB_lwUWnwTBhNipsCY2uIZfBUlvyzGf6Y5Gvxhl3FfiuRDc5w..",
+      "content": "中商情报网2026年4月23日",
+      "publish_date": "2026-06-06T15:53:50.170023",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "旭龙物联股票_数据_资料_信息 — 东方财富网",
+      "url": "/link?url=hedJjaC291PvucEF_0E02dhidTBh4atIk9aMBAEj8wuog0mWMNylRTXCEvn_97NDreaVHN88tHY.",
+      "content": "东方财富网2026年5月19日",
+      "publish_date": "2026-06-06T15:53:50.170359",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "AIDC底层感知网络建设白皮书:扫描模组工厂推荐与光电耦合架...",
+      "url": "/link?url=hedJjaC291N5SN74Iwy6i_TwTfp23kcZK2JiKAozKTvlST3-GSu8yq4to0wa_Tif",
+      "content": "电子发烧友网2026年4月24日",
+      "publish_date": "2026-06-06T15:53:50.170646",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "德国科隆自动识别知识论坛国际贸易展览会",
+      "url": "/link?url=hedJjaC291PVNUTLMsTFwdvSc3n0VGyjHSOtKV8984dypsF6t4lQ6q3mlRzfPLR2",
+      "content": "www.showguide.cn2026年5月22日",
+      "publish_date": "2026-06-06T15:53:50.170904",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "因此,他不会考虑回到新东方,曾经的同事也大多如此.",
+      "url": "/link?url=hedJjaC291OuUWyzEjFsv_fXezRLsC2zEXK8HzrEvYnfp1BLanu8ZxQ89sWzl3Yg",
+      "content": "快科技2026年5月26日",
+      "publish_date": "2026-06-06T15:53:50.171257",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "恒为科技_分时成交_最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=AZ5lEp6zQ3utpkDnt6hq49hidTBh4atIzd0Gd8O2K4cV05qvzk_d7zMdTQkSsWXt4f5ynffkHQY.",
+      "content": "东方财富网2026年6月4日",
+      "publish_date": "2026-06-06T15:53:50.171759",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "澜起科技 239.39 -20.28(-7.81%)最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=hedJjaC291PmzuqOKxmxq-yZ4YdED0_EyBeNKUYSKTPyCqaEQPxtY7bAp6VRqT6Q",
+      "content": "东方财富网23小时前",
+      "publish_date": "2026-06-06T15:53:50.172071",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "南亚时讯|20260529",
+      "url": "/link?url=hedJjaC291ND72rFEx5NeOBe3ZQanx0lCv_gnMF8cTIS5SOo3YQgr2YpP5eeJ1Ws",
+      "content": "腾讯网2026年5月29日",
+      "publish_date": "2026-06-06T15:53:50.172353",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "荣旗科技 80.09 -0.21(-0.26%)最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=hedJjaC291PmzuqOKxmxq-yZ4YdED0_EdUJGPtM1vOwxP4DIiozpqYuLX6OyZEeS",
+      "content": "东方财富网2026年6月5日",
+      "publish_date": "2026-06-06T15:53:50.172646",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "2026北京公租房最新消息(各区项目持续更新)",
+      "url": "/link?url=DOb0bgH2eKh1izA18nbfFysi_ilAVudj-hTboRvoQyaGn8GvrJE_4WRQdOJZcpyL",
+      "content": "本地宝2026年5月26日",
+      "publish_date": "2026-06-06T15:53:50.172926",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "净水器哪一款好?家用排行榜前十名性能与口碑揭晓,销量认证!",
+      "url": "https://baijiahao.baidu.com/s?id=1867163482322174598&wfr=spider&for=pc",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.381519",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "高端净水器怎么看?2026十款品牌精选,一文读懂不同价位怎么选",
+      "url": "https://baijiahao.baidu.com/s?id=1867051525879269102&wfr=spider&for=pc",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.382748",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "快来抄作业啦!净水器哪个牌子好?2026最新畅销十大品牌排名精选",
+      "url": "https://baijiahao.baidu.com/s?id=1866572869501702111&wfr=spider&for=pc",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.383473",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "家用净水器怎么选?2026年618净水器选购指南,看这篇就够了",
+      "url": "https://www.bjnews.com.cn/detail/1780562555129588.html",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.383876",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "【科普】家用净水器,您了解多少?",
+      "url": "https://www.thepaper.cn/newsDetail_forward_28872060",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.384404",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "净水机市场洗牌在即,产业下一个增长点在哪?",
+      "url": "https://36kr.com/p/1381437575019913",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.384806",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "净水器都在宣传的RO反渗透到底是什么?为什么越来越多人选择朗诗德...",
+      "url": "http://cn.chinadaily.com.cn/a/202301/31/WS63d8db2da3102ada8b22d2b8.html",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:13.385267",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "上海浪尖工业设计的个人主页",
+      "url": "/link?url=58p16RfDRLvXFP9L53_lSCw9jauy57Qo4b2YVabZhx0TAXnUyN_JQPf2wj5NBG0EUnqYitdGIIt0KQS_zml7Qg..",
+      "content": "搜狐号2026年5月14日",
+      "publish_date": "2026-06-06T15:54:31.732999",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "2026年净水器行业市场未来发展趋势及投资建议分析",
+      "url": "/link?url=hedJjaC291Osj6fmiZw1Zg5CjEl5L_RPpG35D5rEv3NP5X6MOssMEfLDf2c1vBBZZdxX4rkQ3Oc.",
+      "content": "中研网2026年6月2日",
+      "publish_date": "2026-06-06T15:54:31.733510",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "纳滤净水设备核心供应商解析：技术优势与行业应用深度剖析",
+      "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_1256a15f39749152",
+      "content": "",
+      "publish_date": "2026-06-06T15:54:31.734388",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "新家必备神器!小米推出米家空气净化器6 Max:3999元",
+      "url": "/link?url=hedJjaC291OuUWyzEjFsv_fXezRLsC2z8I6c1c3SsorJbw3k4pQZWRBgw0Dnpzqm",
+      "content": "快科技2026年5月21日",
+      "publish_date": "2026-06-06T15:54:31.735024",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "评测_天极网_专业IT门户",
+      "url": "/link?url=hedJjaC291O5Ry8oMe9cHbEUjpumoCW8T60ae5om30EY3SzVE1jmZv1yl4QDL_ohtsCnpVGpPpA.",
+      "content": "天极网2026年5月19日",
+      "publish_date": "2026-06-06T15:54:31.735515",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "光跃科技股票_数据_资料_信息 — 东方财富网",
+      "url": "/link?url=hedJjaC291PvucEF_0E02dhidTBh4atIk9aMBAEj8wt44DS0sPxF2taSEx69YVwZreaVHN88tHY.",
+      "content": "东方财富网2026年5月28日",
+      "publish_date": "2026-06-06T15:54:31.735852",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "碧水源 3.43 -0.06(-1.72%)最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=AZ5lEp6zQ3utpkDnt6hq49hidTBh4atImfdQESRvbeSr6UwL7URwaK1H8C0ujVhx7v7xC7y8Wa6oNYvQjdtT6g..",
+      "content": "东方财富网2026年6月4日",
+      "publish_date": "2026-06-06T15:54:31.736139",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "商用净水器品牌十大排行 门店办公净水优选",
+      "url": "https://news.qq.com/rain/a/20260520A07P5A00?refer=cp_1009&scene=qqsearch",
+      "content": "",
+      "publish_date": "2026-06-06T15:55:15.829335",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "四季沐歌净水荣获 “房建供应链企业综合实力TOP500-首选装饰材料类...",
+      "url": "/link?url=6IqLFeTuIygpzGvkFoAXG_gQsr6UtAEFIIkXrqQjH3ac-fDzNgnOZh1eRqhF_ouH8gW0QHT_ZCA.",
+      "content": "新浪地产网2026年5月18日",
+      "publish_date": "2026-06-06T15:55:15.829726",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "热点专题_家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291NxYXx9S_4uf95-q1HMnru0nAWBIKL0dvF0nVag2C7Q3v43OakBgIAFIeZ8aQ291kY.",
+      "content": "天极网2026年5月21日",
+      "publish_date": "2026-06-06T15:55:15.830150",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "相关报道_",
+      "url": "/link?url=hedJjaC291NxYXx9S_4uf95-q1HMnru0jGuX4e1ibzd7mO2M-sP9nt0H1ppmFnP-tsCnpVGpPpA.",
+      "content": "天极网2026年4月18日",
+      "publish_date": "2026-06-06T15:55:15.830371",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "2026家用净水器十大品牌综合排名大盘点:碧云泉登顶榜首",
+      "url": "/link?url=hedJjaC291PtqC_7Rrwx2Ql-EqU1F5lWImN38trmtg811M0VXyZ0tUWE0bXOqJR0",
+      "content": "TOM网2026年6月1日",
+      "publish_date": "2026-06-06T15:55:15.830610",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "【速读国企】让健康直饮水流入千家万户 用心守护民生甘甜",
+      "url": "/link?url=hedJjaC291Ok-E9WTygIKll2MrIoS4vqZKTIgR2BqDj0iwPM-ZbzJJER3AQ1iY8B",
+      "content": "搜狐2026年6月1日",
+      "publish_date": "2026-06-06T15:55:56.797250",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "直营模式直饮机租赁方案，为企业饮水省钱又省心",
+      "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_77769fdb23978052",
+      "content": "",
+      "publish_date": "2026-06-06T15:55:56.797653",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "玫德雅昌:坚持创新驱动 引领一站式水务解决方案及城镇智慧水务发展...",
+      "url": "/link?url=6IqLFeTuIygpzGvkFoAXG_gQsr6UtAEFIIkXrqQjH3YcgGV6jzS5WAOoUB1aaIRev_4qGmGEdHQ.",
+      "content": "新浪地产网2026年5月18日",
+      "publish_date": "2026-06-06T15:55:56.797876",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "产业向新 稳进提质_重庆市人民政府网",
+      "url": "/link?url=hedJjaC291OKW7FXUo9EGAFL_z4CWXywijugBPa-OpeHdlMzCxpMPXanzMp9BpL6eUAyYu6Kp5sh5nxpDb3WRg..",
+      "content": "cq.gov.cn2026年4月23日",
+      "publish_date": "2026-06-06T15:55:56.798038",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "家用直饮水机市场发展现状与未来趋势分析:健康消费升级推动行业进...",
+      "url": "/link?url=hedJjaC291Ok-E9WTygIKll2MrIoS4vqF5VL-1Dqul3Bz1IgS_GFtf5BlveU8lLf",
+      "content": "搜狐2026年6月1日",
+      "publish_date": "2026-06-06T15:55:56.798210",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "全国检察院门 户网站",
+      "url": "/link?url=hedJjaC291OX6Bgv8JalNP4UZtQ7YMnqS5M7v2YZY2MvUqXM10unAvVXxPxMjPr_",
+      "content": "中华人民共和国最高人民检察院2026年5月30日",
+      "publish_date": "2026-06-06T15:55:56.798375",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "2027年美国西部国际水处理展览会WQA|北美顶级水处理环保行业旗舰...",
+      "url": "/link?url=DSOYnZeCC_oFmTickJ_wjyczxNTwwid95924wa1Wv7zS1cLU8f4b34C08WEY8SLB",
+      "content": "搜狐2026年5月29日",
+      "publish_date": "2026-06-06T15:55:56.798607",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "宜来卫浴王浩:引领卫生间健康的中国创智-新浪地产网",
+      "url": "/link?url=6IqLFeTuIygpzGvkFoAXG_gQsr6UtAEFIIkXrqQjH3bv9z-O-z8McfpklfB_J36f0Brh5OsUkV4.",
+      "content": "新浪地产网2026年5月19日",
+      "publish_date": "2026-06-06T15:55:56.798827",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "智能制造 - OFweek环保网",
+      "url": "/link?url=hedJjaC291PkBQQ_xoLWkvpWaVNqGGqKYNF9dhrTgxwUbWPSxLfUKpIpXG9dpUA4eFBFlOYw9nUBcdwBvb2yILvXr96jBRSV",
+      "content": "OFweek环保网2026年3月13日",
+      "publish_date": "2026-06-06T15:55:56.798988",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "厨下式净水器十大品牌排行榜选购攻略：小白零基础哪个牌子好",
+      "url": "https://news.qq.com/rain/a/20260515A0AN6V00?refer=cp_1009&scene=qqsearch",
+      "content": "",
+      "publish_date": "2026-06-06T15:56:38.994905",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "也就是说,米家净水器已经35个月累计市场销量第一.",
+      "url": "/link?url=hedJjaC291OuUWyzEjFsv_fXezRLsC2zEXK8HzrEvYnDRmBfZ1eyWRQ89sWzl3Yg",
+      "content": "快科技2026年5月28日",
+      "publish_date": "2026-06-06T15:56:38.995137",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "广西崇左QQHB(清清)净水器报价",
+      "url": "/link?url=hedJjaC291PGBe68oUDDoRb4z3PTd1cHkKWzXb70le8nNuxVGXJnuti70enpONDB-AAcGnjE73lfjbNHJ8Ccv4t9Y8ROet0O7FoYSnCyDmZs-JtRIcHlmg..",
+      "content": "中关村在线2026年5月22日",
+      "publish_date": "2026-06-06T15:56:38.995739",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "甘肃陇南QQHB(清清)净水器报价",
+      "url": "/link?url=hedJjaC291PGBe68oUDDoRb4z3PTd1cHkKWzXb70le8nNuxVGXJnuti70enpONDB-AAcGnjE73lfjbNHJ8Ccv8jiulKIHLBslj9b_F2djyxs-JtRIcHlmg..",
+      "content": "中关村在线2026年5月22日",
+      "publish_date": "2026-06-06T15:56:38.995921",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "净水器排行榜- 精选视频",
+      "url": "https://m.sogou.com/h5/pages/video-recommend?ids=11207;11208&query=净水器排行榜&title= 精选视频&conn=&videoAutoPlayType=",
+      "content": "数玩工场",
+      "publish_date": "2026-06-06T15:56:38.996276",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "文章排行榜周_天极网_专业IT门户",
+      "url": "/link?url=hedJjaC291O5Ry8oMe9cHbEUjpumoCW89VspE_-izKHGtbQhkTJLuyO8tnTuSCxDmCgZmp_-qgauLaNMGv04nw..",
+      "content": "天极网2026年5月24日",
+      "publish_date": "2026-06-06T15:56:38.996505",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "特色栏目_家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291NxYXx9S_4uf95-q1HMnru0nAWBIKL0dvE3Le3IYgUspPFjQc-pfawmreaVHN88tHY.",
+      "content": "天极网2026年4月22日",
+      "publish_date": "2026-06-06T15:57:29.769632",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "买净水器认准有水效标准的！",
+      "url": "http://mp.weixin.qq.com/s?src=11&timestamp=1780732651&ver=6765&signature=wM5H*jj3JW8Vl80DG7jOXRXQG1I*ys29Xf9VumQC43RnDqQQKckveLu3sSc894*VtAJPnGM-hWCRFOB3S2TRfaJ7ZRDHpiHc1JrfZBOjZZORnFaBbw-bAzzVpyNMk*Ll&new=1",
+      "content": "",
+      "publish_date": "2026-06-06T15:57:29.771009",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "善水科技(301190)盘口异动_行情_走势图—东方财富网",
+      "url": "/link?url=hedJjaC291PmzuqOKxmxq-yZ4YdED0_Efhgr_rszT6-AFxUt7tM-sSixBYwH7-Qy8lt1yA_Rx22t5pUc3zy0dg..",
+      "content": "东方财富网2026年5月27日",
+      "publish_date": "2026-06-06T15:57:29.771302",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "五公开专栏-安康市人民政府",
+      "url": "/link?url=DSOYnZeCC_pAb8877rCylxEvvA2Eoq4-X2GlYCk5VNx7jcNarbagtCHmfGkNvdZG",
+      "content": "安康市人民政府2026年5月8日",
+      "publish_date": "2026-06-06T15:57:29.772003",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "中华人民共和国水污染防治法",
+      "url": "/link?url=hedJjaC291OBPRPBSrlVCQhPpzza5YpeE5FynJiThArXgmZAPhm53yLI0bppD2T7ri2jTBr9OJ8.",
+      "content": "庐江县人民政府2026年5月27日",
+      "publish_date": "2026-06-06T15:57:29.772390",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "特种设备-中国质量新闻网",
+      "url": "/link?url=hedJjaC291NfBwpj1y6MbfHeL61jO9WmlxhArlAylO34zqpOwxHwt63mlRzfPLR2",
+      "content": "中国质量新闻网2026年5月27日",
+      "publish_date": "2026-06-06T15:57:29.772637",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "善水科技 23.86 1.26(5.58%)最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=hedJjaC291PmzuqOKxmxq-yZ4YdED0_EdUJGPtM1vOwxP4DIiozpqUFJZm4hR3pL",
+      "content": "东方财富网2026年5月22日",
+      "publish_date": "2026-06-06T15:57:29.773161",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "安徽淮北QQHB(清清)净水器报价",
+      "url": "/link?url=hedJjaC291PGBe68oUDDoRb4z3PTd1cHkKWzXb70le8nNuxVGXJnuti70enpONDB-AAcGnjE73lfjbNHJ8CcvzbPWCObLo2rhuYUNHpLA6Jpbm2WLTFbEa3mlRzfPLR2",
+      "content": "中关村在线2026年5月10日",
+      "publish_date": "2026-06-06T15:58:15.362103",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "美的净水继续全球出征#茶卡盐湖宝藏新机位 #美的净水生万物 #美的星河净水器",
+      "url": "https://newsa.html5.qq.com/v1/share-video?vid=6624019562694249902",
+      "content": "",
+      "publish_date": "2026-06-06T15:58:15.362508",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "_新闻深度家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291PFQF4nvrpIghU8lWO3ABIVVZcV7ZvLRt26YGTa3JnZ7LbAp6VRqT6Q",
+      "content": "天极网2026年5月8日",
+      "publish_date": "2026-06-06T15:58:15.362733",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "陕西省企业品牌建设促进会在西安召开2024年中国品牌日宣传座谈会",
+      "url": "/link?url=hedJjaC291Ok-E9WTygIKtXlE0qcN_Ce9wdOMdstz57UrRFHHFj6QtUOkuJ6315b",
+      "content": "搜狐2026年4月27日",
+      "publish_date": "2026-06-06T15:58:15.362938",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "行业要闻 - 第一家电网",
+      "url": "/link?url=DSOYnZeCC_r7mwOCmgHR7C-E2v0phmpT40pvYJllMeoecBj37UuMthj10zc2p1gerrwzRKyPQ5U.",
+      "content": "www.jdw001.com2026年5月12日",
+      "publish_date": "2026-06-06T15:58:15.364203",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "美的净水 净水 新品- 精选视频",
+      "url": "https://m.sogou.com/h5/pages/video-recommend?ids=11207;11208&query=美的净水 净水 新品&title= 精选视频&conn=&videoAutoPlayType=",
+      "content": "瘦瘦的小辉",
+      "publish_date": "2026-06-06T15:58:15.365219",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "_深度天极网_专业IT门户",
+      "url": "/link?url=hedJjaC291O5Ry8oMe9cHQzcyU-G1OHxRy25Vo8DshCxVaHH44Yooq3mlRzfPLR2",
+      "content": "天极网2026年5月28日",
+      "publish_date": "2026-06-06T15:59:02.166726",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "净水机- OFweek智能家居网",
+      "url": "/link?url=hedJjaC291M7ZWsaaGMSPuhvygYTqrWNlptyved1IZ8xXdLBrUek7eTBUZowSywhffKU4LsxhQc7l5Og48ggLq3mlRzfPLR2",
+      "content": "OFweek智能家居网2026年3月30日",
+      "publish_date": "2026-06-06T15:59:02.167360",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "白色家电 - 第3页-第一家电网",
+      "url": "/link?url=DSOYnZeCC_r7mwOCmgHR7C-E2v0phmpT40pvYJllMeoecBj37UuMthj10zc2p1geFGUh0KyePXo4Y1-Wcu1w1A..",
+      "content": "www.jdw001.com2026年3月16日",
+      "publish_date": "2026-06-06T15:59:02.167878",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "紫金龙净纯电矿卡启程发往西藏",
+      "url": "/link?url=DSOYnZeCC_qJYl5-xFRygBK8P6Sn75JmMeNH4YhyUuF1vhRB0V6MO-zVyaEc98X5K-2rxc8chQWXd6bE6rOW6g..",
+      "content": "福建省人民政府2026年5月10日",
+      "publish_date": "2026-06-06T15:59:02.168248",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "要闻 - 第9页-第一家电网",
+      "url": "/link?url=DSOYnZeCC_r7mwOCmgHR7C-E2v0phmpT40pvYJllMeoecBj37UuMthj10zc2p1geAWrKvKZWcOut5pUc3zy0dg..",
+      "content": "www.jdw001.com2026年5月14日",
+      "publish_date": "2026-06-06T15:59:46.222728",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "公司 - OFweek智能家居网",
+      "url": "/link?url=hedJjaC291M7ZWsaaGMSPuhvygYTqrWNlptyved1IZ_rpo4E7_34ZVXljkSku_cJyl84JPmQXds.",
+      "content": "OFweek智能家居网2026年5月12日",
+      "publish_date": "2026-06-06T15:59:46.222948",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "今日重点_厨卫家电_家电•智慧生活频道_天极网",
+      "url": "/link?url=hedJjaC291NxYXx9S_4uf95-q1HMnru0a19wcpFLyEQRHz_KSIkgyOGkEbgGFK_x3Jy14NR_TTk.",
+      "content": "天极网2026年4月3日",
+      "publish_date": "2026-06-06T15:59:46.223163",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "青年良品 魅蓝note完胜红米手机2",
+      "url": "/link?url=hedJjaC291PL3fR0-bp-inKgdoeT_q4xupjkDK-JfxXS92skCg37ibbAp6VRqT6Q",
+      "content": "电科技2026年5月2日",
+      "publish_date": "2026-06-06T15:59:46.223377",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "美的集团入选“2023央国资房地产开发企业优选供应商(民族品牌)...",
+      "url": "/link?url=6IqLFeTuIygpzGvkFoAXG_gQsr6UtAEFIIkXrqQjH3bd6A2b2kQ-1PuHusKxU-BqqYVVPK9MycY.",
+      "content": "新浪地产网2026年5月19日",
+      "publish_date": "2026-06-06T15:59:46.223604",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "南德认证检测(中国)有限公司上海分公司",
+      "url": "/link?url=hedJjaC291P8jrU_XPx6_DyWpXb88J70YnNjw8UdesnDf5A0U-7K5Up8g2ZAFztv",
+      "content": "美通社2026年5月22日",
+      "publish_date": "2026-06-06T15:59:46.223765",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "美的集团股票_数据_资料_信息 — 东方财富网",
+      "url": "/link?url=hedJjaC291PvucEF_0E02dhidTBh4atIk9aMBAEj8wsHoNtsRYiSh1IU-homIQL2reaVHN88tHY.",
+      "content": "东方财富网2026年5月30日",
+      "publish_date": "2026-06-06T15:59:46.223935",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "广西新千源投资集团有限公司",
+      "url": "/link?url=hedJjaC291PocnyepUJkimwATPJkd4SQwkcThaFgTjycJlPToHsd0ebDi2XRzgdII43SNMkZtC0UfbkImgyGyA..",
+      "content": "广西人才网2026年4月1日",
+      "publish_date": "2026-06-06T15:59:46.224108",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "_深度空调_空气净化器_智慧空净频道_天极网",
+      "url": "/link?url=hedJjaC291PFQF4nvrpIghU8lWO3ABIV9NuSVG43WbEhCNWo0Wu16GXcV-K5ENzn",
+      "content": "天极网2026年3月31日",
+      "publish_date": "2026-06-06T15:59:46.224321",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "厨房电器,最新的厨房电器电商资讯、专题报道和知识服务内容 - 电商...",
+      "url": "/link?url=hedJjaC291MB-pP-pE0w8Q_Vq5RSmrhZNCyVhA9omkyt5pUc3zy0dg..",
+      "content": "亿邦动力网2026年4月9日",
+      "publish_date": "2026-06-06T16:00:30.938635",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "澳柯玛 7.72 -0.09(-1.15%)最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=hedJjaC291PmzuqOKxmxq-yZ4YdED0_EdUJGPtM1vOw22n0uu6iOBATEUKHGLfyB",
+      "content": "东方财富网2026年6月3日",
+      "publish_date": "2026-06-06T16:00:30.939178",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "快科技资讯2025年05月09日Blog版-资讯中心-科技改变生活",
+      "url": "/link?url=6IqLFeTuIyiixm9sHSw8wPvrp38G3T1u34__0kMIdRQK6ZZ_e5l7wgZFJ5UQUXQ3",
+      "content": "快科技2026年5月24日",
+      "publish_date": "2026-06-06T16:00:30.939493",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "图片源自于网络丨REC.709为标准的sRGB色域",
+      "url": "/link?url=hedJjaC291OuUWyzEjFsv_fXezRLsC2zEXK8HzrEvYnyIIga6-rOcRQ89sWzl3Yg",
+      "content": "快科技2026年5月19日",
+      "publish_date": "2026-06-06T16:00:30.939825",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "经济观察报",
+      "url": "/link?url=hedJjaC291NbWrwHYHKCyEOVsTHBOJrFFsXezd9kzfxx5ltyei3RrYoybXR-2t7zreaVHN88tHY.",
+      "content": "网易2026年5月30日",
+      "publish_date": "2026-06-06T16:00:30.940150",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "编辑专栏_通信",
+      "url": "/link?url=hedJjaC291O1YhBvgMhJqrEUjpumoCW80iBiSz75E2MjeCbPl00IEI3pPKTr2CFF3Jy14NR_TTk.",
+      "content": "天极网2026年3月24日",
+      "publish_date": "2026-06-06T16:00:30.940429",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "关于调整融资融券标的证券名单的公告",
+      "url": "/link?url=DSOYnZeCC_rz88Xns-EirMjOuv2Z-sfz36TNqfRd_2LoXbAfNCLTnClCCeiL0A0en4-RR1R6qNe8YwEDosIOsiLa0Oa6HuIVUQiuR7wKN-YJDs4xe59GbWBh2nGI1TyT",
+      "content": "中国银河证券2026年6月3日",
+      "publish_date": "2026-06-06T16:00:30.941066",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "山东省宏海家电有限公司",
+      "url": "/link?url=hedJjaC291MBhOYxqzO2Tk7mSCsMeF-IjuFVyzSjleeOnDshCySdbA..",
+      "content": "聊城信息港2026年5月30日",
+      "publish_date": "2026-06-06T16:01:16.093651",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "2025年我国天美传媒app下载渠道北斗时空产业产值超1.3万亿元",
+      "url": "/link?url=DSOYnZeCC_rChviDgFVsWSuxPdeLqkUlZms7zFA1Ph8qqKSutFp5GNM7Xe6uZ5eq",
+      "content": "法制山东网2026年5月25日",
+      "publish_date": "2026-06-06T16:01:16.093944",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "美的集团彻底清仓小米背后到底有何玄机",
+      "url": "/link?url=hedJjaC291P33igiXMgxhGHC47y42-qmWXnFBhwhaxRJDcdeiQYXtl8ee8SjmdfaxRf797IxROc.",
+      "content": "东方财富网2026年5月30日",
+      "publish_date": "2026-06-06T16:01:16.094136",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "中证白酒 6760.88 1.96(0.03%)最新价格_行情_走势图—东方财富网",
+      "url": "/link?url=hedJjaC291PmzuqOKxmxq-yZ4YdED0_EdUJGPtM1vOw9aaNE6Z6eTu1aWo3tSVxs",
+      "content": "东方财富网23小时前",
+      "publish_date": "2026-06-06T16:01:16.094316",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "1+1+4+N场大会!2024全国地热大会组委会第二次工作会议召开-新浪...",
+      "url": "/link?url=6IqLFeTuIygpzGvkFoAXG_gQsr6UtAEFIIkXrqQjH3ZP2mmiRe2JOeYu3DqkW5gJiZA36U7JRaM.",
+      "content": "新浪地产网2026年4月28日",
+      "publish_date": "2026-06-06T16:01:16.094553",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "中国国防部:日本军事天美tm传媒入口官网扩张野心暴露无遗",
+      "url": "/link?url=DSOYnZeCC_qWi0Se8NTlbCV6d1SG2OESyoM1R6N4q_m28y96vQq85Qf3N9tsR8pq0ztd7q5nl6o.",
+      "content": "大西北网2026年4月10日",
+      "publish_date": "2026-06-06T16:01:16.094786",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "英国增加大批警务人员打击星空丶天美丶糖心免费社区犯罪",
+      "url": "/link?url=6IqLFeTuIyiy7fPsULUWj8cLctgN5X3DVt9LZVtnZCnBRHZrQaK1_zh3ZfoXRJBg",
+      "content": "网界网2026年4月8日",
+      "publish_date": "2026-06-06T16:01:16.095027",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "今日黑料-91吃瓜首页 - 今日黑料-91吃瓜首页V.5.6.19大全",
+      "url": "/link?url=DSOYnZeCC_rQFrrEpnwTvirWP1kyCdjfgEz2eYEqgboP1zC0XjX1EVqd7kwkhLCI0Brh5OsUkV4.",
+      "content": "www.dongshiju.com2025年8月5日",
+      "publish_date": "2026-06-06T16:01:16.095261",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "搜狗新闻",
+      "title": "庥豆.蜜桃.91.天美.果冻免费(中国)官方网站IOS/Android通用版/手机...",
+      "url": "/link?url=6IqLFeTuIyiy7fPsULUWj8cLctgN5X3DMHDB_gSD0UDkFFn7QBNaxR5GLqaNVzSJz9dAbDTQ4oU.",
+      "content": "网界网2026年4月2日",
+      "publish_date": "2026-06-06T16:01:16.095499",
+      "raw_metadata": {
+        "source": "搜狗新闻",
+        "adapter": "sogou"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "美的荣膺2025年度商用净水渠道价值力推荐TOP品牌",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRPZh7WUsqFYsvh_6e5FwmteE6w07TMzP-XI-gT7UJRngsO9hHTyPselXWApTRLmdp23vyLTe4ApAYSI01vlMb1O0Oc5VWTGvpSisumPYFKlYe--Dwe1TBMHwuxnrj3Y00T3OG4VS987cvlNZFoK3UCmjhUg_1U3IKcgbOylJiACPIbhGNaeKMM6NRriutt3fXa",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.786900",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "美的商净:升级产品和服务,拓展发展合作新边界",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRLHFJ1JYNam6Y6smTb6o_G7MjC0_KYBoM85_7_sPSXIkKx-vZWQDOgcPoVJWTKQhIk_P_oRN1JuaNaLcZLYcjrp3idMTJhmxjpqRmm23c_ufYKJPbv5dU4pK_PkSyQGlncGUPOd_JgoeZoZBMkqZYiC-BhM9TFE50rI0rJ1qFmsU5Edg8uyDUzXzvPC4jJeEVa",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.788503",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "名品!新品!精品!2025商用净水渠道价值力推荐TOP品牌精品展区暨...",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRNQwyJMJBA9laXMZDLRslyP4uMY0OObQ-xy3_TbYP-iXDeVr6y6V4JmUFfmv605z_pXADkTRzEQdr6JOvSvEh-teYJIJ8lo9hymxWskotjE9A7TgPEM2reHVxTUzPm_t1d9uNJA4d_Zp4sHalZIcez5WPSEYVVHF0g8-uEsC7LlxH55qeeYEyWtd314t4t0SwK",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.790285",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "美的商用净水:服务力即持久发展力",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRWufzTJv2FTaQZx_rqytIQY4jnJL4CC_1xpHIsXL_ONiWXaDaXtNDsFR1Jgx2VsJedyVKrxzKA9KdU46c2eW9hgBTZJPuZ5KZJrN1CaKsg3m69rAKMGlBAa2ZhWh3x9WxHEVqmPUWYB1ExhYwy6W6sqQUGYFpFpLAjXIGs1g7pGSTLpjqdb_55ZpfkE9o6aKta",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.794142",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "2025.6.4 重磅揭幕:中国商用净水渠道价值力推荐TOP品牌精品展揭幕...",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRWUy-A3n2b7qX80RA2R3RiEgOghGoWUSoITTXHtgvL0t9Py3rE3gnZrj9Qiu8YOyNCnQB1b8lfXpRa8EYLgh4dR74G4G5YLZasm2qEV8tbhZlDgEpkqYmUAC8AWwOY-Jc4kM6LIcm1-qwqaJT2Xgg5d7OjLxic9yKCfL0wAoE5na_AmD-XK5ttDP5_gsIW3VFK",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.795696",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "美的:打造智慧厨房,提升用户健康体验",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRVdrTJ6Q_4xmY5o8jXoi9cC-8NBWBrdMFgqkkSKbXf8xg0VdPOM3B5u1mGkopadgJNraF7N648TpKFYIxksJxBQI5yKnmua2K7cSZn-F6Yd5xVMKLFSYUnM_wpb71mVL-OYa8qrqNJCCs_3wWBk4C0nHmudJnfOecBz_Ex1INcvvTISsmFvYAvnLELzNdnLmd_",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.797908",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "开能净水:以标杆样板破局商用市场,凭四大方法论实现40%+业绩增长",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRLeC15QEek8Brudu3n1U2sw1pR1B5CHKX1exRQFrh2B_EnL5g0R0cgNsTSK7ecunwKSskGnqabkSKeFUS34X1fGBs52auD-VgG7Ua5JYkX7nyRaIE8EQiZMpyN9JnnRoEcjEEr44CIU8fS7JepXtKVNQ5qHx7NPJQg4gvyd_W9ZRj40ZkE599pGK_Wn0guaSjK",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.800777",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "现场直击:以【质】致【净】—第二届中国商用净水发展高峰论坛",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRNRSVGvxZenehs5I6jHDD308aywBKzUE6gpdOQqW2psiCPEnsc_qvHAUuKyOPCpBTIMFvSRqwZ5FHRqLBWSv0BtAHxQuLXKnloD4Dr9mXrq5aPeuS-RKcDNEefy5glryZihAVsra6pv17oVvOVmRtFLJc-dsMqE56gYj7XWv7yBmvQaOoFJ2qlip5LAsAqhN4q",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.802110",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "湖南航启商贸的零售转型,锚定趋势明方向,敢踩油门强执行",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRQHpcOTgHmpEt87M9tK8T1zuKYRYr60RZwr8yQPfETVmELduogHiTdGlBergVgXbqNrpk_iAVj5wQJ_qTwXnA9FAJULZUldfbZ-vHPqgO-lorB2aMra9AC1fo7Y6VvVHUeh8LU3pRv0WabT4VTHGv-ZFP6E8-TsxZj4uONdW-jPeHnUEpB3sjPf_q3y-ZPKsIK",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.803956",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "微信搜索",
+      "title": "信▪心向荣,智享美好生活—美的携手第十二届中国家电营销年会...",
+      "url": "http://www.baidu.com/link?url=QpcmH3mWw1HdVTNkR8hb_Quh4Baw6Rs92yH_Vy9RTDk1EZyu4ppEJwUfifr42GpuwcDEX9APzjNRNfvKOikLRWsfWhhancfvz2olbY4Ia9VYj2lTnbjQGv7Y6B2KDBll8IE81-MrttlO7dTzH642_t_LoU2KpW1TuDg9AvEpfflxHTh8VIMRZjIRn4Lbo3OZrnIb-BFkUR2EH_32nOA-n80096XtWTEy8uYAwi-ZiEQPYE-r_iXkFuCpUDA3o_Lgt4-9Kd1LKuA99z_Q9BSqta",
+      "content": "",
+      "publish_date": "2026-06-06T16:01:31.807515",
+      "raw_metadata": {
+        "source": "微信搜索",
+        "adapter": "wechat_search"
+      }
+    },
+    {
+      "source_channel": "news",
+      "source_name": "百度新闻",
+      "title": "零陈水畅饮不等待美的澎湃1200G净水机智享健康饮水新方式",
+      "url": "https://www.gfan.com/info/569846.html",
+      "content": "",
+      "publish_date": "2026-06-06T16:02:21.352773",
+      "raw_metadata": {
+        "source": "百度新闻",
+        "adapter": "baidu"
       }
     }
   ]

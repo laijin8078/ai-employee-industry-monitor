@@ -10,6 +10,7 @@ import json
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
+from email.utils import formataddr
 from datetime import date
 from typing import Optional
 
@@ -38,7 +39,14 @@ class EmailNotifier:
         self.port = smtp_config.get("port", 587)
         self.user = smtp_config.get("user", "")
         self.password = smtp_config.get("password", "")
-        self.from_addr = smtp_config.get("from", "AI情报员工 <notify@pudow.com>")
+        from_raw = smtp_config.get("from", "AI情报员工 <notify@pudow.com>")
+        # QQ邮箱要求纯地址，自动提取邮箱地址
+        if "<" in from_raw and ">" in from_raw:
+            display_name = from_raw[:from_raw.index("<")].strip()
+            addr = from_raw[from_raw.index("<")+1:from_raw.index(">")].strip()
+            self.from_addr = formataddr((display_name, addr))
+        else:
+            self.from_addr = from_raw
 
     @property
     def is_configured(self) -> bool:
