@@ -1,5 +1,5 @@
 import { Table, Card, Button, Space, Modal, Tag } from 'antd'
-import { DeleteOutlined, EyeOutlined, DownloadOutlined } from '@ant-design/icons'
+import { DeleteOutlined, DownloadOutlined, EyeOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
@@ -29,8 +29,14 @@ export default function Reports() {
     })
   }
 
+  const formatTime = (value: string) => {
+    if (!value) return '-'
+    return value.replace('T', ' ').slice(0, 19)
+  }
+
   const columns = [
     { title: '报告日期', dataIndex: 'date', key: 'date' },
+    { title: '生成时间', dataIndex: 'generated_at', key: 'generated_at', render: formatTime },
     { title: '情报数量', dataIndex: 'total_count', key: 'total_count' },
     { title: '状态', dataIndex: 'status', key: 'status', render: (s: string) => <Tag color={s === 'completed' ? 'green' : 'blue'}>{s === 'completed' ? '已完成' : s}</Tag> },
     {
@@ -46,7 +52,11 @@ export default function Reports() {
   ]
 
   return (
-    <Card title="📑 报告管理" loading={loading}>
+    <Card
+      title="📑 报告管理"
+      loading={loading}
+      extra={<Button icon={<ReloadOutlined />} onClick={fetchReports}>刷新</Button>}
+    >
       <Table dataSource={reports} columns={columns} rowKey="id" pagination={{ pageSize: 10 }} />
     </Card>
   )

@@ -6,7 +6,7 @@ JSON 报告生成器
 """
 
 import json
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -122,11 +122,11 @@ class JSONReporter:
         Returns:
             保存的文件路径
         """
-        filename = f"intelligence_report_{report.report_date}.json"
-        filepath = self.reports_dir / filename
-
         # 转换为可序列化的字典
         report_dict = self._report_to_dict(report)
+        filepath = self._build_output_path(report.report_date)
+        report_dict["report_id"] = filepath.stem
+        report_dict["generated_at"] = datetime.now().isoformat(timespec="seconds")
 
         filepath.write_text(
             json.dumps(report_dict, ensure_ascii=False, indent=2, default=str),
@@ -134,6 +134,20 @@ class JSONReporter:
         )
         logger.info(f"报告已保存: {filepath}")
         return str(filepath)
+
+    def _build_output_path(self, report_date: date) -> Path:
+        """生成不会覆盖历史报告的输出路径。"""
+        timestamp = datetime.now().strftime("%H%M%S")
+        base_name = f"intelligence_report_{report_date}_{timestamp}"
+        filepath = self.reports_dir / f"{base_name}.json"
+        if not filepath.exists():
+            return filepath
+
+        for index in range(1, 1000):
+            candidate = self.reports_dir / f"{base_name}_{index:03d}.json"
+            if not candidate.exists():
+                return candidate
+        raise RuntimeError("无法生成唯一报告文件名")
 
     def _group_by_category(self, analyses: list[DeepAnalysis]) -> dict[str, list[DeepAnalysis]]:
         """按类别分组，组内按优先级排序"""

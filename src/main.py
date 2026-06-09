@@ -97,7 +97,9 @@ class IntelligencePipeline:
 
         # 初始化 LLM 客户端
         self.llm = LLMClient(
-            api_key=self.settings.anthropic_api_key if not mock_mode else "",
+            api_key=self.settings.llm_api_key if not mock_mode else "",
+            provider=self.settings.llm_provider,
+            api_base=self.settings.ai_settings.get("api_base", ""),
             model=self.settings.ai_settings.get("model", "claude-sonnet-4-6"),
             max_tokens=self.settings.ai_settings.get("max_tokens", 4096),
             temperature=self.settings.ai_settings.get("temperature", 0.3),
@@ -249,10 +251,11 @@ class IntelligencePipeline:
 
             # 保存 JSON 报告
             json_path = self.json_reporter.save(report)
+            report_file_stem = Path(json_path).stem
 
             # 生成 HTML 报告
             html_content = self.html_reporter.render(report)
-            html_path = self.html_reporter.save(report, self.settings.reports_dir)
+            html_path = self.html_reporter.save(report, self.settings.reports_dir, filename_stem=report_file_stem)
             self._emit_log("success", f"✅ 报告生成完成: JSON={Path(json_path).name}, HTML={Path(html_path).name if html_path else 'N/A'}", step="报告生成", status="success")
 
             # === 步骤 8: 附件处理（MVP 跳过） ===
@@ -268,7 +271,9 @@ class IntelligencePipeline:
 
             # === 步骤 10: 数据归档 ===
             logger.info(f"\n💾 [步骤 10/10] 数据存储与归档...")
-            self.db.save_report(self.json_reporter._report_to_dict(report))
+            report_dict = self.json_reporter._report_to_dict(report)
+            report_dict["report_html_path"] = html_path or ""
+            self.db.save_report(report_dict)
             self.db.cleanup_old_data(max_age_days=90)
             logger.info("✅ 数据已归档")
 
@@ -438,14 +443,19 @@ class IntelligencePipeline:
                             self._emit_log("success", f"✅ [{channel_label}] {src_name}: 获取 {count} 条", step="采集", source=src_name, status="success")
                         self._emit_log("success", f"✅ {channel_label}: 共获取 {len(items)} 条", step="采集", source=channel, status="success")
                     else:
-                        failed.append(channel)
-                        source_health[channel] = {"status": "empty", "strategy": "requests", "count": 0, "error": "0条结果"}
-                        self._emit_log("warning", f"⚠ {channel_label}: 0 条结果", step="采集", source=channel, status="empty")
+                        if channel == "wechat":
+                            succeeded.append(channel)
+                            source_health[channel] = {"status": "empty", "strategy": "search_engine", "count": 0, "error": "本期公众号无更新"}
+                            self._emit_log("info", f"ℹ {channel_label}: 本期未发现新文章", step="采集", source=channel, status="empty")
+                        else:
+                            failed.append(channel)
+                            source_health[channel] = {"status": "empty", "strategy": "requests", "count": 0, "error": "0条结果"}
+                            self._emit_log("warning", f"⚠ {channel_label}: 0 条结果", step="采集", source=channel, status="empty")
                         # 输出该渠道每个目标的状态
                         if channel == "wechat":
                             for name in wechat_names:
                                 wname = name if isinstance(name, str) else name.get("name", str(name))
-                                self._emit_log("warning", f"  ⚠ 公众号「{wname}」: 未获取到数据", step="采集", source=wname, status="empty")
+                                self._emit_log("info", f"  ℹ 公众号「{wname}」: 本期未发现新文章", step="采集", source=wname, status="empty")
                         elif channel == "website":
                             for ws in website_configs:
                                 wname = ws.get("name", "") if isinstance(ws, dict) else str(ws)
@@ -508,7 +518,7 @@ class IntelligencePipeline:
                 if crawler:
                     cached = crawler.load_cached_data(f"{channel}_all")
                     if cached:
-                        all_items.extend(cached)
+                        all_items.extend(crawler.filter_recent_items(cached, self.settings.max_news_age_days))
                         break
         return all_items
 

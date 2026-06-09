@@ -36,6 +36,26 @@ const stageLabels: Record<string, string> = {
   reporting: '报告生成', notifying: '发送通知', completed: '已完成',
 }
 
+const stepToStage: Record<string, string> = {
+  初始化: 'starting',
+  启动: 'starting',
+  采集: 'collecting',
+  清洗: 'cleaning',
+  AI初筛: 'screening',
+  深度分析: 'analyzing',
+  报告生成: 'reporting',
+  通知: 'notifying',
+  完成: 'completed',
+}
+
+const stageOrder = ['starting', 'collecting', 'cleaning', 'screening', 'analyzing', 'summarizing', 'reporting', 'notifying', 'completed']
+
+function parseStartMs(value?: string | null) {
+  if (!value) return 0
+  const ms = new Date(value).getTime()
+  return Number.isFinite(ms) ? ms : 0
+}
+
 const stepColors: Record<string, string> = {
   '启动': '#1890ff', '初始化': '#1890ff', '采集': '#722ed1',
   '清洗': '#13c2c2', 'AI初筛': '#eb2f96', '深度分析': '#fa541c',
@@ -61,6 +81,7 @@ export default function CollectionLog() {
   const [jobsLoading, setJobsLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState('')
   const [elapsed, setElapsed] = useState(0)
+  const [startedAtMs, setStartedAtMs] = useState(0)
   const logEndRef = useRef<HTMLDivElement>(null)
   const logContainerRef = useRef<HTMLDivElement>(null)
   const eventSourceRef = useRef<EventSource | null>(null)
@@ -112,13 +133,14 @@ export default function CollectionLog() {
             return
           }
           const isOurs = sessionOwned.current && sessionOwned.current === runningJob.job_id
-          const heartbeatOk = runningJob.last_heartbeat &&
-            (Date.now() - new Date(runningJob.last_heartbeat).getTime() < 120_000)
-          if (isOurs && heartbeatOk && !runningRef.current) {
+          if (isOurs && !runningRef.current) {
+            const start = parseStartMs(runningJob.execution_time) || parseStartMs(sessionStorage.getItem('cc_job_started_at')) || Date.now()
             setActiveJob(runningJob)
             setRunning(true)
             setJobId(runningJob.job_id)
-            setCurrentStep(runningJob.current_stage || '')
+            setStartedAtMs(start)
+            sessionStorage.setItem('cc_job_started_at', new Date(start).toISOString())
+            setCurrentStep(runningJob.current_stage || 'starting')
             if (!eventSourceRef.current) {
               connectSSE(runningJob.job_id)
             }
@@ -139,13 +161,18 @@ export default function CollectionLog() {
   // 运行中的耗时计时器
   useEffect(() => {
     if (running) {
-      setElapsed(0)
-      elapsedTimer.current = setInterval(() => setElapsed(prev => prev + 1), 1000)
+      if (elapsedTimer.current) clearInterval(elapsedTimer.current)
+      const tick = () => {
+        const start = startedAtMs || parseStartMs(sessionStorage.getItem('cc_job_started_at'))
+        setElapsed(start ? Math.max(0, Math.floor((Date.now() - start) / 1000)) : 0)
+      }
+      tick()
+      elapsedTimer.current = setInterval(tick, 1000)
     } else {
       if (elapsedTimer.current) { clearInterval(elapsedTimer.current); elapsedTimer.current = null }
     }
     return () => { if (elapsedTimer.current) clearInterval(elapsedTimer.current) }
-  }, [running])
+  }, [running, startedAtMs])
 
   // 清理
   useEffect(() => {
@@ -165,7 +192,7 @@ export default function CollectionLog() {
       try {
         const entry: LogEntry = JSON.parse(event.data)
         setLogs(prev => [...prev, entry])
-        if (entry.step) setCurrentStep(entry.step)
+        if (entry.step) setCurrentStep(stepToStage[entry.step] || entry.step)
 
         // 检测完成或取消信号
         const terminalStatuses = ['success', 'partial', 'failed', 'timeout', 'cancelled']
@@ -217,13 +244,19 @@ export default function CollectionLog() {
     manualStopRef.current = false  // 新任务开始，清除手动停止标记
     setRunning(true)
     setCurrentStep('启动')
+    const localStart = Date.now()
+    setStartedAtMs(localStart)
+    sessionStorage.setItem('cc_job_started_at', new Date(localStart).toISOString())
 
     try {
       const r = await fetch('/api/execute', { method: 'POST' })
       const data = await r.json()
 
       if (data.status === 'already_running') {
+        const start = parseStartMs(data.execution_time) || localStart
         setJobId(data.job_id)
+        setStartedAtMs(start)
+        sessionStorage.setItem('cc_job_started_at', new Date(start).toISOString())
         connectSSE(data.job_id)
         fetchJobs()
         return
@@ -236,7 +269,10 @@ export default function CollectionLog() {
       }
 
       setJobId(data.job_id)
+      const start = parseStartMs(data.execution_time) || localStart
+      setStartedAtMs(start)
       sessionStorage.setItem('cc_job_id', data.job_id)
+      sessionStorage.setItem('cc_job_started_at', new Date(start).toISOString())
       sessionOwned.current = data.job_id
       connectSSE(data.job_id)
     } catch (e: any) {
@@ -357,7 +393,11 @@ export default function CollectionLog() {
                 setJobId(activeJob!.job_id)
                 sessionStorage.setItem('cc_job_id', activeJob!.job_id)
                 sessionOwned.current = activeJob!.job_id
+                const start = parseStartMs(activeJob!.execution_time) || parseStartMs(sessionStorage.getItem('cc_job_started_at')) || Date.now()
+                setStartedAtMs(start)
+                sessionStorage.setItem('cc_job_started_at', new Date(start).toISOString())
                 setRunning(true)
+                setCurrentStep(activeJob!.current_stage || 'starting')
                 connectSSE(activeJob!.job_id)
               }}>接管任务</Button>
             )
@@ -399,8 +439,7 @@ export default function CollectionLog() {
           </Row>
           <div style={{ marginTop: 12 }}>
             {['starting', 'collecting', 'cleaning', 'screening', 'analyzing', 'summarizing', 'reporting', 'notifying', 'completed'].map(stage => {
-              const activeStage = activeJob?.current_stage || ''
-              const stageOrder = ['collecting', 'cleaning', 'screening', 'analyzing', 'summarizing', 'reporting', 'notifying', 'completed']
+              const activeStage = currentStep || activeJob?.current_stage || ''
               const isActive = activeStage === stage
               const isDone = stageOrder.indexOf(stage) < stageOrder.indexOf(activeStage)
               const isPending = !isActive && !isDone

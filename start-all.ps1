@@ -19,18 +19,18 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "✓ Node.js: $nodeCheck" -ForegroundColor Green
 
 Write-Host ""
-Write-Host "启动后端... (http://localhost:8000)" -ForegroundColor Cyan
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot'; python -m src.main --schedule"
+Write-Host "启动API服务... (http://localhost:8001)" -ForegroundColor Cyan
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot'; python -m uvicorn src.api_server:app --host 0.0.0.0 --port 8001 --reload"
 
 Write-Host "等待后端启动..." -ForegroundColor Yellow
 Start-Sleep -Seconds 3
 
 Write-Host "启动前端... (http://localhost:3000)" -ForegroundColor Cyan
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot/frontend'; npm run dev"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot/frontend'; npm.cmd run dev"
 
 Write-Host ""
 Write-Host "✓ 系统已启动！" -ForegroundColor Green
-Write-Host "  后端: http://localhost:8000" -ForegroundColor Green
+Write-Host "  API: http://localhost:8001" -ForegroundColor Green
 Write-Host "  前端: http://localhost:3000" -ForegroundColor Green
 Write-Host ""
 Write-Host "关闭此窗口可停止所有进程" -ForegroundColor Yellow

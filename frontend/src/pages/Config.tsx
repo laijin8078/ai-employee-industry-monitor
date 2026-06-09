@@ -1,4 +1,4 @@
-import { Card, Button, Space, Modal, Input, Spin, Row, Col, Tag, Empty } from 'antd'
+import { Card, Button, Space, Modal, Input, Spin, Row, Col, Tag, Empty, message } from 'antd'
 import { DeleteOutlined, PlusOutlined, WechatOutlined, GlobalOutlined, KeyOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react'
 
@@ -19,8 +19,17 @@ export default function Config() {
   }
 
   const save = async (c: any) => {
-    await fetch('/api/config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(c) })
-    setConfig(c)
+    const response = await fetch('/api/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(c),
+    })
+    if (!response.ok) {
+      message.error('配置保存失败')
+      return
+    }
+    await fetchConfig()
+    message.success('配置已保存')
   }
 
   const addWechat = () => {

@@ -3,12 +3,34 @@
     "competitor_wechat": [
       "美的净水",
       "沁园净水器官方",
-      "安吉尔官方"
+      "安吉尔官方",
+      "小米公司"
     ],
     "competitor_websites": [
-      {"name": "美的净水", "url": "https://water.midea.com/news/"},
-      {"name": "沁园", "url": "https://www.qinyuan.com.cn/news/"},
-      {"name": "安吉尔", "url": "https://www.angelgroup.com.cn/news/"}
+      {
+        "id": "0",
+        "name": "美的净水",
+        "url": "https://water.midea.com/news/",
+        "status": "正常"
+      },
+      {
+        "id": "1",
+        "name": "沁园",
+        "url": "https://www.qinyuan.com.cn/news/",
+        "status": "正常"
+      },
+      {
+        "id": "2",
+        "name": "安吉尔",
+        "url": "https://www.angelgroup.com.cn/news/",
+        "status": "正常"
+      },
+      {
+        "id": "1780977733916",
+        "name": "小米",
+        "url": "https://www.xiaomi.cn/",
+        "status": "正常"
+      }
     ],
     "industry_keywords": [
       "净水器新国标",
@@ -48,14 +70,32 @@
     "full_name": "朴道水汇净水科技有限公司",
     "core_tech": "DPM纳滤技术",
     "key_differentiator": "保留水中矿物质（钙镁离子30-50mg/L）",
-    "main_competitors": ["美的净水", "沁园", "安吉尔"],
+    "main_competitors": [
+      "美的净水",
+      "沁园",
+      "安吉尔"
+    ],
     "target_market": "商用净水器 / 企业直饮水",
     "product_lines": [
-      {"name": "名士K2", "spec": "2000G大流量商用直饮机"},
-      {"name": "名士K1", "spec": "1000G商用直饮机"},
-      {"name": "名士S系列", "spec": "中小型企业直饮机"}
+      {
+        "name": "名士K2",
+        "spec": "2000G大流量商用直饮机"
+      },
+      {
+        "name": "名士K1",
+        "spec": "1000G商用直饮机"
+      },
+      {
+        "name": "名士S系列",
+        "spec": "中小型企业直饮机"
+      }
     ],
-    "key_clients": ["华为", "阿里巴巴", "腾讯", "字节跳动"]
+    "key_clients": [
+      "华为",
+      "阿里巴巴",
+      "腾讯",
+      "字节跳动"
+    ]
   },
   "crawler_settings": {
     "request_interval_min": 5,
@@ -67,7 +107,7 @@
     "headless": true
   },
   "ai_settings": {
-    "model": "claude-sonnet-4-6",
+    "model": "deepseek-v4-pro",
     "max_tokens": 4096,
     "temperature": 0.3,
     "batch_size": 10,
@@ -75,13 +115,35 @@
   },
   "filter_rules": {
     "keyword_whitelist": [
-      "降价", "融资", "新品", "发布", "政策", "标准", "技术",
-      "纳滤", "RO反渗透", "直饮水", "商用", "企业", "招标",
-      "采购", "合作", "战略", "市场", "份额"
+      "降价",
+      "融资",
+      "新品",
+      "发布",
+      "政策",
+      "标准",
+      "技术",
+      "纳滤",
+      "RO反渗透",
+      "直饮水",
+      "商用",
+      "企业",
+      "招标",
+      "采购",
+      "合作",
+      "战略",
+      "市场",
+      "份额"
     ],
     "competitor_blacklist": [
-      "冰箱", "洗衣机", "空调", "电视", "油烟机", "热水器",
-      "招聘", "团建", "年会"
+      "冰箱",
+      "洗衣机",
+      "空调",
+      "电视",
+      "油烟机",
+      "热水器",
+      "招聘",
+      "团建",
+      "年会"
     ],
     "max_news_age_days": 14,
     "title_similarity_threshold": 0.8,
@@ -93,8 +155,11 @@
       "wechat_search": 10
     },
     "compensation_keywords": [
-      "净水器", "直饮水机", "商用净水", "饮水设备", "净水行业"
+      "净水器",
+      "直饮水机",
+      "商用净水",
+      "饮水设备",
+      "净水行业"
     ]
   }
 }
-

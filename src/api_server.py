@@ -1,6 +1,5 @@
 """API 服务器 - 为前端提供 REST API 接口"""
 import json
-import queue
 import threading
 import uuid
 import asyncio
@@ -23,6 +22,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 settings = get_settings()
 data_dir = Path(settings.reports_dir)
 config_dir = Path(__file__).resolve().parent.parent / "config"
+REPORT_PREFIX = "intelligence_report_"
 
 
 # ============ 采集日志管理 ============
@@ -31,20 +31,23 @@ class JobLogManager:
     """管理采集任务的实时日志"""
 
     def __init__(self):
-        self._queues: dict[str, queue.Queue] = {}
+        self._events: dict[str, list[dict]] = {}
         self._lock = threading.Lock()
+        self._condition = threading.Condition(self._lock)
         self._cancelled: set = set()  # 被取消的 job_id 集合
 
     def create_job(self, job_id: str):
-        with self._lock:
-            self._queues[job_id] = queue.Queue()
+        with self._condition:
+            self._events[job_id] = []
+            self._condition.notify_all()
 
     def emit(self, job_id: str, level: str, message: str, step: str = "", source: str = "", status: str = ""):
         """发送一条日志事件"""
-        with self._lock:
-            q = self._queues.get(job_id)
-        if q:
-            q.put({
+        with self._condition:
+            events = self._events.get(job_id)
+            if events is None:
+                return
+            events.append({
                 "time": datetime.now().strftime("%H:%M:%S"),
                 "level": level,
                 "message": message,
@@ -52,15 +55,40 @@ class JobLogManager:
                 "source": source,
                 "status": status,
             })
+            self._condition.notify_all()
 
     def get_queue(self, job_id: str):
         with self._lock:
-            return self._queues.get(job_id)
+            return self._events.get(job_id)
+
+    def get_events_since(self, job_id: str, cursor: int) -> tuple[list[dict], int] | None:
+        """读取某个游标之后的事件；不消费事件，支持多个页面同时订阅。"""
+        with self._lock:
+            events = self._events.get(job_id)
+            if events is None:
+                return None
+            next_events = events[cursor:]
+            return next_events, len(events)
+
+    def wait_for_events(self, job_id: str, cursor: int, timeout: float = 1.0) -> tuple[list[dict], int] | None:
+        """等待新事件，超时返回空列表。"""
+        with self._condition:
+            if job_id not in self._events:
+                return None
+            self._condition.wait_for(
+                lambda: job_id not in self._events or len(self._events[job_id]) > cursor,
+                timeout=timeout,
+            )
+            events = self._events.get(job_id)
+            if events is None:
+                return None
+            return events[cursor:], len(events)
 
     def remove_job(self, job_id: str):
-        with self._lock:
-            self._queues.pop(job_id, None)
+        with self._condition:
+            self._events.pop(job_id, None)
             self._cancelled.discard(job_id)
+            self._condition.notify_all()
 
     def cancel_job(self, job_id: str):
         """标记任务为已取消"""
@@ -105,7 +133,7 @@ class PipelineLogSink:
 
 # ============ 数据转换 ============
 
-def transform_report(raw_data: Dict[str, Any]) -> Dict[str, Any]:
+def transform_report(raw_data: Dict[str, Any], report_id: str = "") -> Dict[str, Any]:
     items = []
     item_id = 0
     for category, items_list in raw_data.get("intelligence_by_category", {}).items():
@@ -123,13 +151,86 @@ def transform_report(raw_data: Dict[str, Any]) -> Dict[str, Any]:
             item_id += 1
 
     return {
-        "id": raw_data.get("report_date", ""),
+        "id": report_id or raw_data.get("report_id", "") or raw_data.get("report_date", ""),
         "date": raw_data.get("report_date", ""),
+        "generated_at": raw_data.get("generated_at", ""),
         "summary": raw_data.get("summary", ""),
         "items": items,
         "competitor_summary": raw_data.get("competitor_summary", {}),
         "recommendations": raw_data.get("recommendation", "")
     }
+
+
+def _report_path(report_id: str) -> Path:
+    if not report_id.startswith(REPORT_PREFIX) or any(sep in report_id for sep in ("/", "\\")):
+        raise HTTPException(status_code=400, detail="Invalid report id")
+    return data_dir / f"{report_id}.json"
+
+
+def _load_report_raw(report_id: str) -> Dict[str, Any]:
+    report_file = _report_path(report_id)
+    if not report_file.exists():
+        raise HTTPException(status_code=404, detail="Report not found")
+    with open(report_file, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def _save_report_raw(report_id: str, raw_data: Dict[str, Any]):
+    data_dir.mkdir(parents=True, exist_ok=True)
+    report_file = _report_path(report_id)
+    with open(report_file, 'w', encoding='utf-8') as f:
+        json.dump(raw_data, f, ensure_ascii=False, indent=2, default=str)
+
+
+def _parse_strategy(strategy: str) -> list[dict]:
+    responses = []
+    for line in (strategy or "").splitlines():
+        text = line.strip()
+        if not text:
+            continue
+        if text.startswith("[") and "]" in text:
+            dimension, action = text[1:].split("]", 1)
+            responses.append({"dimension": dimension.strip(), "action": action.strip()})
+        else:
+            responses.append({"dimension": "应对策略", "action": text})
+    return responses
+
+
+def apply_report_update(raw_data: Dict[str, Any], payload: Dict[str, Any]) -> Dict[str, Any]:
+    if "summary" in payload:
+        raw_data["summary"] = payload.get("summary") or ""
+    if "recommendations" in payload:
+        raw_data["recommendation"] = payload.get("recommendations") or ""
+
+    item_updates = payload.get("items")
+    if isinstance(item_updates, list):
+        current_items = []
+        for _, items_list in raw_data.get("intelligence_by_category", {}).items():
+            current_items.extend(items_list)
+
+        updated_categories: dict[str, list] = {}
+        for index, raw_item in enumerate(current_items):
+            update = item_updates[index] if index < len(item_updates) and isinstance(item_updates[index], dict) else {}
+            category = update.get("category") or raw_item.get("event_type") or "未分类"
+            raw_item["title"] = update.get("title", raw_item.get("title", ""))
+            raw_item["event_type"] = category
+            raw_item["ai_summary"] = update.get("summary", raw_item.get("ai_summary", ""))
+            raw_item["impact_analysis"] = update.get("impact", raw_item.get("impact_analysis", ""))
+            raw_item["priority"] = update.get("priority", raw_item.get("priority", "低"))
+            raw_item["source"] = update.get("source", raw_item.get("source", ""))
+            raw_item["our_response"] = _parse_strategy(update.get("strategy", "")) or raw_item.get("our_response", [])
+            updated_categories.setdefault(category, []).append(raw_item)
+
+        raw_data["intelligence_by_category"] = updated_categories
+        raw_data["total_items"] = sum(len(items) for items in updated_categories.values())
+        raw_data["important_items"] = sum(
+            1
+            for items in updated_categories.values()
+            for item in items
+            if item.get("priority") in ("高", "中")
+        )
+
+    return raw_data
 
 
 # ============ API 端点 ============
@@ -143,23 +244,30 @@ async def root():
 async def get_reports():
     data_dir.mkdir(parents=True, exist_ok=True)
     reports = []
-    for file in sorted(data_dir.glob("intelligence_report_*.json"), reverse=True):
+    for file in sorted(data_dir.glob("intelligence_report_*.json"), key=lambda p: p.stat().st_mtime, reverse=True):
         with open(file, 'r', encoding='utf-8') as f:
             data = json.load(f)
             total = sum(len(v) for v in data.get("intelligence_by_category", {}).values())
-            reports.append({"id": file.stem, "date": data.get("report_date", ""), "total_count": total, "status": "completed"})
+            generated_at = data.get("generated_at") or datetime.fromtimestamp(file.stat().st_mtime).isoformat(timespec="seconds")
+            reports.append({
+                "id": file.stem,
+                "date": data.get("report_date", ""),
+                "generated_at": generated_at,
+                "total_count": total,
+                "status": "completed",
+            })
     return reports
 
 
 @app.get("/api/reports/latest")
 async def get_latest_report():
-    files = sorted(data_dir.glob("intelligence_report_*.json"), reverse=True)
+    files = sorted(data_dir.glob("intelligence_report_*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
     if not files:
         return {"date": datetime.now().strftime("%Y-%m-%d"), "summary": "暂无报告数据", "totalCount": 0, "category_counts": {}}
 
     with open(files[0], 'r', encoding='utf-8') as f:
         data = json.load(f)
-        transformed = transform_report(data)
+        transformed = transform_report(data, files[0].stem)
 
         category_counts = {}
         for item in transformed.get("items", []):
@@ -177,25 +285,33 @@ async def get_latest_report():
 
 @app.get("/api/reports/{report_id}")
 async def get_report_detail(report_id: str):
-    report_file = data_dir / f"{report_id}.json"
-    if not report_file.exists():
-        raise HTTPException(status_code=404, detail="Report not found")
-    with open(report_file, 'r', encoding='utf-8') as f:
-        return transform_report(json.load(f))
+    return transform_report(_load_report_raw(report_id), report_id)
+
+
+@app.put("/api/reports/{report_id}")
+async def update_report(report_id: str, payload: Dict[str, Any]):
+    raw_data = _load_report_raw(report_id)
+    updated = apply_report_update(raw_data, payload)
+    updated["report_id"] = report_id
+    _save_report_raw(report_id, updated)
+    return transform_report(updated, report_id)
 
 
 @app.delete("/api/reports/{report_id}")
 async def delete_report(report_id: str):
-    report_file = data_dir / f"{report_id}.json"
+    report_file = _report_path(report_id)
     if report_file.exists():
         report_file.unlink()
+        html_file = data_dir / f"{report_id}.html"
+        if html_file.exists():
+            html_file.unlink()
         return {"status": "success"}
     raise HTTPException(status_code=404, detail="Report not found")
 
 
 @app.get("/api/reports/{report_id}/download")
 async def download_report(report_id: str):
-    report_file = data_dir / f"{report_id}.json"
+    report_file = _report_path(report_id)
     if not report_file.exists():
         raise HTTPException(status_code=404, detail="Report not found")
     return FileResponse(report_file, filename=f"{report_id}.json")
@@ -212,6 +328,11 @@ def _get_db():
 @app.post("/api/execute")
 async def execute_collection(background_tasks: BackgroundTasks):
     """启动采集任务。若已有 running 任务则返回现有任务，防止重复启动。"""
+    global settings, data_dir
+    get_settings.cache_clear()
+    settings = get_settings()
+    data_dir = Path(settings.reports_dir)
+
     # 1. 标记超时任务
     db = _get_db()
     db.mark_stale_jobs_as_timeout(timeout_minutes=10)
@@ -229,11 +350,13 @@ async def execute_collection(background_tasks: BackgroundTasks):
         return {
             "status": "already_running",
             "job_id": existing["job_id"],
+            "execution_time": existing.get("execution_time", ""),
             "message": f"已有运行中的采集任务（{existing['execution_time']} 启动），请等待完成"
         }
 
     # 3. 创建新任务
     job_id = f"job_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+    execution_time = datetime.now().isoformat()
     job_log_manager.create_job(job_id)
 
     def run_pipeline():
@@ -312,44 +435,47 @@ async def execute_collection(background_tasks: BackgroundTasks):
             threading.Timer(30.0, job_log_manager.remove_job, args=[job_id]).start()
 
     background_tasks.add_task(run_pipeline)
-    return {"status": "started", "job_id": job_id, "message": "Collection started"}
+    return {"status": "started", "job_id": job_id, "execution_time": execution_time, "message": "Collection started"}
 
 
 @app.get("/api/execute/{job_id}/stream")
 async def stream_logs(job_id: str, request: Request):
     """SSE 端点：实时推送采集日志"""
-    q = job_log_manager.get_queue(job_id)
-    if q is None:
+    if job_log_manager.get_queue(job_id) is None:
         raise HTTPException(status_code=404, detail="Job not found or already cleaned up")
 
     async def event_generator():
+        cursor = 0
         try:
             while True:
                 # 检查客户端是否断开
                 if await request.is_disconnected():
                     break
 
-                try:
-                    # 非阻塞地从队列获取日志
-                    entry = await asyncio.to_thread(q.get, timeout=1.0)
-                    data = json.dumps(entry, ensure_ascii=False)
-                    yield f"data: {data}\n\n"
+                result = await asyncio.to_thread(job_log_manager.wait_for_events, job_id, cursor, 1.0)
+                if result is None:
+                    break
 
-                    # 如果收到完成信号，结束流
-                    if entry.get("status") in ("success", "partial", "failed", "timeout") and entry.get("step") == "完成":
-                        # 再等几秒看是否有后续日志
+                entries, cursor = result
+                if entries:
+                    should_stop = False
+                    for entry in entries:
+                        data = json.dumps(entry, ensure_ascii=False)
+                        yield f"data: {data}\n\n"
+
+                        if entry.get("status") in ("success", "partial", "failed", "timeout", "cancelled") and entry.get("step") == "完成":
+                            should_stop = True
+
+                    if should_stop:
                         await asyncio.sleep(2)
-                        # 排空剩余消息
-                        while True:
-                            try:
-                                extra = q.get_nowait()
+                        result = job_log_manager.get_events_since(job_id, cursor)
+                        if result:
+                            extra_entries, cursor = result
+                            for extra in extra_entries:
                                 edata = json.dumps(extra, ensure_ascii=False)
                                 yield f"data: {edata}\n\n"
-                            except queue.Empty:
-                                break
                         break
-
-                except queue.Empty:
+                else:
                     # 超时，发送心跳
                     yield f": heartbeat\n\n"
 
@@ -406,7 +532,7 @@ def _serialize_job(j: dict) -> dict:
 
 
 @app.get("/api/jobs")
-async def get_jobs():
+async def get_jobs(active_only: bool = False):
     """获取历史采集任务列表（自动标记超时任务）。支持 ?active_only=true 仅返回活跃任务。"""
     try:
         from src.storage.database import IntelligenceDB
@@ -414,7 +540,6 @@ async def get_jobs():
         # 先标记超时任务
         db.mark_stale_jobs_as_timeout(timeout_minutes=10)
 
-        active_only = False  # 由 query param 控制，这里简化处理
         if active_only:
             jobs = db.get_active_jobs()
         else:
@@ -468,8 +593,19 @@ async def get_config():
     else:
         scope = {}
 
+    wechat_accounts = []
+    for i, account in enumerate(scope.get("competitor_wechat", [])):
+        if isinstance(account, dict):
+            wechat_accounts.append({
+                "id": str(account.get("id", i)),
+                "name": account.get("name", ""),
+                "status": account.get("status", "正常"),
+            })
+        else:
+            wechat_accounts.append({"id": str(i), "name": account, "status": "正常"})
+
     return {
-        "competitor_wechat": [{"id": str(i), "name": n, "status": "正常"} for i, n in enumerate(scope.get("competitor_wechat", []))],
+        "competitor_wechat": wechat_accounts,
         "competitor_websites": [{"id": str(i), "name": w.get("name",""), "url": w.get("url",""), "status": "正常"} for i, w in enumerate(scope.get("competitor_websites", []))],
         "industry_keywords": scope.get("industry_keywords", []),
         "news_sources": scope.get("news_sources", [])
@@ -478,22 +614,59 @@ async def get_config():
 
 @app.post("/api/config")
 async def update_config(config: Dict[str, Any]):
+    global settings, data_dir
     config_file = config_dir / "monitor_config.json"
     existing = {}
     if config_file.exists():
         with open(config_file, 'r', encoding='utf-8') as f:
             existing = json.load(f)
 
+    wechat_accounts = [
+        (w.get("name", "") if isinstance(w, dict) else str(w)).strip()
+        for w in config.get("competitor_wechat", [])
+    ]
+    wechat_accounts = [name for name in wechat_accounts if name]
+
+    website_configs = []
+    for site in config.get("competitor_websites", []):
+        if not isinstance(site, dict):
+            continue
+        name = str(site.get("name", "")).strip()
+        url = str(site.get("url", "")).strip()
+        if not name or not url:
+            continue
+        website_configs.append({
+            "id": str(site.get("id", "")),
+            "name": name,
+            "url": url,
+            "status": site.get("status", "正常"),
+        })
+
     existing["monitor_scope"] = {
-        "competitor_wechat": [w["name"] if isinstance(w, dict) else w for w in config.get("competitor_wechat", [])],
-        "competitor_websites": config.get("competitor_websites", []),
+        "competitor_wechat": wechat_accounts,
+        "competitor_websites": website_configs,
         "industry_keywords": config.get("industry_keywords", []),
         "news_sources": config.get("news_sources", [])
     }
 
+    # 新增的公众号/官网也作为新闻搜索竞品词，确保后续新闻聚合会覆盖。
+    company_context = existing.setdefault("company_context", {})
+    configured_competitors = company_context.get("main_competitors", [])
+    monitored_names = wechat_accounts + [site["name"] for site in website_configs]
+    company_context["main_competitors"] = list(dict.fromkeys([
+        *configured_competitors,
+        *monitored_names,
+    ]))
+
     with open(config_file, 'w', encoding='utf-8') as f:
         json.dump(existing, f, ensure_ascii=False, indent=2)
-    return {"status": "success"}
+
+    # get_settings() 有缓存；配置保存后必须清掉，否则采集流水线仍会使用旧监控范围。
+    get_settings.cache_clear()
+    settings = get_settings()
+    data_dir = Path(settings.reports_dir)
+
+    return {"status": "success", "config": existing["monitor_scope"]}
 
 
 # ============ 系统设置（持久化） ============

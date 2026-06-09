@@ -25,8 +25,8 @@ for /f "tokens=*" %%i in ('node --version') do set NODE_VERSION=%%i
 echo ✓ Node.js %NODE_VERSION%
 
 echo.
-echo 启动后端... (http://localhost:8000)
-start "AI员工 - 后端" cmd /k "cd /d %~dp0 && python -m src.main --schedule"
+echo 启动API服务... (http://localhost:8001)
+start "AI员工 - API" cmd /k "cd /d %~dp0 && python -m uvicorn src.api_server:app --host 0.0.0.0 --port 8001 --reload"
 
 echo 等待后端启动...
 timeout /t 3 /nobreak
@@ -36,7 +36,7 @@ start "AI员工 - 前端" cmd /k "cd /d %~dp0frontend && npm run dev"
 
 echo.
 echo ✓ 系统已启动！
-echo   后端: http://localhost:8000
+echo   API: http://localhost:8001
 echo   前端: http://localhost:3000
 echo.
 echo 关闭窗口可停止进程

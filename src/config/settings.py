@@ -124,12 +124,51 @@ class Settings:
     @property
     def ai_settings(self) -> dict:
         """AI / LLM 调用参数"""
-        return self._config["ai_settings"]
+        settings = dict(self._config["ai_settings"])
+        env_overrides = {
+            "provider": os.getenv("AI_PROVIDER"),
+            "model": os.getenv("AI_MODEL"),
+            "api_base": os.getenv("AI_API_BASE"),
+            "max_tokens": os.getenv("AI_MAX_TOKENS"),
+            "temperature": os.getenv("AI_TEMPERATURE"),
+            "max_concurrent": os.getenv("AI_MAX_CONCURRENT"),
+        }
+        for key, value in env_overrides.items():
+            if value is None or value == "":
+                continue
+            if key in ("max_tokens", "max_concurrent"):
+                settings[key] = int(value)
+            elif key == "temperature":
+                settings[key] = float(value)
+            else:
+                settings[key] = value
+        return settings
 
     @property
     def anthropic_api_key(self) -> str:
         """Anthropic API Key（从环境变量读取）"""
         return os.getenv("ANTHROPIC_API_KEY", "")
+
+    @property
+    def llm_provider(self) -> str:
+        """LLM 提供商：anthropic / deepseek / openai_compatible"""
+        model = self.ai_settings.get("model", "")
+        provider = self.ai_settings.get("provider") or os.getenv("AI_PROVIDER", "")
+        if provider:
+            return provider.lower()
+        if str(model).startswith("deepseek"):
+            return "deepseek"
+        return "anthropic"
+
+    @property
+    def llm_api_key(self) -> str:
+        """根据 provider 获取对应 API Key"""
+        provider = self.llm_provider
+        if provider == "anthropic":
+            return os.getenv("ANTHROPIC_API_KEY", "")
+        if provider == "deepseek":
+            return os.getenv("DEEPSEEK_API_KEY", os.getenv("ANTHROPIC_API_KEY", ""))
+        return os.getenv("OPENAI_API_KEY", os.getenv("AI_API_KEY", ""))
 
     # ========== 过滤规则 ==========
 
@@ -180,8 +219,12 @@ class Settings:
         errors = []
 
         # 检查 API Key
-        if not self.anthropic_api_key:
-            errors.append("缺少 ANTHROPIC_API_KEY 环境变量")
+        provider = self.llm_provider
+        api_key = self.llm_api_key
+        if not api_key:
+            errors.append(f"缺少 {provider} 的 API Key 环境变量")
+        elif provider == "anthropic" and not api_key.startswith("sk-ant-"):
+            errors.append("ANTHROPIC_API_KEY 格式不像 Anthropic Key（通常以 sk-ant- 开头）")
 
         # 检查监控对象
         if not self.competitor_wechat:

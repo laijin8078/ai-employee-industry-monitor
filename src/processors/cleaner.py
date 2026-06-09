@@ -133,22 +133,10 @@ class DataCleaner:
         for item in items:
             pub_date = item.raw.publish_date
             if pub_date is None:
-                # 无日期信息的保留（可能无法解析时间）
-                valid.append(item)
+                logger.debug(f"过滤无日期内容: {item.raw.title[:50]}...")
             elif pub_date >= cutoff:
                 valid.append(item)
             else:
-                # 检查是否为重大政策（政策类放宽时效）
-                title = item.raw.title
-                is_policy = any(
-                    kw in title for kw in ["国标", "政策", "法规", "标准", "条例"]
-                )
-                if is_policy:
-                    # 政策类放宽到30天
-                    policy_cutoff = current_time - timedelta(days=30)
-                    if pub_date >= policy_cutoff:
-                        valid.append(item)
-                        continue
                 logger.debug(f"过期内容: {item.raw.title[:50]}... ({pub_date.strftime('%Y-%m-%d')})")
 
         return valid
@@ -210,6 +198,14 @@ class DataCleaner:
             )
             if has_blacklist:
                 logger.debug(f"过滤（黑名单）: {title[:50]}")
+                continue
+
+            pseudo_wechat_keywords = [
+                "135编辑器", "96编辑器", "秀米", "微信编辑器", "公众号助手",
+                "微信公众号导航", "素材", "模板",
+            ]
+            if item.raw.source_channel == "wechat" and any(kw in full_text for kw in pseudo_wechat_keywords):
+                logger.debug(f"过滤（伪微信结果）: {title[:50]}")
                 continue
 
             # 纯招聘内容过滤

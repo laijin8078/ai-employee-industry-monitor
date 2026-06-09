@@ -1982,3 +1982,65 @@ TypeError: IntelligenceDB.cleanup_old_data() got an unexpected keyword argument 
 2026-06-07 00:22:21 | WARNING | __main__:_emit_log:145 |    失败渠道: wechat
 2026-06-07 00:22:21 | INFO    | __main__:_emit_log:145 |    下次监控: 2026-06-22
 2026-06-07 00:22:21 | DEBUG   | src.storage.database:close:378 | 数据库连接已关闭
+2026-06-09 11:45:43 | INFO    | src.storage.database:_get_conn:42 | 数据库已连接: C:\Users\86158\ai-employee\data\intelligence.db
+2026-06-09 11:45:43 | DEBUG   | src.storage.database:_init_tables:104 | 数据库表初始化完成
+2026-06-09 11:45:43 | INFO    | src.main:_emit_log:147 | 📡 启动并行采集: 3个公众号 + 3个网站 + 新闻搜索
+2026-06-09 11:45:43 | INFO    | src.crawlers.website:crawl:59 | [官网爬虫] 开始采集 3 个网站（requests优先→Playwright兜底）
+2026-06-09 11:45:43 | INFO    | src.crawlers.news:crawl:303 | [新闻聚合] 5个源 × 17个query (行业8 + 竞品9) [并行模式]
+2026-06-09 11:45:43 | INFO    | src.main:_emit_log:147 | ⏳ 微信公众号 采集中...
+2026-06-09 11:45:43 | INFO    | src.crawlers.wechat:crawl:69 | [微信爬虫] 开始采集 3 个公众号 (Playwright: 有, Profile: 无)
+2026-06-09 11:45:43 | INFO    | src.crawlers.wechat:crawl:84 |    [美的净水] 微信直采失败/不可用，启用搜索引擎补偿...
+2026-06-09 11:45:49 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第1/3次): [美的净水] HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='water.midea.com', port=443): Failed to resolve 'water.midea.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-09 11:45:50 | INFO    | src.crawlers.wechat:crawl:99 | [微信爬虫] 美的净水: 1 篇
+2026-06-09 11:45:50 | INFO    | src.crawlers.wechat:crawl:84 |    [沁园净水器官方] 微信直采失败/不可用，启用搜索引擎补偿...
+2026-06-09 11:45:53 | WARNING | src.crawlers.base:load_cached_data:236 | 无缓存数据: wechat_沁园净水器官方
+2026-06-09 11:45:53 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 1 条 (文件: cache_wechat_all.json, 时间: 2026-06-09T11:43:14.873508)
+2026-06-09 11:45:53 | WARNING | src.crawlers.wechat:crawl:102 | [微信爬虫] 沁园净水器官方: 本期无数据
+2026-06-09 11:45:53 | INFO    | src.crawlers.wechat:crawl:84 |    [安吉尔官方] 微信直采失败/不可用，启用搜索引擎补偿...
+2026-06-09 11:45:55 | WARNING | src.crawlers.base:load_cached_data:236 | 无缓存数据: wechat_安吉尔官方
+2026-06-09 11:45:55 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 1 条 (文件: cache_wechat_all.json, 时间: 2026-06-09T11:43:14.873508)
+2026-06-09 11:45:55 | WARNING | src.crawlers.wechat:crawl:102 | [微信爬虫] 安吉尔官方: 本期无数据
+2026-06-09 11:45:55 | INFO    | src.crawlers.base:cache_raw_data:225 | 已缓存 1 条数据到 C:\Users\86158\ai-employee\data\raw\cache_wechat_all.json
+2026-06-09 11:45:55 | SUCCESS | src.main:_emit_log:147 | ✅ [微信公众号] 美的净水: 获取 1 条
+2026-06-09 11:45:55 | SUCCESS | src.main:_emit_log:147 | ✅ 微信公众号: 共获取 1 条
+2026-06-09 11:45:55 | INFO    | src.main:_emit_log:147 | ⏳ 竞品官网 采集中...
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:336 | [新闻聚合] 已达目标(30条)，提前结束采集
+2026-06-09 11:45:56 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第2/3次): [美的净水] HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='water.midea.com', port=443): Failed to resolve 'water.midea.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:399 |    [百度新闻] 27 条
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:399 |    [Bing新闻] 0 条
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:399 |    [搜狗新闻] 40 条
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:399 |    [今日头条] 1 条
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:399 |    [微信搜索] 40 条
+2026-06-09 11:45:56 | INFO    | src.crawlers.base:cache_raw_data:225 | 已缓存 103 条数据到 C:\Users\86158\ai-employee\data\raw\cache_news_all.json
+2026-06-09 11:45:56 | INFO    | src.crawlers.news:crawl:404 | [新闻聚合] 总计: 108条原始 → 103条去重后
+2026-06-09 11:46:02 | ERROR   | src.crawlers.base:fetch:168 | 请求彻底失败(fail#1): [美的净水] HTTPSConnectionPool(host='water.midea.com', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='water.midea.com', port=443): Failed to resolve 'water.midea.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-09 11:46:02 | INFO    | src.crawlers.website:_crawl_with_fallback:98 |    [美的净水] requests 失败（SSL/反爬），启用 Playwright...
+2026-06-09 11:46:02 | INFO    | src.crawlers.browser_fetcher:fetch_html:63 | [Browser] 正在加载: https://water.midea.com/news/
+2026-06-09 11:46:06 | WARNING | src.crawlers.website:_crawl_with_fallback:109 |    [美的净水] Playwright 失败: Page.goto: net::ERR_CONNECTION_CLOSED at https://water.midea.com/news/
+Call log:
+2026-06-09 11:46:06 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 5621 条 (文件: cache_website_all.json, 时间: 2026-06-09T11:19:43.139892)
+2026-06-09 11:46:06 | INFO    | src.crawlers.website:_crawl_with_fallback:120 |    [美的净水] 使用缓存兜底（5621条）
+2026-06-09 11:46:06 | INFO    | src.crawlers.website:crawl:67 | [官网爬虫] 美的净水: 5621 条
+2026-06-09 11:46:12 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第1/3次): [沁园] HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='www.qinyuan.com.cn', port=443): Failed to resolve 'www.qinyuan.com.cn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-09 11:46:22 | DEBUG   | src.crawlers.base:fetch:165 | 请求失败 (第2/3次): [沁园] HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='www.qinyuan.com.cn', port=443): Failed to resolve 'www.qinyuan.com.cn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-09 11:46:29 | ERROR   | src.crawlers.base:fetch:168 | 请求彻底失败(fail#2): [沁园] HTTPSConnectionPool(host='www.qinyuan.com.cn', port=443): Max retries exceeded with url: /news/ (Caused by NameResolutionError("HTTPSConnection(host='www.qinyuan.com.cn', port=443): Failed to resolve 'www.qinyuan.com.cn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-09 11:46:29 | INFO    | src.crawlers.website:_crawl_with_fallback:98 |    [沁园] requests 失败（SSL/反爬），启用 Playwright...
+2026-06-09 11:46:29 | INFO    | src.crawlers.browser_fetcher:fetch_html:63 | [Browser] 正在加载: https://www.qinyuan.com.cn/news/
+2026-06-09 11:46:33 | WARNING | src.crawlers.website:_crawl_with_fallback:109 |    [沁园] Playwright 失败: Page.goto: net::ERR_CONNECTION_CLOSED at https://www.qinyuan.com.cn/news/
+Call l
+2026-06-09 11:46:33 | INFO    | src.crawlers.base:load_cached_data_recent:292 | 从近期缓存加载 5621 条 (文件: cache_website_all.json, 时间: 2026-06-09T11:19:43.139892)
+2026-06-09 11:46:33 | INFO    | src.crawlers.website:_crawl_with_fallback:120 |    [沁园] 使用缓存兜底（5621条）
+2026-06-09 11:46:33 | INFO    | src.crawlers.website:crawl:67 | [官网爬虫] 沁园: 5621 条
+2026-06-09 11:46:41 | INFO    | src.crawlers.website:crawl:67 | [官网爬虫] 安吉尔: 11 条
+2026-06-09 11:46:41 | INFO    | src.crawlers.base:cache_raw_data:225 | 已缓存 11253 条数据到 C:\Users\86158\ai-employee\data\raw\cache_website_all.json
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ [竞品官网] 安吉尔: 获取 11253 条
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ 竞品官网: 共获取 11253 条
+2026-06-09 11:46:41 | INFO    | src.main:_emit_log:147 | ⏳ 行业新闻 采集中...
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ [行业新闻] 今日头条: 获取 1 条
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ [行业新闻] 百度新闻: 获取 26 条
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ [行业新闻] 搜狗新闻: 获取 37 条
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ [行业新闻] 微信搜索: 获取 39 条
+2026-06-09 11:46:41 | SUCCESS | src.main:_emit_log:147 | ✅ 行业新闻: 共获取 103 条
+2026-06-09 11:46:41 | INFO    | src.main:_emit_log:147 | 📊 采集汇总: 成功渠道 3/3, 共 11357 条原始数据
+2026-06-09 11:46:41 | WARNING | src.main:_emit_log:147 | 🛡️ 反爬/降级源: 美的净水(degraded), 沁园(degraded)（已跳过，由正常源补偿）
+2026-06-09 11:46:41 | DEBUG   | src.storage.database:close:378 | 数据库连接已关闭

@@ -42,6 +42,52 @@ class NewsSourceAdapter:
         """解析搜索结果（子类重写）"""
         raise NotImplementedError
 
+    def parse_search_datetime(self, text: str) -> Optional[datetime]:
+        """从搜索结果文本中提取发布时间；解析不到返回 None。"""
+        if not text:
+            return None
+        now = datetime.now()
+        compact = re.sub(r"\s+", " ", text)
+        if "今天" in compact:
+            return now
+        if "昨天" in compact:
+            return now - timedelta(days=1)
+        rel_match = re.search(r"(\d+)\s*(分钟|小时|天|周|个月)前", compact)
+        if rel_match:
+            value = int(rel_match.group(1))
+            unit = rel_match.group(2)
+            if unit == "分钟":
+                return now - timedelta(minutes=value)
+            if unit == "小时":
+                return now - timedelta(hours=value)
+            if unit == "天":
+                return now - timedelta(days=value)
+            if unit == "周":
+                return now - timedelta(weeks=value)
+            if unit == "个月":
+                return now - timedelta(days=value * 30)
+
+        for pattern, has_year in [
+            (r"(20\d{2})[-/.年](\d{1,2})[-/.月](\d{1,2})", True),
+            (r"(?<!\d)(\d{1,2})[-/.月](\d{1,2})(?:日)?", False),
+        ]:
+            match = re.search(pattern, compact)
+            if not match:
+                continue
+            try:
+                if has_year:
+                    year, month, day = map(int, match.groups())
+                else:
+                    year = now.year
+                    month, day = map(int, match.groups())
+                parsed = datetime(year, month, day)
+                if not has_year and parsed > now + timedelta(days=1):
+                    parsed = parsed.replace(year=year - 1)
+                return parsed
+            except ValueError:
+                continue
+        return None
+
 
 class BaiduNewsAdapter(NewsSourceAdapter):
     """百度新闻搜索"""
@@ -64,10 +110,13 @@ class BaiduNewsAdapter(NewsSourceAdapter):
                 url = title_tag.get("href", "")
                 summary_tag = elem.select_one(".c-summary, .c-abstract, .content, p")
                 summary = summary_tag.get_text(strip=True)[:200] if summary_tag else ""
+                publish_date = self.parse_search_datetime(f"{title} {summary}")
+                if not publish_date or publish_date < cutoff_date:
+                    continue
                 items.append(RawItem(
                     source_channel="news", source_name=source_name,
                     title=title, url=url, content=summary,
-                    publish_date=datetime.now(),
+                    publish_date=publish_date,
                     raw_metadata={"source": source_name, "adapter": "baidu"},
                 ))
             except Exception:
@@ -85,26 +134,42 @@ class BingNewsAdapter(NewsSourceAdapter):
         return f"https://www.bing.com/news/search?q={quote(keyword)}&format=rss"
 
     def parse_results(self, html: str, source_name: str, cutoff_date: datetime) -> list[RawItem]:
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, "xml")
         items = []
-        for elem in soup.select(".news-card, .newsitem, article, .card-withoutlink")[:self.max_results]:
+        for elem in soup.select("item")[:self.max_results]:
             try:
-                title_tag = elem.select_one("a[class*='title'], h3 a, .title, a")
+                title_tag = elem.find("title")
                 if not title_tag:
                     continue
                 title = title_tag.get_text(strip=True)
-                url = title_tag.get("href", "")
-                summary_tag = elem.select_one(".snippet, .description, p, .summary")
-                summary = summary_tag.get_text(strip=True)[:200] if summary_tag else ""
+                link_tag = elem.find("link")
+                url = link_tag.get_text(strip=True) if link_tag else ""
+                summary_tag = elem.find("description")
+                summary = summary_tag.get_text(" ", strip=True)[:300] if summary_tag else ""
+                publish_date = self._parse_rss_time(elem.find("pubDate"))
+                if not publish_date or publish_date < cutoff_date:
+                    continue
                 items.append(RawItem(
                     source_channel="news", source_name=source_name,
                     title=title, url=url, content=summary,
-                    publish_date=datetime.now(),
+                    publish_date=publish_date,
                     raw_metadata={"source": source_name, "adapter": "bing"},
                 ))
             except Exception:
                 continue
         return items
+
+    def _parse_rss_time(self, pub_date_tag) -> datetime:
+        if not pub_date_tag:
+            return None
+        try:
+            from email.utils import parsedate_to_datetime
+            dt = parsedate_to_datetime(pub_date_tag.get_text(strip=True))
+            if dt.tzinfo:
+                dt = dt.replace(tzinfo=None)
+            return dt
+        except Exception:
+            return None
 
 
 class SogouNewsAdapter(NewsSourceAdapter):
@@ -128,10 +193,13 @@ class SogouNewsAdapter(NewsSourceAdapter):
                 url = title_tag.get("href", "")
                 summary_tag = elem.select_one("p, .news-detail, .star-wiki")
                 summary = summary_tag.get_text(strip=True)[:200] if summary_tag else ""
+                publish_date = self.parse_search_datetime(f"{title} {summary}")
+                if not publish_date or publish_date < cutoff_date:
+                    continue
                 items.append(RawItem(
                     source_channel="news", source_name=source_name,
                     title=title, url=url, content=summary,
-                    publish_date=datetime.now(),
+                    publish_date=publish_date,
                     raw_metadata={"source": source_name, "adapter": "sogou"},
                 ))
             except Exception:
@@ -160,10 +228,13 @@ class ToutiaoNewsAdapter(NewsSourceAdapter):
                 url = title_tag.get("href", "")
                 summary_tag = elem.select_one(".abstract, .desc, p")
                 summary = summary_tag.get_text(strip=True)[:200] if summary_tag else ""
+                publish_date = self.parse_search_datetime(f"{title} {summary}")
+                if not publish_date or publish_date < cutoff_date:
+                    continue
                 items.append(RawItem(
                     source_channel="news", source_name=source_name,
                     title=title, url=url, content=summary,
-                    publish_date=datetime.now(),
+                    publish_date=publish_date,
                     raw_metadata={"source": source_name, "adapter": "toutiao"},
                 ))
             except Exception:
@@ -193,10 +264,16 @@ class WechatSearchAdapter(NewsSourceAdapter):
                 url = title_tag.get("href", "")
                 summary_tag = elem.select_one(".c-abstract, .c-span-last, .content")
                 summary = summary_tag.get_text(strip=True)[:200] if summary_tag else ""
+                text_for_match = f"{title} {url} {summary}"
+                if "mp.weixin.qq.com" not in text_for_match:
+                    continue
+                publish_date = self.parse_search_datetime(text_for_match)
+                if not publish_date or publish_date < cutoff_date:
+                    continue
                 items.append(RawItem(
                     source_channel="news", source_name=source_name,
                     title=title, url=url, content=summary,
-                    publish_date=datetime.now(),
+                    publish_date=publish_date,
                     raw_metadata={"source": source_name, "adapter": "wechat_search"},
                 ))
             except Exception:
@@ -348,7 +425,7 @@ class NewsCrawler(BaseCrawler):
             logger.info("[新闻聚合] 加载近7天缓存兜底")
             cached = self.load_cached_data_recent("news_all", max_age_days=7)
             if cached:
-                all_items.extend(cached)
+                all_items.extend(self.filter_recent_items(cached, time_range_days))
 
         # 去重
         unique = self._dedup_by_title(all_items)

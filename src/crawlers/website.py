@@ -7,6 +7,7 @@
 - Playwright 失败也不阻塞流水线
 """
 
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
@@ -205,7 +206,7 @@ class WebsiteCrawler(BaseCrawler):
         time_str = time_tag.get_text(strip=True) if time_tag else ""
         publish_date = self._parse_news_time(time_str)
 
-        if publish_date and publish_date < cutoff_date:
+        if not publish_date or publish_date < cutoff_date:
             return None
 
         return RawItem(
@@ -218,17 +219,26 @@ class WebsiteCrawler(BaseCrawler):
             raw_metadata={"site_url": base_url},
         )
 
-    def _parse_news_time(self, time_str: str) -> datetime:
+    def _parse_news_time(self, time_str: str) -> Optional[datetime]:
         """解析新闻发布时间"""
         if not time_str:
-            return datetime.now()
+            return None
         time_str = time_str.strip()
+        if "今天" in time_str:
+            return datetime.now()
+        if "昨天" in time_str:
+            return datetime.now() - timedelta(days=1)
+        days_match = re.search(r"(\d+)\s*天前", time_str)
+        if days_match:
+            return datetime.now() - timedelta(days=int(days_match.group(1)))
         for fmt in ["%Y-%m-%d", "%Y-%m-%d %H:%M", "%Y/%m/%d", "%Y年%m月%d日", "%m-%d", "%m月%d日"]:
             try:
                 dt = datetime.strptime(time_str, fmt)
                 if dt.year == 1900:
                     dt = dt.replace(year=datetime.now().year)
+                    if dt > datetime.now() + timedelta(days=1):
+                        dt = dt.replace(year=dt.year - 1)
                 return dt
             except ValueError:
                 continue
-        return datetime.now()
+        return self.parse_chinese_datetime(time_str)

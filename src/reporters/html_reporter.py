@@ -5,6 +5,7 @@ HTML 报告生成器
 """
 
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -46,7 +47,7 @@ class HTMLReporter:
         logger.info(f"HTML 报告已渲染 ({len(html)} 字符)")
         return html
 
-    def save(self, report: IntelligenceReport, output_dir: Path) -> Optional[str]:
+    def save(self, report: IntelligenceReport, output_dir: Path, filename_stem: str = None) -> Optional[str]:
         """
         保存 HTML 报告到文件。
 
@@ -60,7 +61,9 @@ class HTMLReporter:
         try:
             html = self.render(report)
             output_dir.mkdir(parents=True, exist_ok=True)
-            filename = f"intelligence_report_{report.report_date}.html"
+            if filename_stem is None:
+                filename_stem = f"intelligence_report_{report.report_date}_{datetime.now().strftime('%H%M%S')}"
+            filename = f"{filename_stem}.html"
             filepath = output_dir / filename
             filepath.write_text(html, encoding="utf-8")
             logger.info(f"HTML 报告已保存: {filepath}")

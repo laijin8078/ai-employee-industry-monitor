@@ -31,6 +31,8 @@ class LLMClient:
     def __init__(
         self,
         api_key: str,
+        provider: str = "anthropic",
+        api_base: str = "",
         model: str = "claude-sonnet-4-6",
         max_tokens: int = 4096,
         temperature: float = 0.3,
@@ -40,11 +42,16 @@ class LLMClient:
         """
         Args:
             api_key: Anthropic API Key
+            provider: anthropic / deepseek / openai_compatible
+            api_base: OpenAI-compatible API base URL
             model: 模型名称
             max_tokens: 最大输出 token
             temperature: 生成温度（0-1，越低越确定）
             max_concurrent: 最大并发调用数
         """
+        self.provider = (provider or "anthropic").lower()
+        self.api_key = api_key
+        self.api_base = api_base.rstrip("/")
         self.model = model
         self.max_tokens = max_tokens
         self.temperature = temperature
@@ -53,13 +60,15 @@ class LLMClient:
         # 单次 API 调用超时（秒），防止请求长时间阻塞
         self.api_timeout = api_timeout
 
-        self._client = Anthropic(api_key=api_key) if (api_key and _has_anthropic) else None
+        self._client = Anthropic(api_key=api_key) if (self.provider == "anthropic" and api_key and _has_anthropic) else None
         self._semaphore = asyncio.Semaphore(max_concurrent)
 
     @property
     def is_available(self) -> bool:
         """检查 API 是否可用"""
-        return self._client is not None
+        if self.provider == "anthropic":
+            return self._client is not None
+        return bool(self.api_key)
 
     def chat(
         self,
@@ -93,14 +102,21 @@ class LLMClient:
             # 设置超时防止长时间卡住（连接10s，读取30s）
             import httpx
             try:
-                # 使用线程池执行同步 SDK 调用，并设置超时以防阻塞
+                # 使用线程池执行同步调用，并设置超时以防阻塞
                 def _call():
-                    return self._client.messages.create(
-                        model=self.model,
-                        max_tokens=max_tokens,
+                    if self.provider == "anthropic":
+                        return self._client.messages.create(
+                            model=self.model,
+                            max_tokens=max_tokens,
+                            temperature=temperature,
+                            system=system_prompt,
+                            messages=[{"role": "user", "content": user_message}],
+                        )
+                    return self._chat_openai_compatible(
+                        user_message=user_message,
+                        system_prompt=system_prompt,
                         temperature=temperature,
-                        system=system_prompt,
-                        messages=[{"role": "user", "content": user_message}],
+                        max_tokens=max_tokens,
                     )
 
                 with ThreadPoolExecutor(max_workers=1) as ex:
@@ -111,7 +127,10 @@ class LLMClient:
                         logger.error(f"LLM 调用超时（>{self.api_timeout}s）")
                         return None
 
-                # 提取文本内容
+                if isinstance(message, str):
+                    return message
+
+                # 提取 Anthropic 文本内容
                 content = message.content
                 if isinstance(content, list):
                     text = "".join(
@@ -129,6 +148,43 @@ class LLMClient:
         except Exception as e:
             logger.error(f"LLM 调用失败: {e}")
             return None
+
+    def _chat_openai_compatible(
+        self,
+        user_message: str,
+        system_prompt: str,
+        temperature: float,
+        max_tokens: int,
+    ) -> str:
+        """调用 DeepSeek / OpenAI-compatible Chat Completions API"""
+        import httpx
+
+        api_base = self.api_base
+        if not api_base:
+            api_base = "https://api.deepseek.com" if self.provider == "deepseek" else "https://api.openai.com/v1"
+        url = f"{api_base.rstrip('/')}/chat/completions"
+
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": user_message})
+
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+
+        with httpx.Client(timeout=self.api_timeout) as client:
+            response = client.post(url, headers=headers, json=payload)
+            response.raise_for_status()
+            data = response.json()
+            return data["choices"][0]["message"]["content"]
 
     def chat_json(
         self,

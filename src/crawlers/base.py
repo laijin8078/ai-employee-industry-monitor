@@ -7,6 +7,7 @@
 import hashlib
 import json
 import random
+import re
 import time
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
@@ -296,6 +297,63 @@ class BaseCrawler(ABC):
 
         # 退回到原有缓存加载
         return self.load_cached_data(channel)
+
+    def filter_recent_items(self, items: list[RawItem], max_age_days: int = None) -> list[RawItem]:
+        """只保留明确发布时间在最近 N 天内的内容。"""
+        if max_age_days is None:
+            max_age_days = getattr(self.settings, "max_news_age_days", 14)
+        cutoff = datetime.now() - timedelta(days=max_age_days)
+        return [item for item in items if item.publish_date and item.publish_date >= cutoff]
+
+    def parse_chinese_datetime(self, text: str) -> Optional[datetime]:
+        """从中文搜索摘要/列表文本中提取常见日期。解析不到返回 None。"""
+        if not text:
+            return None
+
+        now = datetime.now()
+        compact = re.sub(r"\s+", " ", text)
+        if "今天" in compact:
+            return now
+        if "昨天" in compact:
+            return now - timedelta(days=1)
+
+        rel_match = re.search(r"(\d+)\s*(分钟|小时|天|周|个月)前", compact)
+        if rel_match:
+            value = int(rel_match.group(1))
+            unit = rel_match.group(2)
+            if unit == "分钟":
+                return now - timedelta(minutes=value)
+            if unit == "小时":
+                return now - timedelta(hours=value)
+            if unit == "天":
+                return now - timedelta(days=value)
+            if unit == "周":
+                return now - timedelta(weeks=value)
+            if unit == "个月":
+                return now - timedelta(days=value * 30)
+
+        patterns = [
+            (r"(20\d{2})[-/.年](\d{1,2})[-/.月](\d{1,2})", True),
+            (r"(?<!\d)(\d{1,2})[-/.月](\d{1,2})(?:日)?", False),
+        ]
+        for pattern, has_year in patterns:
+            match = re.search(pattern, compact)
+            if not match:
+                continue
+            try:
+                if has_year:
+                    year, month, day = map(int, match.groups())
+                else:
+                    year = now.year
+                    month, day = map(int, match.groups())
+                parsed = datetime(year, month, day)
+                if not has_year and parsed > now + timedelta(days=1):
+                    parsed = parsed.replace(year=year - 1)
+                return parsed
+            except ValueError:
+                continue
+
+        return None
 
     # ---------- 工具方法 ----------
 
